@@ -1,0 +1,1155 @@
+@import "fonts"
+@import "vars"
+
+
+*::-webkit-input-placeholder
+   color: #666
+   opacity: 1
+
+*:-moz-placeholder
+   color: #666
+   opacity: 1
+
+*::-moz-placeholder
+   color: #666
+   opacity: 1
+
+*:-ms-input-placeholder
+   color: #666
+   opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+   color: #666
+body input:required:valid,
+body textarea:required:valid
+   color: #666
+
+
+html
+   font-size: 10px
+
+body
+   font-size: 16px
+   min-width: 320px
+   position: relative
+   line-height: 1.3
+   overflow-x: hidden
+   color: $black
+   display: flex
+   font-family: $mainFonts
+   &._noScrollPopup
+      overflow: hidden
+      width: 100%
+   &._noScrollBurger
+      overflow: hidden
+
+
+
+*
+   box-sizing: border-box
+   margin: 0
+   padding: 0
+
+
+a
+   color: inherit
+   text-decoration: none
+   &:hover
+      text-decoration: none
+   &:focus
+      color: inherit
+      text-decoration: none
+
+p, ul
+   margin: 0      
+
+input, textarea
+   // appearance: none
+   resize: none
+
+img
+   max-width: 100%
+
+._bold
+   font-weight: 700
+
+   
+.contain
+   max-width: 1315px
+   padding: 0 50px
+   margin: 0 auto
+
+.wrapper
+   min-height: 100vh
+   margin: 0 auto
+   position: relative
+   display: flex
+   flex-direction: column
+   height: 100%
+   overflow: hidden
+   min-width: 100%
+
+
+.body_content
+   flex: 1 0 auto
+
+#footer
+   flex: 0 0 auto
+   background-color: #202328
+   width: 100%
+   margin: 0 auto
+   position: relative
+   color: #fff
+   text-align: center
+   padding: 10px 0
+
+
+._pt10
+   padding-top: 10px
+._pb10
+   padding-bottom: 10px
+._pt15
+   padding-top: 15px
+._pb15
+   padding-bottom: 15px
+._pt20
+   padding-top: 20px
+._pb20
+   padding-bottom: 20px
+._pt30
+   padding-top: 3em
+._pb30
+   padding-bottom: 3em
+._pt40
+   padding-top: 4em
+._pb40
+   padding-bottom: 4em
+._pt50
+   padding-top: 5em
+._pb50
+   padding-bottom: 5em
+._pt60
+   padding-top: 6em
+._pb60
+   padding-bottom: 6em
+._pt70
+   padding-top: 7em
+._pb70
+   padding-bottom: 7em
+._pt80
+   padding-top: 8em
+._pb80
+   padding-bottom: 8em
+._pt90
+   padding-top: 9em
+._pb90
+   padding-bottom: 9em
+._pt100
+   padding-top: 10em
+._pb100
+   padding-bottom: 10em
+
+._mt5
+   margin-top: 5px
+._mb5
+   margin-bottom: 5px
+._mt10
+   margin-top: 10px
+._mb10
+   margin-bottom: 10px
+._mt15
+   margin-top: 15px
+._mb15
+   margin-bottom: 15px
+._mt20
+   margin-top: 20px
+._mb20
+   margin-bottom: 20px
+._mt25
+   margin-top: 25px
+._mb25
+   margin-bottom: 25px
+._mt30
+   margin-top: 3em
+._mb30
+   margin-bottom: 3em
+._mt40
+   margin-top: 4em
+._mb40
+   margin-bottom: 4em
+._mt50
+   margin-top: 5em
+._mb50
+   margin-bottom: 5em
+._mt60
+   margin-top: 6em
+._mb60
+   margin-bottom: 6em
+._mt70
+   margin-top: 7em
+._mb70
+   margin-bottom: 7em
+._mt80
+   margin-top: 8em
+._mb80
+   margin-bottom: 8em
+._mt90
+   margin-top: 9em
+._mb90
+   margin-bottom: 9em
+._mt100
+   margin-top: 10em
+._mb100
+   margin-bottom: 10em
+
+
+._center
+   text-align: center
+._right
+   text-align: right
+
+
+.lazyImg
+   opacity: 0
+   transition: all .7s
+
+
+._lazyAnimation
+  transform: translate(0,30px)
+  opacity: 0
+._animGo
+  transition: transform 1s, opacity 1s
+  transform: translate(0,0)
+  opacity: 1
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus
+   transition: background-color 600000s 0s, color 600000s 0s
+
+
+._color
+   color: $color_1
+
+._fz12
+   font-size: 12px
+._fz14
+   font-size: 14px
+   &._red
+      color: red
+
+
+
+
+#headerAdmin
+   // width: 300px
+   // height: 100%
+   // height: 50px
+   background-color: $color_1
+   width: 100%
+   color: #fff
+   padding: 10px 0
+   .contain
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+
+
+// .list_1
+//    display: flex
+//    list-style-type: none
+//    li 
+//       margin-right: 20px
+// .adminSidebar
+//    width: 300px
+//    height: 100%
+//    background-color: #eee
+//    position: fixed
+//    top: 0
+//    left: 0
+
+.sectionsWrapper
+   width: calc(100% - 300px)
+   margin-left: 300px
+   
+
+   
+.button_1
+   display: inline-block
+   //width: 100%
+   padding: .4em 1.5em
+   cursor: pointer
+   border: none
+   background-color: $color_1
+   font-size: 16px
+   color: #fff !important
+   transition: background .15s, color .15s
+   text-align: center
+   user-select: none
+   position: relative
+   text-decoration: none
+   font-family: $black
+   font-weight: 700
+   border-radius: 3px
+   @media (hover: hover)
+      &:hover
+         background-color: darken($color_1, 5%)
+   &:active
+      top: 3px
+   &._big
+      // transform: scale(1.5)
+      font-size: 1.2em
+      padding: .6em 1.8em
+   &._disable
+      opacity: .5
+      pointer-events: none
+   &._hide
+      display: none
+
+.inputWrap
+  text-align: left
+  width: 100%
+  .help-block
+     font-size: 12px
+     margin-top: 5px
+  .help-block-error
+     color: red
+
+
+.input_1
+   border: 2px solid rgba(#898989, .2)
+   font-size: 16px
+   font-family: $mainFonts
+   color: $black
+   border-radius: 5px
+   padding: 10px 10px
+   transition: border .15s
+   width: 100%
+   appearance: none
+   outline: none
+   overflow: hidden
+   &:focus
+      border-color: $color_1
+      border-width: 2px
+   &._error
+      border-color: red
+
+
+textarea
+  &.input_1
+      resize: none
+      height: 138px
+   
+trix-editor
+   border: 2px solid rgba(#898989, .2) !important
+   &._error
+      border-color: red !important
+
+
+.inputAlert
+   margin-top: 5px
+   font-size: 14px
+   &._red
+      color: red
+
+
+.inputWrap_1 
+   &._error
+      input
+         border-color: red
+
+.inputWrap_1__name
+   margin-bottom: 5px
+   display: block
+
+._required
+   &:after
+      content: '*'
+      color: red
+
+.menu_1
+   ul 
+      list-style-type: none
+      display: flex
+      align-items: center
+   li 
+      margin-right: 30px
+   a 
+      transition: color .15s
+      &._active
+         color: lighten($color_1, 40%)
+         text-decoration: underline
+      @media(hover: hover)
+         &:hover
+            color: lighten($color_1, 40%)
+   // svg
+   //    width: 35px
+   //    height: 35px
+   //    fill: #fff
+
+
+.iconRef
+   border: 1px solid #fff
+   position: relative
+   display: block
+   width: 30px
+   height: 30px
+   border-radius: 50%
+   overflow: hidden
+   transition: border .15s
+   svg
+      position: absolute
+      max-width: 100%
+      max-height: 100%
+      left: 50%
+      top: 50%
+      fill: #fff
+      transform: translate(-50%,-40%)
+   &._active
+      border-color: lighten($color_1, 40%)
+      svg
+         fill: lighten($color_1, 40%)
+   @media(hover: hover)
+      &:hover
+         border-color: lighten($color_1, 40%)
+
+
+
+// Pagination ======================
+
+.paginationEl__flex
+   display: flex
+   justify-content: space-between
+   align-items: center
+
+.paginationEl__controlls
+   >span
+      display: flex
+      align-items: center
+      // border: 1px solid blue
+
+.paginationEl__arrow
+   border: 1px solid #eee
+   position: relative
+   width: 30px
+   height: 30px
+   display: block
+   transition: border .15s
+   // border: 1px solid red
+   svg
+      // border: 1px solid red
+      position: absolute
+      // max-width: 100%
+      // max-height: 100%
+      width: 70%
+      top: 50%
+      left: 50%
+      transform: translate(-50%,-50%)
+   @media(hover: hover)
+      &[href]
+         &:hover
+            border-color: $color_1
+
+
+.paginationEl__num
+   width: 30px
+   height: 30px
+   border: 1px solid #eee
+   position: relative
+   transition: border .15s
+   >span
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+   &._active
+      background-color: $color_1
+      border-color: $color_1
+      color: #fff
+   @media(hover: hover)
+      &:hover
+         border-color: $color_1
+
+
+.paginationEl__previousNext
+   display: none
+
+
+// EndPagination ======================
+ 
+._section
+   font-size: 16px
+   
+.sectionAdmin
+   padding: 3em 0 
+
+.titleItem
+   display: flex
+   align-items: center
+   justify-content: space-between
+.title_1
+   font-size: 1.8em
+   font-weight: 700
+   // color: $color_1
+
+
+
+.adminList
+   display: grid
+   grid-template-columns: repeat(6, 1fr)
+   grid-gap: 20px
+
+
+// adminItem ================================
+
+.adminItem
+   border: 1px solid #eee
+   cursor: pointer
+   transition: border .15s, box-shadow .15s
+   flex-direction: column
+   display: flex
+   position: relative
+   // flex-wrap: wrap
+   // height: 100%
+   background-color: rgba(green, .1)
+   >a
+      height: 100%
+      display: flex
+      flex-wrap: wrap
+      flex-direction: column
+   @media(hover: hover)
+      &:hover
+         border-color: $color_1
+         box-shadow: 0 0 10px 0px rgba(#000, .2)
+   &._notPublished
+      // opacity: .6
+      // border-color: orange
+      background-color: rgba(orange, .1)
+   .closeIcon
+      z-index: 1
+      top: 10px
+      right: 10px
+      width: 25px
+      height: 25px
+      box-shadow: 0 2px 3px 0px rgba(#000, .5)
+      &:active
+         top: 13px
+   .checkbox_1
+      position: absolute
+      z-index: 1
+      top: 5px 
+      left: 5px
+
+
+.adminItem__img
+   // border: 1px solid red
+   width: 100%
+   padding-bottom: 60%
+   background-color: #eee
+   position: relative
+   img
+      width: 100%
+      height: 100%
+      object-fit: cover
+      object-position: center top
+      position: absolute
+   svg
+      position: absolute
+      fill: rgba(#000, .4) //$color_1
+      max-width: 50%
+      max-height: 65%
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+      opacity: .2
+
+.adminItem__content
+   padding: 10px
+   // border: 1px solid red
+   width: 100%
+   align-self: stretch
+   position: relative
+   // padding-bottom: 30px
+   border-top: 1px solid rgba(#ccc, .3)
+   // display: flex
+   // height: 100%
+   flex: 1 1 auto
+   padding-bottom: 40px
+
+.adminItem__title
+   strong
+      font-weight: 500
+   span 
+      margin-left: 5px
+      font-size: .9em
+      // font-size: 1em
+
+.adminItem__bottom
+   display: flex
+   // margin-top: 7px
+   justify-content: space-between
+   position: absolute
+   bottom: 0
+   padding: 10px
+   left: 0
+
+.adminItem__info
+   font-size: 13px
+.adminItem__date
+   color: #999
+   font-size: 13px
+   display: block
+   text-align: right
+   // position: absolute
+   // right: 10px
+   // bottom: 10px
+
+   
+// adminItemTwo ================================
+.adminListTwo
+   display: grid
+   grid-template-columns: repeat(2, 1fr)
+   grid-gap: 20px
+
+.adminItemTwo
+   border: 1px solid #eee
+   display: flex
+   position: relative
+   transition: border .15s, box-shadow .15s
+   background-color: rgba(green, .1)
+   @media(hover: hover)
+      &:hover
+         border-color: $color_1
+         box-shadow: 0 0 10px 0px rgba(#000, .2)
+   >a 
+      display: flex
+      width: 100%
+      // flex-direction: column
+   &._notPublished
+      // opacity: .6
+      // border-color: orange
+      background-color: rgba(orange, .1)
+   .closeIcon
+      z-index: 1
+      top: 7px
+      right: 7px
+      width: 25px
+      height: 25px
+      box-shadow: 0 2px 3px 0px rgba(#000, .5)
+      &:active
+         top: 10px
+   &._notCategory
+      background-color: rgba(#666, .1)
+
+
+
+.adminItemTwo__img
+   width: 150px
+   min-width: 150px
+   height: 100%
+   background-color: #F8F8F8
+   // border: 1px solid red
+   position: relative
+   img
+      width: 100%
+      height: 100%
+      object-fit: cover
+      object-position: center top
+      position: absolute
+      // transition: opacity .15s
+   svg
+      position: absolute
+      fill: rgba(#000, .4) //$color_1
+      max-width: 50%
+      max-height: 65%
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+      opacity: .2
+
+.adminItemTwo__content
+   padding: 10px 50px 10px 10px
+   width: 100%
+   flex: 1 1 auto
+   padding-bottom: 40px
+   position: relative
+   ._fz12
+      margin-bottom: 5px
+
+.adminItemTwo__title
+   // width: 100%
+   strong
+      font-weight: 500
+   span 
+      margin-left: 5px
+
+.adminItemTwo__date
+   color: #999
+   font-size: 13px
+   display: block
+
+.adminItemTwo__bottom
+   position: absolute
+   bottom: 0
+   display: flex
+   width: 100%
+   left: 0
+   align-items: center
+   padding: 10px
+   justify-content: space-between
+
+.adminListThree
+   .adminItemThree
+      margin-top: 20px
+      &:first-child
+         margin-top: 0
+
+.adminItemThree
+   border: 1px solid #eee
+   display: flex
+   position: relative
+   transition: border .15s, box-shadow .15s
+   background-color: rgba(green, .1)
+   @media(hover: hover)
+      &:hover
+         border-color: $color_1
+         box-shadow: 0 0 10px 0px rgba(#000, .2)
+   >a 
+      display: flex
+      width: 100%
+   &._notPublished
+      // opacity: .6
+      // border-color: orange
+      background-color: rgba(orange, .1)
+   .closeIcon
+      z-index: 1
+      top: 7px
+      right: 7px
+      width: 25px
+      height: 25px
+      box-shadow: 0 2px 3px 0px rgba(#000, .5)
+      &:active
+         top: 10px
+
+
+
+.searchBlock
+   max-width: 500px
+   width: 100%
+   .inputWrap
+      display: flex
+   .input_1
+      border-radius: 5px 0 0 5px
+      margin-right: -1px
+
+
+
+.alertItem
+   text-align: center
+   padding: 15px 20px
+   background-color: #d1e7dd
+   border: 1px solid #badbcc
+   color: #0f5132
+   border-radius: 5px
+   &._red
+      background-color: #f8d7da
+      color: #842029
+      border-color: #f5c2c7
+   &._left
+      text-align: left
+      
+ul 
+   &.alertItem
+      list-style-type: none
+
+.ref_1
+   text-decoration: underline
+   display: inline-block
+
+
+.centerItem
+   margin-left: auto
+   margin-right: auto
+   // border: 1px solid red
+   padding: 2em 3em 3em
+   border-radius: 1em
+   box-shadow: 0 12px 30px 0px rgba(#000, .2)
+
+._maxW500
+   max-width: 500px
+._maxW700
+   max-width: 700px
+
+.form_1
+   // columns: 2
+   // column-gap: 2em
+   .button_1
+      margin-top: 30px
+
+
+
+
+
+.checkbox_1
+   position: relative
+   display: flex
+   align-items: center
+   .checkbox_1__text
+      // font-size: 14px
+      text-align: left
+      order: 2
+      cursor: pointer
+      a
+         text-decoration: underline
+      // @media(hover: hover)
+      //    &:hover
+      //       & + .checkboxInput
+      //          label
+                  // background: rgba($color_1, 1)
+   &._t2
+      .checkboxInput
+         label
+            width: 20px
+            height: 20px
+            border: 1px solid $color_1
+      // @media(hover: hover)
+         // &:hover
+         //    label
+         //       background: $color_1
+
+.checkboxInput
+   position: relative
+   line-height: .8
+   margin-right: 10px
+   z-index: 0
+   order: 1
+   &:active
+      top: 3px
+   label
+      width: 26px
+      height: 26px
+      // background-color: #fff
+      display: inline-block
+      cursor: pointer
+      position: relative
+      border-radius: 5px
+      background: #fff
+      border: 2px solid #eee
+      transition: background .15s
+   input
+      &:checked
+         & + svg
+            opacity: 1
+         & + svg + label
+            background: $color_1
+            border-color: $color_1
+            // border-color: #fff
+            // background: linear-gradient(90deg, #FC5565 0%, #F6771E 100%) !important
+   svg
+      width: 70%
+      height: 70%
+      position: absolute
+      left: 50%
+      top: 50%
+      opacity: 0
+      transition: opacity .15s
+      transform: translate(-50%,-50%)
+      z-index: 1
+      fill: #fff
+      pointer-events: none
+   // @media(hover: hover)
+   //    &:hover
+   //       label
+   //          background: rgba($color_1, .05)
+
+.uploadImg
+   // margin: 10px 0
+   display: block
+   width: 100%
+   // padding-bottom: 40%
+   border: 2px solid rgba(#898989, .2)
+   position: relative
+   border-radius: 5px
+   line-height: 0
+   overflow: hidden
+   text-align: center
+   // img
+      // width: 100%
+      // height: 100%
+      // object-fit: cover
+   .closeIcon
+      box-shadow: 0 2px 3px 0px rgba(#000, .5)
+
+
+.closeIcon 
+   width: 30px
+   height: 30px
+   border-radius: 50%
+   background-color: $color_1
+   position: absolute
+   display: block
+   top: 15px
+   right: 15px
+   cursor: pointer
+   border: none
+   @media(hover: hover)
+      &:hover
+         background-color: darken($color_1, 10%)
+   svg
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+      max-width: 50%
+      max-height: 50%
+      stroke: #fff
+   &:active
+      top: 18px
+
+
+
+
+// ======== POPUP ==========
+
+.popupBlock
+   display: none
+   opacity: 0
+   position: fixed
+   top: 0
+   left: 0
+   width: 100%
+   height: 100%
+   z-index: 20
+   transition: opacity .25s
+   background-color: rgba(#000,.4)
+   padding: 40px 10px 15px
+   overflow: auto
+   text-align: center
+   &:before
+      content: ''
+      display: inline-block
+      vertical-align: middle
+      height: 100%
+      user-select: none
+      pointer-events: none
+
+	
+.popupItem
+   vertical-align: middle
+   margin-left: -5px
+   background-color: #FFF
+   display: inline-block
+   position: relative
+   border-radius: 5px
+   padding: 25px 5em 35px
+   width: 100%
+   transform: translate3d(0,-200px,0)
+   opacity: 0
+   transition: transform .7s, opacity .7s
+   &._show
+      transform: translate3d(0,0,0)
+      opacity: 1
+   &._t1
+      max-width: 450px
+   .close_popup
+      top: -40px
+      right: 5px
+
+
+
+
+// ======== /POPUP ==========
+
+.popupConfirm
+   background-color: #fff
+   border: 2px solid $color_1
+   // position: fixed
+   z-index: 20
+   // left: 50%
+   // top: 50%
+   // transform: translate(-50%,-50%)
+   padding: 20px 20px
+   border-radius: 5px
+   width: auto
+
+.popupConfirm__title
+   &+p
+      font-weight: 700
+   
+   
+.popupConfirm__buttons
+   display: flex
+   align-items: center
+   justify-content: center
+   margin-top: 20px
+   .button_1
+      &:first-child
+         margin-right: 20px
+
+
+
+.listElems_1
+   max-width: 500px
+   li 
+      // display: flex
+      justify-content: space-between
+      display: grid
+      grid-template-columns: 1fr auto
+      grid-gap: 20px
+      align-items: start
+      // border: 1px solid #eee
+      margin-bottom: 15px
+      &:last-child
+         margin-bottom: 0
+   &._disable
+      opacity: .7
+      pointer-events: none
+
+
+.catElemsListWrap
+   // border: 1px solid $color_1
+.catElemsListWrap__title
+   font-weight: 700
+   margin-bottom: 10px
+   font-size: 1.4em
+.catElemsList
+   list-style-type: none
+   li 
+      margin-top: 10px
+      // display: inline-block
+      &:first-child
+         margin-top: 0
+
+
+.catElemsList__marks
+   list-style-type: none
+   display: flex
+   font-size: 12px
+   margin-bottom: 5px
+   li 
+      &:first-child
+         width: 50px
+         margin-right: 5px
+
+.catElemsList__li
+   display: flex
+   padding-right: 35px
+   &._change
+      .catElemsList__elem
+         background-color: rgba(red, .1)
+
+.catElemsList__elem
+   border: 1px solid #e1e1e1
+   border-radius: 5px
+   padding: 5px
+   display: inline-block
+   // padding-right: 35px
+   position: relative
+   @media(hover: hover)
+      &:hover
+         background-color: rgba($color_1, .08)
+   .closeIcon
+      width: 20px
+      height: 20px
+      top: 5px
+      right: -30px
+      transition: transform .15s
+      &:active
+         top: 8px
+      &._remove
+         transform: rotate(45deg)
+
+.catElemsList__elem_input
+   width: 50px
+   font-family: $mainFonts
+   border: 1px solid #e1e1e1
+   padding: 5px 5px
+   font-size: 16px
+   color: $black
+   border-radius: 5px
+   transition: border .15s
+   appearance: none
+   outline: none
+   overflow: hidden
+   margin-right: 5px
+   &:focus
+      border-color: $color_1
+   &._disable
+      opacity: .5
+      pointer-events: none
+
+.formAdminSetting
+   margin-top: 30px
+   .editItem
+      margin-bottom: 20px
+
+
+.editItem
+   display: flex
+   align-items: center
+.editItem__inner
+   margin-right: 10px
+   input
+      display: none
+   p 
+      font-size: 20px
+   .input_1
+      padding: 5px
+
+
+.passwordEditItem
+   margin-top: 30px
+   max-width: 500px
+   p 
+      // font-weight: 700
+      margin-bottom: 15px
+   .inputWrap_1 
+      margin-top: 15px
+      &:first-child
+         margin-top: 0
+
+
+.passwordEditItem__new
+   margin-top: 30px
+
+.inputText
+   font-size: 16px
+   margin-top: 5px
+   &._red
+      color: red
+
+
+.selectionFilter
+   display: flex
+   align-items: center
+   form
+      display: flex 
+      margin-right: 10px
+   .inputButton
+      margin-right: 5px
+
+.inputButton
+   input
+      display: none
+   label
+      cursor: pointer
+      padding: 5px 10px
+      display: block
+      border: 1px solid $color_1
+      border-radius: 30px
+      transition: color .15s
+      &._active
+         background-color: $color_1
+         color: #fff !important
+      @media(hover: hover)
+         &:hover
+            color: $color_1
+
+
+
+
+.push
+   height: 1000px
+@import "media" // Всегда в конце
+
