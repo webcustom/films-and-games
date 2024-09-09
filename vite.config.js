@@ -6,11 +6,11 @@ export default defineConfig({
         laravel({
             input: ['resources/sass/main.sass', 'resources/js/app.js'],
             refresh: true,
-            // Добавьте опцию для генерации manifest
-            publicDirectory: 'public',
-            build: {
-                manifest: true,
-            },
         }),
     ],
+    // Добавьте опцию для генерации manifest
+    build: {
+        manifest: true,
+        outDir: 'public/build',
+    }
 });
