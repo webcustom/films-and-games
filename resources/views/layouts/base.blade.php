@@ -46,10 +46,13 @@
     {{-- если путь начинается с admin и пользователь авторизован и является админом --}}
     @if(Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin')
         @vite('resources/admin/sass/main.sass' /*, 'resources/js/app.js'*/)
+        {{-- <link rel="stylesheet" href="{{ asset('assets/main-OSXSCQmp.css') }}"> --}}
         @stack('css_admin') 
         @stack('js_admin')
     @else
         @vite('resources/sass/main.sass' /*, 'resources/js/app.js'*/)
+        {{-- <link rel="stylesheet" href="{{ asset('public/build/assets/main-OSXSCQmp.css') }}"> --}}
+
         @stack('css') 
         @stack('js')
     @endif

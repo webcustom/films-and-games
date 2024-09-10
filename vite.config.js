@@ -9,8 +9,8 @@ export default defineConfig({
         }),
     ],
     // Добавьте опцию для генерации manifest
-    build: {
-        manifest: true,
-        outDir: 'public/build',
-    }
+    // build: {
+    //     manifest: true,
+    //     outDir: 'public/css/asdas',
+    // }
 });

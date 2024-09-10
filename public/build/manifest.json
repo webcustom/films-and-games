@@ -1,0 +1,37 @@
+{
+  "resources/fonts/RobotoBold/RobotoBold.woff": {
+    "file": "assets/RobotoBold-D8oNvUOK.woff",
+    "src": "resources/fonts/RobotoBold/RobotoBold.woff"
+  },
+  "resources/fonts/RobotoBold/RobotoBold.woff2": {
+    "file": "assets/RobotoBold-BYLdE7Ab.woff2",
+    "src": "resources/fonts/RobotoBold/RobotoBold.woff2"
+  },
+  "resources/fonts/RobotoMedium/RobotoMedium.woff": {
+    "file": "assets/RobotoMedium-CcxbJM51.woff",
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff"
+  },
+  "resources/fonts/RobotoMedium/RobotoMedium.woff2": {
+    "file": "assets/RobotoMedium-C3H6pipf.woff2",
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff2"
+  },
+  "resources/fonts/RobotoRegular/RobotoRegular.woff": {
+    "file": "assets/RobotoRegular-SXoIhfGg.woff",
+    "src": "resources/fonts/RobotoRegular/RobotoRegular.woff"
+  },
+  "resources/fonts/RobotoRegular/RobotoRegular.woff2": {
+    "file": "assets/RobotoRegular-DcS189mR.woff2",
+    "src": "resources/fonts/RobotoRegular/RobotoRegular.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-C1-XIpUa.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/main.sass": {
+    "file": "assets/main-OSXSCQmp.css",
+    "src": "resources/sass/main.sass",
+    "isEntry": true
+  }
+}

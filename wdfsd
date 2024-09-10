@@ -1,0 +1,87 @@
+warning: in the working copy of 'resources/sass/main.sass', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/layouts/base.blade.php', CRLF will be replaced by LF the next time Git touches it
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex c87c6fe..73ebd45 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,6 +1,6 @@[m
+ /.phpunit.cache[m
+ /node_modules[m
+[31m-/public/build[m
+[32m+[m[32m#/public/build[m
+ /public/hot[m
+ /public/storage[m
+ /storage/*.key[m
+[1mdiff --git a/resources/sass/main.sass b/resources/sass/main.sass[m
+[1mindex 3d403d2..42992e9 100644[m
+[1m--- a/resources/sass/main.sass[m
+[1m+++ b/resources/sass/main.sass[m
+[36m@@ -1026,32 +1026,7 @@[m [mtrix-editor[m
+    padding-top: 7em[m
+    &:last-child[m
+       margin-bottom: 10em[m
+[31m-      // &::before[m
+[31m-      //    content: ''[m
+[31m-      //    width: 100%[m
+[31m-      //    height: 100%[m
+[31m-      //    position: absolute[m
+[31m-      //    left: 0[m
+[31m-      //    top: 50%[m
+[31m-      //    transform: translate(-5%,-70%)[m
+[31m-      //    background: linear-gradient(to right, $color_1 -30%, transparent 100%)[m
+[31m-      //    z-index: -1[m
+[31m-      // &::after[m
+[31m-      //    content: ''[m
+[31m-      //    position: absolute[m
+[31m-      //    top: 35%[m
+[31m-      //    left: 105%[m
+[31m-      //    transform: translate(0, -50%)[m
+[31m-      //    width: 740px[m
+[31m-      //    height: 2px[m
+[31m-      //    background: linear-gradient(to right, $color_3 30%, $color_1 100%) [m
+[31m-[m
+[31m-      // text-decoration: underline[m
+[31m-      // text-decoration-style: wavy[m
+[31m-      // text-decoration-color: $color_1[m
+[31m-      // border-bottom: 2px solid $color_3[m
+[31m-      // line-height: 1[m
+[31m-      // display: inline[m
+[32m+[m[41m  [m
+ [m
+ .mainTop[m
+    display: flex[m
+[1mdiff --git a/resources/views/layouts/base.blade.php b/resources/views/layouts/base.blade.php[m
+[1mindex d68d5a0..69d72bd 100644[m
+[1m--- a/resources/views/layouts/base.blade.php[m
+[1m+++ b/resources/views/layouts/base.blade.php[m
+[36m@@ -46,10 +46,13 @@[m
+     {{-- если путь начинается с admin и пользователь авторизован и является админом --}}[m
+     @if(Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin')[m
+         @vite('resources/admin/sass/main.sass' /*, 'resources/js/app.js'*/)[m
+[32m+[m[32m        {{-- <link rel="stylesheet" href="{{ asset('assets/main-OSXSCQmp.css') }}"> --}}[m
+         @stack('css_admin') [m
+         @stack('js_admin')[m
+     @else[m
+         @vite('resources/sass/main.sass' /*, 'resources/js/app.js'*/)[m
+[32m+[m[32m        {{-- <link rel="stylesheet" href="{{ asset('public/build/assets/main-OSXSCQmp.css') }}"> --}}[m
+[32m+[m
+         @stack('css') [m
+         @stack('js')[m
+     @endif[m
+[1mdiff --git a/vite.config.js b/vite.config.js[m
+[1mindex 4cf11f3..805b4ca 100644[m
+[1m--- a/vite.config.js[m
+[1m+++ b/vite.config.js[m
+[36m@@ -9,8 +9,8 @@[m [mexport default defineConfig({[m
+         }),[m
+     ],[m
+     // Добавьте опцию для генерации manifest[m
+[31m-    build: {[m
+[31m-        manifest: true,[m
+[31m-        outDir: 'public/build',[m
+[31m-    }[m
+[32m+[m[32m    // build: {[m
+[32m+[m[32m    //     manifest: true,[m
+[32m+[m[32m    //     outDir: 'public/css/asdas',[m
+[32m+[m[32m    // }[m
+ });[m
