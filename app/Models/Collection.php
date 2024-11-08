@@ -125,7 +125,7 @@ class Collection extends Model
             // инкапсулировал логику сжатия изображений в класс App/Services/ImageProcessor
             $imageProcessor = new ImageProcessor();
             //передаем само изображение, название папки куда будут сохранятся изображения, и массив с размерами изображений
-            $paths = $imageProcessor->processImage($request->file('img'), 'collectionss', [[300, 200], [1000, 600]]); 
+            $paths = $imageProcessor->processImage($request->file('img'), 'collections', [[300, 200], [1000, 600]]); 
         
             $path_original = $paths[0];
             $path_medium = $paths[1];
