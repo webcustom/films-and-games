@@ -10,9 +10,15 @@ function deleteEditImg(param = null){
         input_delete_img = document.querySelector('[name="delete_img"]')
 
         input.addEventListener('change', function(){
+
             if (input.files && input.files[0]) {
-                let reader = new FileReader()
-                reader.readAsDataURL(input.files[0]);
+                // console.log(input_delete_img)
+                // удаляем прошлое уже привязанное к записи изображение если загрузили новое
+                if(input_delete_img){
+                    input_delete_img.value = '1'
+                }
+                let reader = new FileReader() // FileReader - позволяет асинхронно читать содержимое файла
+                reader.readAsDataURL(input.files[0]) // читаем содержимое файла
                 reader.onload = function (e) {
                     if(param){
                         input_delete_img.value = param 
@@ -22,7 +28,6 @@ function deleteEditImg(param = null){
                             <span class="closeIcon"><svg><use xlink:href="#close"/></svg></span>
                         </div>`
                     uploadImg = document.querySelector('.uploadImg')
-                    console.log(uploadImg)
 
                     if(uploadImg){
                         uploadImg.remove()
@@ -42,10 +47,9 @@ function deleteEditImg(param = null){
 }
 
 function deleteInputImg(param = null){
-    console.log(param)
     input.value = ''
     if(param){
-        input_delete_img.value = '1';//param
+        input_delete_img.value = '1' //param
     }
     document.querySelector('.uploadImg').remove()
 }
