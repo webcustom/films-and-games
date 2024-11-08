@@ -189,6 +189,15 @@ class Collection extends Model
     }
 
 
+    public static function deleteFiles($imgs_paths)
+    {
+        foreach($imgs_paths as $path){
+            if(isset($path) && file_exists(public_path($path))) {
+                unlink(public_path($path));
+            }
+        }
+    }
+
 
 }
 
