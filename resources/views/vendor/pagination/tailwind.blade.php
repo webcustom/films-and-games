@@ -25,17 +25,17 @@
         <div class="paginationEl__flex hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div class="paginationEl__info">
                 <p class="text-sm text-gray-700 leading-5 dark:text-gray-400">
-                    {!! __('Showing') !!}
+                    {{-- {!! __('от') !!} --}}
                     @if ($paginator->firstItem())
                         <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                        {!! __('to') !!}
+                        {!! __('-') !!}
                         <span class="font-medium">{{ $paginator->lastItem() }}</span>
                     @else
                         {{ $paginator->count() }}
                     @endif
-                    {!! __('of') !!}
+                    {!! __('из') !!}
                     <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
+                    {{-- {!! __('результатов') !!} --}}
                 </p>
             </div>
 

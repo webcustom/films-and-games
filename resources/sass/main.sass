@@ -286,7 +286,7 @@ input:-webkit-autofill:focus
    user-select: none
    position: relative
    text-decoration: none
-   font-family: $black
+   font-family: $mainFonts
    font-weight: 700
    border-radius: 30px
    border: 1px solid darken($color_3, 15%)
@@ -357,9 +357,10 @@ input:-webkit-autofill:focus
    appearance: none
    outline: none
    overflow: hidden
+   // border: 2px solid red   
    &:focus
-      border-color: $color_1
-      border-width: 2px
+      border-color: $color_1 !important
+      // border-width: 2px
    &._error
       border-color: red
 
@@ -370,10 +371,12 @@ textarea
       height: 138px
    
 trix-editor
+   color: red !important
    border: 2px solid rgba(#898989, .2) !important
    &._error
       border-color: red !important
-
+   &:focus
+      border-color: $color_1 !important
 
 .inputAlert
    margin-top: 5px
@@ -450,7 +453,7 @@ trix-editor
 .title_1
    font-size: 4em
    font-weight: 700
-   color: $color_3
+   // color: $color_3
    line-height: 1
 
 .title_2
@@ -880,7 +883,8 @@ trix-editor
 
 ._fz16
    font-size: 16px
-
+._fz20
+   font-size: 20px
 
 .imgTotalWrap
    width: 100%
@@ -889,7 +893,8 @@ trix-editor
    position: relative
    border-radius: 5px
    display: block
-   background: linear-gradient(to right, $color_3 30%, $color_1 100%)
+   background-color: #ccc
+   // background: linear-gradient(to right, $color_3 30%, $color_1 100%)
    // border: 2px solid $color_2
    // border-radius: 10px
    box-shadow: 2px 2px 5px 0 rgba($color_2, .5)
@@ -936,7 +941,7 @@ trix-editor
    font-weight: 700
    line-height: 1
    z-index: 0
-   width: calc(100% - 60px)
+   width: calc(100% - 1em)
    // border: 1px solid red
    // padding-right: 20px
    // &::before
@@ -1017,9 +1022,7 @@ trix-editor
    grid-gap: 15px
    .titleAbsolute
       font-size: 2em
-      left: 15px
-      bottom: 15px
-      width: calc(100% - 30px)
+      // width: calc(100% - 30px)
 
 
 .sectionItem
@@ -1050,11 +1053,136 @@ trix-editor
    .title_1
       font-size: 3em
       position: relative
-      color: $color_3
+      // color: $color_3
       // text-shadow: 0 0 5px rgba($color_2, 1)
       // background-color: $color_3
       // padding: 20px 20px
       // border-radius: 50px
+
+
+.collectionsLIst
+   display: grid
+   grid-template-columns: 1fr 1fr
+   gap: 30px
+   margin-top: 30px
+
+.collectionItem
+   // border: 1px solid red
+   display: flex
+   background-color: #eee
+   // flex-direction: column
+   .button_1
+      font-size: 14px
+      margin-top: 20px
+      align-self: flex-end
+
+.collectionItem__img
+   width: 30%
+   min-width: 30%
+   padding-bottom: 20%
+   // border-radius: 10px
+   background-color: #ccc
+   position: relative
+   overflow: hidden
+   // align-self: flex-start
+   img
+      position: absolute
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      object-fit: cover
+      object-position: center
+
+.collectionItem__content
+   padding: 2em
+   display: flex
+   flex-wrap: wrap
+   >div
+      width: 100%
+   // flex: 1 0 auto
+   // align-items: flex-start
+   // border: 1px solid red
+   // flex-direction: column
+
+.collectionItem__title
+   font-weight: 700
+   font-size: 20px
+   line-height: 1
+   width: 100%
+
+.collectionItem__description
+   font-size: 14px
+   margin-top: 15px
+   width: 100%
+   // align-self: flex-start
+
+
+// Pagination ======================
+
+.paginationEl__flex
+   display: flex
+   justify-content: space-between
+   align-items: center
+   font-size: 16px
+
+.paginationEl__controlls
+   >span
+      display: flex
+      align-items: center
+      // border: 1px solid blue
+
+.paginationEl__arrow
+   border: 1px solid #eee
+   position: relative
+   width: 30px
+   height: 30px
+   display: block
+   transition: border .15s
+   // border: 1px solid red
+   svg
+      // border: 1px solid red
+      position: absolute
+      // max-width: 100%
+      // max-height: 100%
+      width: 70%
+      top: 50%
+      left: 50%
+      transform: translate(-50%,-50%)
+   @media(hover: hover)
+      &[href]
+         &:hover
+            border-color: $color_1
+
+
+.paginationEl__num
+   width: 30px
+   height: 30px
+   border: 1px solid #eee
+   position: relative
+   transition: border .15s
+   >span
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+   &._active
+      background-color: $color_1
+      background: linear-gradient(to bottom, $color_1 0%, $color_3 100%)
+      border-color: $color_1
+      color: #fff
+   @media(hover: hover)
+      &:hover
+         border-color: $color_1
+
+
+.paginationEl__previousNext
+   display: none
+
+
+// EndPagination ======================
+
+
 
 .push
    height: 1000px

@@ -86,7 +86,8 @@
             <input type="hidden" name="delete_img" readonly value="">
 
             <x-admin.input type="text" title="Содержание поста" name="description" class="_mt20" value="{{ strip_tags($collection->description) ?? '' }}">
-                <x-slot name="trix"></x-slot> {{-- можно дополнять компоненту слотом --}}
+                {{-- <x-slot name="trix"></x-slot> можно дополнять компоненту слотом --}}
+                <x-slot name="trix"></x-slot>
             </x-admin.input>
             {{-- <x-admin.input type="text" name="resource_id" title="id фильмов или других элементов (через запятую)" class="_mt20"/> --}}
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20" value="{{ $collection->published_at }}"/>

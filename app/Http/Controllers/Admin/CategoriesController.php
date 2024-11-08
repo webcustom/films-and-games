@@ -64,13 +64,7 @@ class CategoriesController extends Controller
         return redirect()->route('admin.categories.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
-    }
+
 
 
      // редактирование -> страница формы
@@ -122,5 +116,50 @@ class CategoriesController extends Controller
         alert(__('Категория удалена'));
         
         return redirect()->route('admin.categories.index');
+    }
+
+
+    public function show($category_slug){
+        // dump($collection_slug);
+        // dd($category_slug);
+
+        // получаем элемент по slug
+        $category = Category::where('slug', $category_slug)->first();
+        // dd($category->collections);
+        // dd($category);
+        // $collections = $query->latest('published_at')->paginate(12);
+
+        // $order = $category->collections;
+        // // Преобразуем массив в коллекцию
+        // $sortOrder = collect($category->collections);
+        // // Сортируем фильмы по индексу сортировки
+        // $sortedElems = $order->sortBy(function ($elem) use ($sortOrder) {
+        //     // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
+        //     return (!empty($sortOrder[$elem->id])) ? $sortOrder[$elem->id] : PHP_INT_MAX;
+        // }); 
+
+        // dd($sortedElems);
+
+    // @foreach ($sortedElems as $elem)
+
+
+        $collectionsItems = $category->collections()->where('published', 1)->paginate(12);
+        // dump($collectionsItems);
+        // $category = Category::find($collection->category_id);
+        // $category = Category::find($collection->category_id);
+        // $films = Film::where()
+
+        // $collection2 = Category::find(2);
+        // if($collection->category_id === $category->id){
+        //     $title = $category->title;
+        //     $order = $collection->films;
+
+        // }
+        // dd($collection2);
+        // dd($query);
+        // $query->where('slug', 'like', "%{$collection_slug}%");
+        // dd($query);
+        return view('categories.show', compact('collectionsItems', 'category'));
+
     }
 }

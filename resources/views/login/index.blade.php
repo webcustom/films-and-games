@@ -46,7 +46,7 @@
                 <div class="_center _mt10">
                     <button class="button_1 _big _mb20" type="submit">Войти</button>
                     <br>
-                    <a href="{{ route('register.index') }}" class="_center ref_1 _fz16">Зарегистрироваться</a>
+                    {{-- <a href="{{ route('register.index') }}" class="_center ref_1 _fz16">Зарегистрироваться</a> --}}
                 </div>
             </form>
         </div>

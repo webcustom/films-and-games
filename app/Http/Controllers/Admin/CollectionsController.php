@@ -41,6 +41,9 @@ class CollectionsController extends Controller
         }
 
         $collections = $query->latest('published_at')->paginate(12);
+
+        $collections->appends(request()->query()); //позволяет сохранить get параметры в url при пагинации т.е. при переходе на страницу 2 ссылка будет не http://127.0.0.1:8000/admin/collections?page=2 а http://127.0.0.1:8000/admin/collections?selectionByCat=2&page=2
+
         $categories = Category::all();
 
         return view('admin.collections.index', compact('collections', 'categories'));

@@ -128,9 +128,10 @@ class Film extends Model
         $validated = $request->validate(Film::validationRules($film ? $film->id : null));
         $cast = explode(",", $validated['cast']);
 
-
+        // dd($validated['img']);
         // есил файл загрузили в форме
         if($request->hasFile('img')){
+
             // инкапсулировал логику сжатия изображений в класс App/Services/ImageProcessor
             $imageProcessor = new ImageProcessor();
             //передаем само изображение, название папки куда будут сохранятся изображения, и массив с размерами изображений

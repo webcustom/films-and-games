@@ -43,8 +43,9 @@
     <div class="contain">
         <div class="mainTop">
             <p class="title_1">Подборки: {{ $category->title }}</p>
-            <a class="button_1 _shadow">Смотреть все</a>
+            <a href={{ route('categories.show', $category->slug) }} class="button_1 _shadow">Смотреть все</a>
         </div>
+        {{-- {{ dd($category) }} --}}
         <div class="blocksList_1 _mt40">
             @foreach($remainingCollections->where('category_id', $category->id)->take(8) as $collection)
                 <a href="{{ route('collections.show', $collection->slug) }}" class="imgTotalWrap _backgroundDarkening">

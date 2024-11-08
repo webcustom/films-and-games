@@ -14,9 +14,12 @@ class ImageProcessor{
         // try {
             //создаем уникальное имя для нашего изображения
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-            
+            // dd($image);
+
             //загружаем изображение в каталог
             $image->move('storage/'.$path, $imageName);
+
+
             //изменение размеров изображения
             $imgManager = new ImageManager(new Driver());
             $thumbImage = $imgManager->read('storage/'.$path.'/'.$imageName);

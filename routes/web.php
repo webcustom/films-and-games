@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\CollectionsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -20,12 +21,15 @@ use Illuminate\Http\Request;
 // Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/collections/{collection}', [CollectionsController::class, 'show'])->name('collections.show');
+Route::get('/categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
+
 
 
 //что бы применить один middleware на группу роутов надо сделать так:
 Route::middleware('guest')->group(function(){ //guest проверяет пользователь гость или нет
-    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
-    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    // разкоментить /register для добавления нового пользователя
+    // Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    // Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 

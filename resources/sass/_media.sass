@@ -21,10 +21,22 @@
    //
 
 
-@media only screen and (max-width : 1300px)
+@media only screen and (max-width : 1315px)
    //
+   .contain
+      max-width: 1200px
 
-
+   ._section
+      font-size: 9px
+      
+   // .titleAbsolute
+   //    font-size: 3.8vw
+   // .secondEntry 
+   //    .titleAbsolute
+   //       font-size: 2vw
+   // .thirdEntry 
+   //    .titleAbsolute
+   //       font-size: 2vw
 
 
 /* Large Devices, Wide Screens */
@@ -33,6 +45,21 @@
    .contain
       max-width: 992px
 
+   ._section
+      font-size: 8px
+
+   .blocksList_1
+      grid-template-columns: repeat(3, 1fr)
+
+   .titleAbsolute
+      font-size: 4em
+   .secondEntry .titleAbsolute, .thirdEntry .titleAbsolute
+      font-size: 2.5em
+
+   .collectionsLIst
+      gap: 15px
+
+
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px)
@@ -40,18 +67,73 @@
    .contain
       max-width: 768px
 
+   ._section
+      font-size: 7px
+
+   .mainBlocks
+      grid-template-columns: 1fr 1fr
+      grid-template-areas: "first first" "second third"
+
+   .blocksList_1
+      grid-template-columns: repeat(2, 1fr)
+      .titleAbsolute
+         font-size: 2.5em
+
+   .collectionItem
+      flex-wrap: wrap
+      flex-direction: column
+   .collectionItem__img
+      width: 100%
+      min-width: 100%
+      padding-bottom: 50%
+   .collectionItem__title
+      font-size: 18px
+      // align-self: start
+   .collectionItem__description
+      // align-self: start
+   .collectionItem__content
+      width: 100%
+      flex-grow: 1
+      // flex-shrink: 1
+      // flex-basis: auto
+      align-items: start
+      // height: 100%
+      // flex-direction: column
+      // flex: 1
+      // align-items: flex-start
+      .button_1
+         margin-left: auto
+         margin-right: auto
+         display: block
+         max-width: 150px
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px)
    //
    .contain
       max-width: 650px
-
+   .collectionItem__title
+      font-size: 16px
+      // border: 1px solid red
+   .collectionItem__description
+      font-size: 12px
+      // border: 1px solid red
+   
+   .paginationEl__flex
+      font-size: 14px
 
 @media only screen and (max-width : 650px)
    //
    .contain
       max-width: 550px
+
+   .secondEntry .titleAbsolute, .thirdEntry .titleAbsolute, .blocksList_1 .titleAbsolute
+      font-size: 2em
+
+   // .titleAbsolute
+   //    left: .5em
+   //    bottom: .5em
+   //    width: calc(100% - 1em)
 
 
 @media only screen and (max-width : 550px)
@@ -59,7 +141,20 @@
    .contain
       max-width: 480px
 
- 
+   .firstEntry
+      .imgTotalWrap
+         padding-bottom: 50%
+   .imgTotalWrap
+      padding-bottom: 70%
+
+   .titleAbsolute
+      font-size: 3em
+
+   .collectionItem__title
+      font-size: 14px
+   .collectionItem__content
+      .button_1
+         font-size: 12px
 
 
 /* Extra Small Devices, Phones */
@@ -68,11 +163,32 @@
    .contain
       padding: 0 30px
 
+   // .mainBlocks
+   //    grid-template-columns: 1fr 1fr
+   //    grid-template-areas: "first first" "second third"
 
- 
+   // .blocksList_1
+   //    grid-template-columns: repeat(2, 1fr)
+
+   .collectionItem__content
+      padding: 10px 
 
 @media only screen and (max-width : 400px)
    //
+   .contain
+      padding: 0 15px
+
+   .secondEntry .titleAbsolute, .thirdEntry .titleAbsolute, .blocksList_1 .titleAbsolute
+      font-size: 13px
+   
+   .mainBlocks, .blocksList_1
+      gap: 10px
+
+   .mainTop 
+      .title_1
+         font-size: 18px
+
+
 
 @media only screen and (max-width : 350px)
    //
