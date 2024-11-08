@@ -12,7 +12,6 @@ function deleteEditImg(param = null){
         input.addEventListener('change', function(){
 
             if (input.files && input.files[0]) {
-                // console.log(input_delete_img)
                 // удаляем прошлое уже привязанное к записи изображение если загрузили новое
                 if(input_delete_img){
                     input_delete_img.value = '1'
