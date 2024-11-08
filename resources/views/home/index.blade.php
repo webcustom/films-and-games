@@ -14,6 +14,7 @@
             // $publishedItems = $collections->filter(function ($collection) {
             //     return $collection->published;
             // });
+            // dd($collections);
 
             // берем 3 певых элемента
             $topCollections = $collections->take(3);
@@ -37,7 +38,6 @@
     </div>
 </section>
 
-            
 @foreach ($categories as $category)
 <section class="sectionItem _section">
     <div class="contain">
