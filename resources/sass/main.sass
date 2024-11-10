@@ -407,6 +407,8 @@ trix-editor
       align-items: center
    li 
       margin-right: 30px
+      &:last-child
+         margin-right: 0
    a 
       transition: color .15s
       &._active
@@ -459,6 +461,7 @@ trix-editor
 .title_2
    font-size: 3em
    font-weight: 700
+   // color: $color_3
    .date
       font-size: .5em
 
@@ -859,9 +862,40 @@ trix-editor
    margin-right: auto
 
 .itemDetail__text
-   font-size: 2em 
+   font-size: 18px 
    margin-top: 20px
 
+.paramslistWrap
+   margin-top: 20px
+   padding: 20px
+   background-color: #eee
+   border-radius: 5px
+
+.parmsList
+   columns: 2
+   gap: 30px
+
+.itemDetail__param
+   display: flex
+   margin-bottom: 5px
+   font-size: 14px
+   &:last-child
+      margin-bottom: 0
+   p 
+      margin-right: 8px
+      // color: $color_1
+      &:first-child
+         font-weight: 700
+         color: $color_3
+   ul 
+      // font-size: 14px
+      li 
+         display: inline-block
+   &._flexWrap
+      flex-wrap: wrap
+      p
+         &:last-child
+            margin-top: 5px
 
 
 .centerItem
@@ -881,6 +915,12 @@ trix-editor
 
 .sectionDetail__date
    font-size: 16px
+
+
+
+
+
+
 
 ._fz16
    font-size: 16px

@@ -20,7 +20,7 @@
             @endif
             <div class="itemDetail__middle">
                 <a class="ref_1" href="{{ url()->previous() }}">Назад</a>
-                <p class="dateItem">{{ $collection->published_at }}</p>
+                <p class="dateItem">дата публикации: {{ $collection->published_at }}</p>
             </div>
             
 
@@ -65,7 +65,7 @@
                         @foreach ($sortedElems as $elem)
                         {{-- {{ dd($elem) }} --}}
                             <section class="sectionDetail _mt50">
-                                <div class="">
+                                <div class="sectionDetail__inner">
                                     <div class="doubleTop">
                                         <h1 class="title_2">{{ $elem['title'] }} <span class="date">({{ $elem->release }})</span></h1>
                                         {{-- <p class="sectionDetail__date">{{ $elem->release }}</p> --}}
@@ -76,11 +76,101 @@
                                         </div>
                                     @endif
 
+                                    <div class="paramslistWrap">
+                                        <ul class="parmsList">      
+                                            @if(isset($elem->rating_imdb))
+                                                <li class="itemDetail__param">
+                                                    <p>рейтинг Imdb:</p>
+                                                    <p>{{ $elem->rating_imdb }}</p>
+                                                </li>
+                                            @endif
+                                            @if(isset($elem->rating_kinopoisk))
+                                                <li class="itemDetail__param">
+                                                    <p>рейтинг Кинопоиск:</p>
+                                                    <p>{{ $elem->rating_kinopoisk }}</p>
+                                                </li>
+                                            @endif
+
+                                            @if(isset($elem->release))
+                                                <li class="itemDetail__param">
+                                                    <p>релиз:</p>
+                                                    <p>{{ $elem->release }}</p>
+                                                </li>
+                                            @endif
+
+                                            @if(isset($elem->duration))
+                                                <li class="itemDetail__param">
+                                                    <p>продолжительность:</p>
+                                                    <p>{{ $elem->duration }}</p>
+                                                </li>
+                                            @endif
+
+                                           
+
+                                            @if(isset($elem->country))
+                                                <li class="itemDetail__param">
+                                                    <p>страна:</p>
+                                                    <p>{{ $elem->country }}</p>
+                                                </li>
+                                            @endif
+
+                                            @if(isset($elem->budget))
+                                                <li class="itemDetail__param">
+                                                    <p>бюджет:</p>
+                                                    <p>{{ $elem->budget }}</p>
+                                                </li>
+                                            @endif
+
+                                            @if(isset($elem->fees_usa))
+                                                <li class="itemDetail__param">
+                                                    <p>сборы в США:</p>
+                                                    <p>{{ $elem->fees_usa }}</p>
+                                                </li>
+                                            @endif
+
+                                            @if(isset($elem->fees_world))
+                                                <li class="itemDetail__param">
+                                                    <p>сборы в мире:</p>
+                                                    <p>{{ $elem->fees_world }}</p>
+                                                </li>
+                                            @endif
+
+                                            
+
+                                        </ul>
+
+                                        @if(isset($elem->director))
+                                            <div class="itemDetail__param _mt5">
+                                                <p>режиссер:</p>
+                                                <p>{{ $elem->director }}</p>
+                                            </div>
+                                        @endif
+                                        @if(isset($elem->genre))
+                                            <div class="itemDetail__param _mt5">
+                                                <p>жанр:</p>
+                                                <p>{{ $elem->genre }}</p>
+                                            </div>
+                                        @endif
+                                        @if(count($elem->cast) > 0)
+                                            <div class="itemDetail__param _mt5 _flexWrap">
+                                                <p>в&nbsp;ролях:</p>
+                                                <ul>
+                                                    @foreach ($elem->cast as $name)
+                                                        <li>{{ $name }},</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    
+
                                     @if(isset($elem->description))
                                         <div class="itemDetail__text">
                                             <p>{!! $elem->description !!}</p>
                                         </div>
                                     @endif
+
                                 </div>
                             </section>
                         @endforeach
