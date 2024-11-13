@@ -186,7 +186,7 @@
                 </div>
                 
             @else
-                <p class="catElemsListWrap__title _mt20">Нет элементов привязанных к подборке</p>
+                <p class="notElems _mt20">Нет элементов привязанных к подборке</p>
             @endif
         </div>
 {{-- 
