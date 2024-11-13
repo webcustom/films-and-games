@@ -74,7 +74,7 @@
             <x-admin.input type="text" name="release" title="Дата релиза" class="_mt20" value="{{ $game->release }}"/>
             <x-admin.input type="text" name="genre" title="Жанр" class="_mt20" value="{{ $game->genre }}"/>
             <x-admin.input type="text" name="budget" title="Бюджет" class="_mt20" value="{{ $game->budget }}"/>
-            <x-admin.input type="text" name="maker" title="Разработчик" class="_mt20" value="{{ $game->director }}"/>
+            <x-admin.input type="text" name="maker" title="Разработчик" class="_mt20" value="{{ $game->maker }}"/>
             @php
                 if(!is_null($game->cast)){
                     $cast = implode(', ', $game->cast);
@@ -83,7 +83,7 @@
                 }
             @endphp
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20" value="{{ $game->published_at }}"/>
-            <x-admin.checkbox name="published" value="1" class="_mt20" checked="{{ $game->published ? 'checked' : ''}}">Опубликовано</x-admin.checkbox>
+            {{-- <x-admin.checkbox name="published" value="1" class="_mt20" checked="{{ $game->published ? 'checked' : ''}}">Опубликовано</x-admin.checkbox> --}}
             <button class="button_1 _big" type="submit">Сохранить</button>
         </form>
 

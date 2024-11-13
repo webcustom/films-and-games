@@ -1,6 +1,5 @@
 
-
-<div class="adminItem {{ !$elem->published ? '_notPublished' : '' }}">
+<div class="adminItem {{ $collections === '0' ? '_notCollections' : '' }}">
     <button type="button" class="closeIcon deleteElem_js" onclick="show_popup('confirmDelete')" data-id="{{ $elem->id }}" data-title="Удалить: <span class='_bold'>{{ $elem->title }}</span>?"><svg><use xlink:href="#close"/></svg></button>
     <x-admin.checkbox name="{{ $elem->id }}" value="1" class="_t2 itemCheckbox_js"></x-admin.checkbox>
     <a href="{{ $attributes->get('route') }}">
@@ -15,7 +14,7 @@
         <div class="adminItem__content">
             <p class="adminItem__title"><strong>{{ $elem->title }}</strong><span>{{ $elem->release ? "(".$elem->release.")" : '' }}</span></p>
             <div class="adminItem__bottom">
-                <p class="adminItem__info">{{ $elem->id }}</p>
+                {{-- <p class="adminItem__info">{{ $elem->id }}</p> --}}
                 <span class="adminItem__date">
                     {{ $elem->published_at?->format('d.m.y') }}
                     {{-- diffForHumans - позволяет выводить дату в формате: '9 месяцев назад'  --}}

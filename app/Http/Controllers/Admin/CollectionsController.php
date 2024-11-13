@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Film;
 use App\Models\Game;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,7 @@ class CollectionsController extends Controller
             $query->where('category_id', 'like',  "%{$selectionByCat}%");
         }
 
-        $collections = $query->latest('published_at')->paginate(12);
+        $collections = $query->latest('published_at')->paginate(20);
 
         $collections->appends(request()->query()); //позволяет сохранить get параметры в url при пагинации т.е. при переходе на страницу 2 ссылка будет не http://127.0.0.1:8000/admin/collections?page=2 а http://127.0.0.1:8000/admin/collections?selectionByCat=2&page=2
 
@@ -207,6 +208,10 @@ class CollectionsController extends Controller
         $category = Category::find($collection->category_id);
         // $films = Film::where()
 
+
+        // Преобразуем строку в объект Carbon
+        $date = Carbon::parse($collection->published_at);
+        $formattedDate = $date->format('d m Y'); // Например, "26 09 2023"
         // $collection2 = Category::find(2);
         // if($collection->category_id === $category->id){
         //     $title = $category->title;
@@ -217,7 +222,7 @@ class CollectionsController extends Controller
         // dd($query);
         // $query->where('slug', 'like', "%{$collection_slug}%");
         // dd($query);
-        return view('collections.show', compact('collection', 'category'));
+        return view('collections.show', compact('collection', 'category', 'formattedDate'));
 
     }
 

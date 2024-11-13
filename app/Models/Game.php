@@ -37,7 +37,7 @@ class Game extends Model
         // 'fees_world',
         'maker',
         // 'cast',
-        'published',
+        // 'published',
         'published_at',
         // 'collections',
     ];
@@ -62,7 +62,7 @@ class Game extends Model
         // 'category_id' => 'array', // array вместо json, он теперь не поддерживается
         'cast' => 'array',
         // 'img' => 'binary',
-        'published' => 'boolean',
+        // 'published' => 'boolean',
         'published_at' => 'datetime',
     ];
 
@@ -91,7 +91,7 @@ class Game extends Model
             'maker' => ['nullable', 'string', 'max:100'],
             // 'cast' => ['nullable', 'string'],
             'published_at' => ['nullable', 'string', 'date'],
-            'published' => ['nullable', 'boolean'],
+            // 'published' => ['nullable', 'boolean'],
             'collections' => ['array'],
             'collections.*' => ['exists:collections,slug'], //проверяем что каждый элемент в массиве collections существует в таблице коллекций в столбце slug
         ];
@@ -148,7 +148,7 @@ class Game extends Model
             // 'rating_imdb' => $validated['rating_imdb'] ?? null,
             // 'rating_kinopoisk' => $validated['rating_kinopoisk'] ?? null,
             'release' => $validated['release'] ?? null,
-            'duration' => $validated['duration'] ?? null,
+            // 'duration' => $validated['duration'] ?? null,
             'genre' => $validated['genre'] ?? null,
             // 'country' => $validated['country'] ?? null, ///////////////
             'budget' => $validated['budget'] ?? null, 
@@ -158,7 +158,7 @@ class Game extends Model
             // 'cast' => $cast ?? null, //$validated['cast'] ?? null,
             'published_at' => new Carbon($validated['published_at'] ?? null), // null значение по умолчанию, Carbon приводит дату к единому типу
             // 'published_at' => isset($validated['published_at']) ? Carbon::parse($validated['published_at']) : null,
-            'published' => $validated['published'] ?? false, // false значение по умолчанию
+            // 'published' => $validated['published'] ?? false, // false значение по умолчанию
         ];
 
 

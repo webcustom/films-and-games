@@ -29,7 +29,7 @@
         @else
             <div class="adminList _mt30">
                 @foreach ($games as $game)
-                    <x-admin.elemList :elem="$game" route="{{ route('admin.games.edit', $game->id) }}"></x-admin.elemList>
+                    <x-admin.elemList :elem="$game" route="{{ route('admin.games.edit', $game->id) }}" collections="{{ count($game->collections) }}"></x-admin.elemList>
                 @endforeach
             </div>
             {{-- adminList --}}

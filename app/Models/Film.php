@@ -47,7 +47,7 @@ class Film extends Model
         'fees_world',
         'director',
         'cast',
-        'published',
+        // 'published',
         'published_at',
         // 'collections',
     ];
@@ -75,7 +75,7 @@ class Film extends Model
         // 'category_id' => 'array', // array вместо json, он теперь не поддерживается
         'cast' => 'array',
         // 'img' => 'binary',
-        'published' => 'boolean',
+        // 'published' => 'boolean',
         'published_at' => 'datetime',
     ];
 
@@ -116,7 +116,7 @@ class Film extends Model
             'director' => ['nullable', 'string', 'max:100'],
             'cast' => ['nullable', 'string'],
             'published_at' => ['nullable', 'string', 'date'],
-            'published' => ['nullable', 'boolean'],
+            // 'published' => ['nullable', 'boolean'],
             'collections' => ['array'],
             'collections.*' => ['exists:collections,slug'], //проверяем что каждый элемент в массиве collections существует в таблице коллекций в столбце slug
         ];
@@ -169,7 +169,7 @@ class Film extends Model
             'cast' => $cast ?? null, //$validated['cast'] ?? null,
             'published_at' => new Carbon($validated['published_at'] ?? null), // null значение по умолчанию, Carbon приводит дату к единому типу
             // 'published_at' => isset($validated['published_at']) ? Carbon::parse($validated['published_at']) : null,
-            'published' => $validated['published'] ?? false, // false значение по умолчанию
+            // 'published' => $validated['published'] ?? false, // false значение по умолчанию
         ];
 
 

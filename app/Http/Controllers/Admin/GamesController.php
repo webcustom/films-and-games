@@ -40,7 +40,7 @@ class GamesController extends Controller
             $query->where('title', 'like', "%{$search}%");
         }
         // $films = $query->latest('published_at')->paginate(12); 
-        $games = $query->latest('published_at')->paginate(12);
+        $games = $query->latest('published_at')->paginate(48);
 
 
 

@@ -15,7 +15,7 @@
             <button class="button_1" type="submit" form="formAdminSetting">Сохранить</button>
         </div>
 
-        <a class="ref_1 _mt10" href="{{ url()->previous() }}">Назад</a>
+        <a class="ref_1 _mt10" href="{{ route('admin.index') }}">Назад</a>
 
         <form id="formAdminSetting" class="formAdminSetting" action="{{ route('admin.settings.update', $user) }}" method="POST">
             @csrf

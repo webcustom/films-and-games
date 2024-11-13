@@ -41,16 +41,20 @@ class FilmsController extends Controller
         // $films = Film::with('collections')->latest('published_at')->paginate(12);
 
         // dd($films);
+
         
         // выводим посты по параметрам формы поиска
         if($search = $validated['search'] ?? null){
             $query->where('title', 'like', "%{$search}%");
         }
         // $films = $query->latest('published_at')->paginate(12); 
-        $films = $query->latest('published_at')->paginate(12);
+        $films = $query->latest('published_at')->paginate(48);
 
 
+        // $category = Category::where('slug', 'films')->first();
+        // $collections = $category->collections;
 
+        // dd(Film::with('collections')->find(3));
 
         return view('admin.films.index', compact('films'));
     }

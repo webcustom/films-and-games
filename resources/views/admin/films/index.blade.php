@@ -32,7 +32,9 @@
 
             <div class="adminList _mt30">
                 @foreach ($films as $film)
-                    <x-admin.elemList :elem="$film" route="{{ route('admin.films.edit', $film->id) }}"></x-admin.elemList>
+                    {{-- {{ if(count($film->collections)) }} --}}
+                    
+                    <x-admin.elemList :elem="$film" route="{{ route('admin.films.edit', $film->id) }}" collections="{{ count($film->collections) }}"></x-admin.elemList>
                 @endforeach
             </div>
             {{-- adminList --}}

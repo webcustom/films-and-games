@@ -94,7 +94,7 @@
             @endphp
             <x-admin.input type="text" name="cast" title="В ролях (через запятую)" class="_mt20" value="{{ $cast }}"/>
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20" value="{{ $film->published_at }}"/>
-            <x-admin.checkbox name="published" value="1" class="_mt20" checked="{{ $film->published ? 'checked' : ''}}">Опубликовано</x-admin.checkbox>
+            {{-- <x-admin.checkbox name="published" value="1" class="_mt20" checked="{{ $film->published ? 'checked' : ''}}">Опубликовано</x-admin.checkbox> --}}
             <button class="button_1 _big" type="submit">Сохранить</button>
         </form>
 

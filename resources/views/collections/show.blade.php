@@ -9,9 +9,9 @@
 
 <section class="sectionPage _section">
     <div class="contain">
-        {{-- {{ dd($collection) }} --}}
         <div class="itemDetail _mw800">
             
+
             @if(isset($collection->img))
                 <div class="itemDetail__img">
                     <img class="lazyImg" data-src="/{{ $collection->img }}" alt="img">
@@ -20,7 +20,7 @@
             @endif
             <div class="itemDetail__middle">
                 <a class="ref_1" href="{{ url()->previous() }}">Назад</a>
-                <p class="dateItem">дата публикации: {{ $collection->published_at }}</p>
+                <p class="dateItem">дата публикации: {{ $formattedDate }}</p>
             </div>
             
 
@@ -91,12 +91,12 @@
                                                 </li>
                                             @endif
 
-                                            @if(isset($elem->release))
+                                            {{-- @if(isset($elem->release))
                                                 <li class="itemDetail__param">
                                                     <p>релиз:</p>
                                                     <p>{{ $elem->release }}</p>
                                                 </li>
-                                            @endif
+                                            @endif --}}
 
                                             @if(isset($elem->duration))
                                                 <li class="itemDetail__param">
@@ -135,6 +135,13 @@
                                                 </li>
                                             @endif
 
+                                            @if(isset($elem->maker))
+                                                <li class="itemDetail__param">
+                                                    <p>Разработчик:</p>
+                                                    <p>{{ $elem->maker }}</p>
+                                                </li>
+                                            @endif
+
                                             
 
                                         </ul>
@@ -151,7 +158,7 @@
                                                 <p>{{ $elem->genre }}</p>
                                             </div>
                                         @endif
-                                        @if(count($elem->cast) > 0)
+                                        @if(isset($elem->cast) && count($elem->cast) > 0)
                                             <div class="itemDetail__param _mt5 _flexWrap">
                                                 <p>в&nbsp;ролях:</p>
                                                 <ul>

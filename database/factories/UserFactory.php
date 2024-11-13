@@ -25,9 +25,9 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => 'asd@mail.ru', //fake()->unique()->safeEmail(),
+            'email' => 'webcustom1@gmail.com', //fake()->unique()->safeEmail(),
             // 'email_verified_at' => now(),
-            'password' => bcrypt(123123123), //static::$password ??= Hash::make('password'),
+            'password' => bcrypt('heckfy1000000'), //static::$password ??= Hash::make('password'),
             // 'remember_token' => Str::random(10),
             'usertype' => 'admin',
         ];
