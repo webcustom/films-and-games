@@ -14,7 +14,7 @@
 
         <div class="centerItem _maxW500 _mt25">
             {{-- @guest --}}
-                <form class="form_1" action="{{ route('register.store') }}" method="POST" novalidate autocomplete="off">
+                <form class="form_1" action="{{ route('register.store') }}" method="POST" novalidate autocomplete="on">
                     @csrf
                     <div class="inputWrap_1">
                         <label class="inputWrap_1__name _required">Логин</label>
@@ -51,6 +51,10 @@
                         <a href="{{ route('login.index') }}" class="_center ref_1 _fz16">Я уже зарегистрирован</a>
                     </div>
                 </form>
+
+                @if (session('status'))
+                    <div>{{ session('status') }}</div>
+                @endif
             {{-- @endguest --}}
 
             {{-- если пользователь аутентифицировался т.е его данные внесенные в форму регистрации прошли валидацию 

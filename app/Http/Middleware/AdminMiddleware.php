@@ -16,6 +16,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // dd($request->user());
+
         if (Auth::check()) {
             // Пользователь аутентифицирован
             if($request->user()->usertype === 'admin'){
