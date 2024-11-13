@@ -31,7 +31,7 @@ return new class extends Migration
             // $table->string('rating_imdb')->nullable();
             // $table->string('rating_kinopoisk')->nullable();
             $table->string('release')->nullable();
-            $table->string('duration')->nullable();
+            // $table->string('duration')->nullable();
 
             $table->string('genre')->nullable();
             // $table->string('country')->nullable();

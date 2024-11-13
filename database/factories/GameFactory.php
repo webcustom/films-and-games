@@ -35,7 +35,7 @@ class GameFactory extends Factory
             // 'rating_imdb' => $this->faker->randomFloat(1, 1, 10),
             // 'rating_kinopoisk' => $this->faker->randomFloat(1, 1, 10),
             'release' => $this->faker->date,
-            'duration' => $this->faker->numberBetween(60, 240),
+            // 'duration' => $this->faker->numberBetween(60, 240),
             'genre' => $this->faker->word,
             // 'country' => $this->faker->country,
             'budget' => $this->faker->randomNumber(6),
