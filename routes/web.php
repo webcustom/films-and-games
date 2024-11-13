@@ -28,8 +28,8 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show'])->nam
 //что бы применить один middleware на группу роутов надо сделать так:
 Route::middleware('guest')->group(function(){ //guest проверяет пользователь гость или нет
     // разкоментить /register для добавления нового пользователя
-    // Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
-    // Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
