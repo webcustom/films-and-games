@@ -181,8 +181,10 @@ class RegisterController extends Controller
         // $user = User::where('email', $validatedData['email'])->first();
 
         $userData = Session::get('pending_user');
-        $email = $userData['email'];
-        $token = $userData['token'];
+        // if(isset($userData)){
+            $email = $userData['email'];
+            $token = $userData['token'];
+        // }
         // dd($email);
     
 
