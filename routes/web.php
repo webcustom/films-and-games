@@ -83,3 +83,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('/email/verification-notification', [RegisterController::class, 'resendVerificationEmail'])->name('verification.send');
 
 
+
+
+Route::get('/test-email', function () {
+    Mail::raw('Тестовое письмо', function ($message) {
+        $message->from('postmailer1@yandex.ru', 'WebCustom title');
+        $message->to('webcustom1@gmail.com');
+        $message->subject('Тестовое письмо');
+    });
+    return 'Письмо отправлено!';
+});
