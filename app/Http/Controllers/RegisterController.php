@@ -47,45 +47,6 @@ class RegisterController extends Controller
 
     }
     public function store(Request $request){
-        
-        // dd($request->all());
-
-
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'requered|string|max:50',
-        //     'email' => 'required|string|email|unique:users', // email - проверяет формат строки, exists:users,email - проверяет есть ли значение поля email в таблице users (должен обязательно быть)
-        //     'password' => 'required|string|min:7|confirmed', // confirmed - проверяет что в запросе еще должно быть поле password_confirmation и значение в нем должно совпадать со значением в исходном поле password, так же есть множество дополнительных параметров для пароля
-        //     'password_confirmation' => 'required|string|min:7|confirmed',
-        // ]);
-
-        // // $validated = validate($request->all(), [
-        // //     'name' => 'requered|string|max:50',
-        // //     'email' => 'required|string|email|unique:users', // email - проверяет формат строки, exists:users,email - проверяет есть ли значение поля email в таблице users (должен обязательно быть)
-        // //     'password' => 'required|string|min:7|confirmed', // confirmed - проверяет что в запросе еще должно быть поле password_confirmation и значение в нем должно совпадать со значением в исходном поле password, так же есть множество дополнительных параметров для пароля
-        // //     'password_confirmation' => 'required|string|min:7|confirmed',
-
-
-        // //     // 'name' => ['requered', 'string', 'max:50'],
-        // //     // 'email' => ['required', 'string', 'email', 'exists:users,email'], // email - проверяет формат строки, exists:users,email - проверяет есть ли значение поля email в таблице users (должен обязательно быть)
-        // //     // 'password' => ['required', 'string', 'min:7', 'confirmed'], // confirmed - проверяет что в запросе еще должно быть поле password_confirmation и значение в нем должно совпадать со значением в исходном поле password, так же есть множество дополнительных параметров для пароля
-        // //     // 'password_confirmation' => ['required', 'string', 'min:7', 'confirmed'],
-        // // ]);
-
-        // $validated = $validator->validated();
-
-        // dd($validated);
-
-
-
-        // $user = User::create([
-        //     'name' => $validated['name'],
-        //     'email' => $validated['email'],
-        //     'password' => bcrypt($validated['password']),
-        // ]);
-
-
-
-
 
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:50'],
@@ -111,33 +72,7 @@ class RegisterController extends Controller
         // Здесь вы должны создать метод отправки письма с токеном
         Mail::to($validatedData['email'])->send(new VerifyEmail($verificationToken));
 
-
         return redirect()->route('verification.notice')->with('status', 'Пожалуйста, проверьте свою электронную почту для подтверждения регистрации.');
-
-        // return Redirect::route('verification.notice')->with('status', 'Пожалуйста, проверьте свою электронную почту для подтверждения регистрации.');
-        // $user = User::create([
-        //     'name' => $validatedData['name'],
-        //     'email' => $validatedData['email'],
-        //     'password' => bcrypt($validatedData['password']),
-        // ]);
-
-
-
-
-        // event(new Registered($user)); //для аутентификации почты
-
-        // Auth::login($user); //утентифицируем пользователя
-
-        
-
-        // dd(Auth::user($user));
-
-
-        // alert(__('Пожалуйста, проверьте свою электронную почту для подтверждения регистрации.')); //добавляем сессию alert смотреть helpers.php
-
-        // return redirect()->route('admin.films.index');
-        // return redirect()->route('verification.notice'); //перенаправляем на страницу верификации почты
-
         
     }
 
@@ -172,13 +107,6 @@ class RegisterController extends Controller
 
     public function resendVerificationEmail(Request $request)
     {
-        // Валидация входящих данных
-        // $validatedData = $request->validate([
-        //     'email' => 'required|email|exists:users,email',
-        // ]);
-    
-        // Получаем пользователя по email
-        // $user = User::where('email', $validatedData['email'])->first();
 
         $userData = Session::get('pending_user');
         // if(isset($userData)){
@@ -195,17 +123,9 @@ class RegisterController extends Controller
         //     'token' => $verificationToken,
         // ]);
 
-        // Проверяем, что email не верифицирован
+        // Проверяем, что email существует
         if ($email) {
-            // Генерируем новый токен для верификации
-            // $verificationToken = Str::random(60);
-            
-            // Обновляем токен в базе данных (добавьте поле verification_token в модель User)
-            // $user->verification_token = $verificationToken;
-            // $user->save();
-    
             // Отправляем письмо с верификацией
-            // Mail::to($validatedData['email'])->send(new VerifyEmail($verificationToken));
             Mail::to($email)->send(new VerifyEmail($token));
     
             return back()->with('message', 'Ссылка для подтверждения была отправлена на вашу электронную почту.');

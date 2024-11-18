@@ -13,7 +13,7 @@
 
     <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon" />
     <link rel="icon" type="image/png" href="img/favicon/favicon.png" sizes="128x128" />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png" />
 
 
 <!--     <meta property="og:image" content="https://roza.friday.ru/img/share/share.jpg">

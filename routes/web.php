@@ -79,7 +79,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 // // // после чего можем применять проверку ->middleware(['auth', 'verified'])
 
 
-
+// повторная верификация
 Route::post('/email/verification-notification', [RegisterController::class, 'resendVerificationEmail'])->name('verification.send');
 
 
