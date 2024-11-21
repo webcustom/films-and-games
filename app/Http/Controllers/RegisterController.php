@@ -81,7 +81,7 @@ class RegisterController extends Controller
         // Получаем данные пользователя из сессии
         $userData = Session::get('pending_user');
 
-        // dd($userData);
+        dd($userData);
         // Проверяем, существует ли пользователь и совпадает ли токен
         if (!$userData || $userData['token'] !== $token) {
             return redirect()->route('admin.index')->withErrors(['message' => 'Неверный токен.']);
