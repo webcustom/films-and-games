@@ -67,6 +67,9 @@ class RegisterController extends Controller
             'token' => $verificationToken,
         ]);
         
+        $userData = Session::get('pending_user');
+        dd($userData);
+
 
         // Отправляем уведомление для верификации электронной почты
         // Здесь вы должны создать метод отправки письма с токеном
@@ -81,7 +84,7 @@ class RegisterController extends Controller
         // Получаем данные пользователя из сессии
         $userData = Session::get('pending_user');
 
-        dd($userData);
+        // dd($userData);
         // Проверяем, существует ли пользователь и совпадает ли токен
         if (!$userData || $userData['token'] !== $token) {
             return redirect()->route('admin.index')->withErrors(['message' => 'Неверный токен.']);
