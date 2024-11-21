@@ -67,8 +67,8 @@ class RegisterController extends Controller
             'token' => $verificationToken,
         ]);
         
-        $userData = Session::get('pending_user');
-        dump($userData);
+        $userData2 = Session::get('pending_user');
+        dump($userData2);
 
 
         // Отправляем уведомление для верификации электронной почты
