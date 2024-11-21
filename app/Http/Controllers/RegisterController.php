@@ -99,7 +99,7 @@ class RegisterController extends Controller
         ]);
 
         // Удаляем данные из сессии
-        Session::forget('pending_user');
+        // Session::forget('pending_user');
 
         // Аутентификация пользователя (если необходимо)
         Auth::login($user);
