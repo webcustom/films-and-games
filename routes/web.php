@@ -64,10 +64,10 @@ Route::get('/verify-email', function () {
 // })->middleware('auth')->name('verification.notice');
 
 // обрабатываем проверку (переход с кнопки в письме на почте)
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/admin/dashboard');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+//     return redirect('/admin/dashboard');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // повторная верификация
 // Route::post('/email/verification-notification', function (Request $request) {
@@ -85,11 +85,11 @@ Route::post('/email/verification-notification', [RegisterController::class, 'res
 
 
 
-Route::get('/test-email', function () {
-    Mail::raw('Тестовое письмо', function ($message) {
-        $message->from('postmailer1@yandex.ru', 'WebCustom title');
-        $message->to('webcustom1@gmail.com');
-        $message->subject('Тестовое письмо');
-    });
-    return 'Письмо отправлено!';
-});
+// Route::get('/test-email', function () {
+//     Mail::raw('Тестовое письмо', function ($message) {
+//         $message->from('postmailer1@yandex.ru', 'WebCustom title');
+//         $message->to('webcustom1@gmail.com');
+//         $message->subject('Тестовое письмо');
+//     });
+//     return 'Письмо отправлено!';
+// });
