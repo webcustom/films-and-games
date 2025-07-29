@@ -25,7 +25,7 @@ class Collection extends Model
     protected $fillable = [
         'slug',
         'title',
-        'img',
+        // 'img',
         'img_medium',
         'img_thumbnail',
         'description',
@@ -125,14 +125,14 @@ class Collection extends Model
             // инкапсулировал логику сжатия изображений в класс App/Services/ImageProcessor
             $imageProcessor = new ImageProcessor();
             //передаем само изображение, название папки куда будут сохранятся изображения, и массив с размерами изображений
-            $paths = $imageProcessor->processImage($request->file('img'), 'collections', [[300, 200], [1000, 600]]); 
+            $paths = $imageProcessor->processImage($request->file('img'), 'collections', [[800, 600], [300, 200]]); 
         
-            $path_original = $paths[0];
-            $path_medium = $paths[1];
-            $path_thumbnail = $paths[2];
+            // $path_original = $paths[0];
+            $path_medium = $paths[0];
+            $path_thumbnail = $paths[1];
         //если файл не загружался и поле с путем для удаления файла пустое
-        }else if(isset($collection->img) && !isset($validated['delete_img'])){
-            $path_original = $collection->img;
+        }else if(!isset($collection->img) && !isset($validated['delete_img'])){
+            // $path_original = $collection->img;
             $path_medium = $collection->img_medium;
             $path_thumbnail = $collection->img_thumbnail;
         }
@@ -154,7 +154,7 @@ class Collection extends Model
         $validArray = [
             'title' => $validated['title'],
             'slug' => $validated['slug'],
-            'img' => $path_original ?? null, //$validated['img'],
+            // 'img' => $path_original ?? null, //$validated['img'],
             'img_medium' => $path_medium ?? null, //$validated['img'],
             'img_thumbnail' => $path_thumbnail ?? null,
             'description' => $validated['description'] ?? null,
@@ -168,7 +168,7 @@ class Collection extends Model
 
         // если input с путем для удаления файла не пустой удаляем файл из хранилица
         if(isset($validated['delete_img'])){
-            $imgs_paths = [$collection->img, $collection->img_medium, $collection->img_thumbnail];
+            $imgs_paths = [$collection->img_medium, $collection->img_thumbnail];
             Collection::deleteFiles($imgs_paths);
         }
 

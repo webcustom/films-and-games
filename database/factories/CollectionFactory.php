@@ -20,7 +20,9 @@ class CollectionFactory extends Factory
         return [
             'slug' => $this->faker->slug,
             'title' => $this->faker->sentence,
-            'img' => $this->faker->imageUrl(),
+            // 'img' => $this->faker->imageUrl(),
+            'img_medium' => $this->faker->imageUrl(),
+            'img_thumbnail' => $this->faker->imageUrl(),
             'description' => $this->faker->paragraph,
             'published' => $this->faker->boolean,
             'published_at' => $this->faker->dateTime,

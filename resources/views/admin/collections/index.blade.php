@@ -75,7 +75,7 @@
                         <button type="button" class="closeIcon deleteElem_js"  onclick="show_popup('confirmDelete')" data-id="{{ $collection->id }}" data-title="Удалить подборку: <span class='_bold'>{{ $collection->title }}</span>"><svg><use xlink:href="#close"/></svg></button>
                         <a href="{{ route('admin.collections.edit', $collection->id) }}">
                             <div class="adminItemTwo__img">
-                                @if(isset($collection->img))
+                                @if(isset($collection->img_thumbnail))
                                     <img class="lazyImg" data-src="/{{ $collection->img_thumbnail }}" alt="img">
                                     {{-- <img data-src="/storage/{{ $collection->img }}" alt="img"> --}}
                                 @else

@@ -47,6 +47,8 @@ class RegisterController extends Controller
 
 
     }
+
+    // сюда данные идут с фррмы регистрации
     public function store(Request $request){
 
         $validatedData = $request->validate([
@@ -68,7 +70,7 @@ class RegisterController extends Controller
         //     'token' => $verificationToken,
         // ]);
 
-        $pendingUser = PendingUser::create([
+        $pendingUserDB = PendingUser::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
@@ -82,20 +84,23 @@ class RegisterController extends Controller
 
         // Отправляем уведомление для верификации электронной почты
         // Здесь вы должны создать метод отправки письма с токеном
-        Mail::to($validatedData['email'])->send(new VerifyEmail($verificationToken));
+        // dd($pendingUserDB->id);
+        Mail::to($validatedData['email'])->send(new VerifyEmail($verificationToken, $pendingUserDB->id));
 
-        return redirect()->route('verification.notice')->with('status', 'Пожалуйста, проверьте свою электронную почту для подтверждения регистрации.');
+        return redirect()->route('verification.notice', ['pendingUserId' => $pendingUserDB->id])->with('status', 'Пожалуйста, проверьте свою электронную почту для подтверждения регистрации.');
         
     }
 
 
-    public function verifyEmail($token){
+    // при нажатии ссылки подтверждения на почте
+    public function verifyEmail($token, $pendingUserId){
         // Получаем данные пользователя из сессии
-        // $userData = Session::get('pending_user');
+        // $userData = Session::get('pending_user');ё
+        // dd($pendingUserId);
 
-        $pendingUser  = PendingUser::where('token', $token)->first();
+        $pendingUser = PendingUser::where('token', $token)->where('id', $pendingUserId)->first();
 
-        dump($pendingUser);
+        // dump($pendingUser);
         // Проверяем, существует ли пользователь и совпадает ли токен
         if (!$pendingUser || $pendingUser['token'] !== $token) {
             return redirect()->route('admin.index')->withErrors(['message' => 'Неверный токен.']);
@@ -111,36 +116,25 @@ class RegisterController extends Controller
 
         // Удаляем данные из сессии
         // Session::forget('pending_user');
-        $pendingUser ->delete();
+        $pendingUser->delete();
 
         // Аутентификация пользователя (если необходимо)
         Auth::login($user);
 
-        return redirect()->route('login.index')->with('status', 'Ваш аккаунт успешно активирован!');
+        return redirect()->route('admin.index')->with('status', 'Ваш аккаунт успешно активирован!');
+
     }
 
 
-    public function resendVerificationEmail(Request $request)
+    // повторная отправка письма
+    public function resendVerificationEmail($pendingUserId)
     {
+        $pendingUser = PendingUser::where('id', $pendingUserId)->first();
 
-        $pendingUser  = PendingUser ::where('email', $request->email)->first();
-
-        // $userData = Session::get('pending_user');
-        // $email = $userData['email'];
-        // $token = $userData['token'];
-    
-
-        // Session::put('pending_user', [
-        //     'name' => $validatedData['name'],
-        //     'email' => $validatedData['email'],
-        //     'password' => bcrypt($validatedData['password']),
-        //     'token' => $verificationToken,
-        // ]);
-
-        // Проверяем, что email существует
+        // Проверяем, что пользователь есть в ожидающих
         if ($pendingUser) {
             // Отправляем письмо с верификацией
-            Mail::to($pendingUser->email)->send(new VerifyEmail($pendingUser->token));
+            Mail::to($pendingUser->email)->send(new VerifyEmail($pendingUser->token, $pendingUser->id));
     
             return back()->with('message', 'Ссылка для подтверждения была отправлена на вашу электронную почту.');
         }

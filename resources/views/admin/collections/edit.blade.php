@@ -12,6 +12,9 @@
 
         <h1 class="title_1">Редактирование подборки: {{ $collection->title }}</h1>
         <a class="ref_1 _mt10" href="{{ route('admin.collections.index') }}">Назад</a>
+        {{-- <a class="ref_1 _mt10" href="{{ url()->previous() }}">Назад</a> --}}
+
+        
 
         <div class="_mt25">
             <button class="button_1 deleteElem_js" data-id="{{ $collection->id }}" data-title="Удалить подборку: <span class='_bold'>{{ $collection->title }}</span>" onclick="show_popup('confirmDelete')">Удалить</button>
@@ -76,10 +79,10 @@
             <x-admin.input type="text" name="title" title="Заголовок" required value="{{ $collection->title }}"/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг" value="{{ $collection->slug }}"/>
 
-            @if(isset($collection->img))
+            @if(isset($collection->img_medium))
                 <div class="uploadImg _mt20">
-                    <img src="/{{ $collection->img }}"/>
-                    <span class="closeIcon" onclick="deleteInputImg('{{ $collection->img }}')"><svg><use xlink:href="#close"/></svg></span>
+                    <img src="/{{ $collection->img_medium }}"/>
+                    <span class="closeIcon" onclick="deleteInputImg('{{ $collection->img_medium }}')"><svg><use xlink:href="#close"/></svg></span>
                 </div>
             @endif
             <x-admin.input id="add_img" type="file" name="img" title="Загрузить изображение" class="_mt20"/>
@@ -107,10 +110,12 @@
                     </ul>
                     <ul class="catElemsList">
                         @php
+
                             // Преобразуем массив в коллекцию
                             $sortOrder = collect($collection->sort_elems);
                             // Сортируем фильмы по индексу сортировки
                             $sortedElems = $order->sortBy(function ($elem) use ($sortOrder) {
+                                // dd($elem);
                                 // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
                                 return (!empty($sortOrder[$elem->id])) ? $sortOrder[$elem->id] : PHP_INT_MAX;
                             }); 
@@ -183,7 +188,7 @@
             @endif --}}
 
 
-            <button class="button_1 _big" type="submit">Сохранить</button>
+            <button class="button_1 _big _mt20" type="submit">Сохранить</button>
         </form>
 
 

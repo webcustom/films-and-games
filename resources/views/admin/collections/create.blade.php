@@ -61,7 +61,7 @@
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20"/>
             <x-admin.checkbox name="published" value="1" class="_mt20" checked>Опубликовано</x-admin.checkbox>
 
-            <button class="button_1 _big" type="submit">Сохранить</button>
+            <button class="button_1 _big _mt20" type="submit">Сохранить</button>
         </form>
 
 

@@ -14,9 +14,12 @@
         <p class="_fz16 _center _mt25">Спасибо за регистрацию! На указанный email отправлена ссылка, перейдите по ней для завершения регистрации</p>
 
         <div class="_mt15">
-            <form class="form_1" action="{{ route('verification.send') }}" method="POST" novalidate autocomplete="off">
+            <form class="form_1" action="{{ route('verification.resend', ['pendingUserId' => $pendingUserId]) }}" method="POST" novalidate autocomplete="off">
                 @csrf
 
+                {{-- @php
+                    dd($pendingUser);
+                @endphp --}}
                 <p class="_fz16 _center">Если вы не получили ссылку - кликните по кнопке "Отправить повторно"</p>
                 <div class="_center _mt10">
                     <p id="timer" class="_fz16">30</p>

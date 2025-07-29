@@ -48,6 +48,18 @@
             <x-admin.input type="text" name="title" title="Заголовок" required autofocus/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг"/>
             <x-admin.input id="add_img" type="file" name="img" title="Загрузить изображение" class="_mt20"/>
+
+            {{-- <p>Добавить изображение</p> --}}
+            <div class="_mt30">
+                <div class="additionImgsList"></div>
+                @foreach ($errors->get('additional_imgs*') as $key => $error)
+                    <p class="inputAlert _red">{{ $error[0] }}</p>
+                @endforeach
+                <p class="button_1 _mt20" id="additionalImg_js">Добавить изображение</p>
+            </div>
+
+            <x-admin.input type="text" title="iframe с видeо" name="iframe_video" class="_mt20" textarea/>
+
             <x-admin.input type="text" title="Содержание поста" name="description" class="_mt20">
                 <x-slot name="trix"></x-slot> {{-- можно дополнять компоненту слотом --}}
             </x-admin.input>
@@ -66,6 +78,7 @@
 
 <script>
     deleteEditImg()
+    addImgsCreateInput()
 </script>
 
 @endsection
@@ -77,6 +90,7 @@
     @push('js_admin')
         <script src="/admin/js/main.js" defer></script>
         <script src="/admin/js/deleteEditImg.js"></script>
+        <script src="/admin/js/controlsAdditionalImgs.js"></script>
     @endpush
 @endonce
 

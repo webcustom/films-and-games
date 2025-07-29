@@ -29,7 +29,7 @@ class FilmFactory extends Factory
             // 'title' => $this->faker->sentence,
             'title' => 'Фильм ' . self::$filmCount++,
             'slug' => $this->faker->slug,
-            'img' => $this->faker->imageUrl(),
+            // 'img' => $this->faker->imageUrl(),
             'img_medium' => $this->faker->imageUrl(),
             'img_thumbnail' => $this->faker->imageUrl(),
             'description' => $this->faker->paragraph,

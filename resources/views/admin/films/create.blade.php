@@ -45,7 +45,18 @@
     
             <x-admin.input type="text" name="title" title="Заголовок" required autofocus/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг"/>
-            <x-admin.input id="add_img" type="file" name="img" title="Загрузить изображение" class="_mt20"/>
+            <x-admin.input id="add_img" type="file" name="img" title="Загрузить основное изображение" class="_mt20"/>
+
+            {{-- <p>Добавить изображение</p> --}}
+            <div class="_mt30">
+                <div class="additionImgsList"></div>
+                @foreach ($errors->get('additional_imgs*') as $key => $error)
+                    <p class="inputAlert _red">{{ $error[0] }}</p>
+                @endforeach
+                <p class="button_1 _mt20" id="additionalImg_js">Добавить изображение</p>
+            </div>
+            <x-admin.input type="text" title="iframe с видeо" name="iframe_video" class="_mt20" textarea/>
+ 
             <x-admin.input type="text" title="Содержание поста" name="description" class="_mt20">
                 <x-slot name="trix"></x-slot> {{-- можно дополнять компоненту слотом --}}
             </x-admin.input>
@@ -63,7 +74,7 @@
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20"/>
             {{-- <x-admin.checkbox name="published" value="1" class="_mt20" checked>Опубликовано</x-admin.checkbox> --}}
 
-            <button class="button_1 _big" type="submit">Сохранить</button>
+            <button class="button_1 _big _mt30" type="submit">Сохранить</button>
         </form>
 
     </div>
@@ -71,7 +82,27 @@
 
 <script>
     deleteEditImg()
+    addImgsCreateInput()
+    // showThumbnail()
 </script>
+
+
+
+<script>
+
+    // const button = document.getElementById('additionalImg_js')
+    // console.log(button)
+    // button.addEventListener('click', function(){
+    //     const imgAddElem = document.createElement('div')
+    //     imgAddElem.classList.add('addImg')
+    //     imgAddElem.innerHTML = `
+    //             <input type="file" name="additional_imgs[]">
+    //             <input type="text" class="input_1" placeholder="Описание к изображению" name="additional_imgs_text[]" value="">`
+    //     this.parentNode.insertBefore(imgAddElem, this)
+    // })
+
+</script>
+
 
 @endsection
 
@@ -82,7 +113,10 @@
     @push('js_admin')
         <script src="/admin/js/main.js" defer></script>
         <script src="/admin/js/deleteEditImg.js"></script>
+        <script src="/admin/js/controlsAdditionalImgs.js"></script>
+
     @endpush
 @endonce
+
 
 

@@ -6,7 +6,7 @@
 //         "app/helpers.php"
 //     ]
 // },
-// после чего перезапустить проект или выполнить в терминале sail composer dump
+// после чего перезапустить проект или выполнить в терминале  composer dump-autoload
 
 
 use Illuminate\Support\Facades\Auth;

@@ -28,7 +28,7 @@ class GameFactory extends Factory
             // 'title' => $this->faker->sentence,
             'title' => 'Игра ' . self::$gameCount++,//. $this->unique()->numberBetween(1, 1000),
             'slug' => $this->faker->slug,
-            'img' => $this->faker->imageUrl(),
+            // 'img' => $this->faker->imageUrl(),
             'img_medium' => $this->faker->imageUrl(),
             'img_thumbnail' => $this->faker->imageUrl(),
             'description' => $this->faker->paragraph,

@@ -8,6 +8,6 @@
 <body>
     <h1>Подтверждение электронной почты</h1>
     <p>Пожалуйста, нажмите на ссылку ниже, чтобы подтвердить вашу регистрацию:</p>
-    <a href="{{ route('register.verify-email', $token) }}">Подтвердить электронную почту</a>
+    <a href="{{ route('register.verify-email', [$token, $pendingUserId]) }}">Подтвердить электронную почту</a>
 </body>
 </html>

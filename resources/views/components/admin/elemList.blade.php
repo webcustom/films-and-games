@@ -4,7 +4,7 @@
     <x-admin.checkbox name="{{ $elem->id }}" value="1" class="_t2 itemCheckbox_js"></x-admin.checkbox>
     <a href="{{ $attributes->get('route') }}">
         <div class="adminItem__img">
-            @if(isset($elem->img))
+            @if(isset($elem->img_thumbnail))
                 <img class="lazyImg" data-src="/{{ $elem->img_thumbnail }}" alt="img">
             @else
                 {{-- <img class="noImg" src="/img/no_photo.svg" alt="img"> --}}

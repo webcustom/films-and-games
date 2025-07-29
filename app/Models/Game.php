@@ -22,9 +22,13 @@ class Game extends Model
         // 'collection_id',
         'title',
         'slug',
-        'img',
+        // 'img',
         'img_medium',
         'img_thumbnail',
+        'additional_imgs',
+        'additional_imgs_text',
+        'additional_imgs_sort',
+        'iframe_video',
         'description',
         // 'rating_imdb',
         // 'rating_kinopoisk',
@@ -76,7 +80,14 @@ class Game extends Model
             'title' => ['required', 'string', 'max:150'], // обязательный, строка, максимум 100 символов
             'slug' => ['nullable', 'string', Rule::unique('games', 'slug')->ignore($id)],
             'img' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],
+            'additional_imgs' => ['nullable','array'],
+            'additional_imgs.*' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],
+            'additional_imgs_text' => ['nullable', 'array'],
+            'additional_imgs_text.*' => ['nullable', 'string', 'max:200'],
+            'additional_imgs_sort' => ['nullable','array'],
+            'additional_imgs_sort.*' => ['nullable','string', 'max:10'],
             'delete_img' => ['nullable', 'string', 'in:1'],
+            'iframe_video' => ['nullable', 'string', 'max:1000'],
             'description' => ['nullable', 'string', 'max:10000'],
             // 'category_id' => ['nullable', 'integer'],
             // 'rating_imdb' => ['nullable', 'string', 'max:30'],
@@ -102,47 +113,123 @@ class Game extends Model
     {
 
         $validated = $request->validate(Game::validationRules($game ? $game->id : null));
-        // $cast = explode(",", $validated['cast']);
 
-
-        // dd($validated);
-        // dd($request);
 
         // есил файл загрузили в форме
         if($request->hasFile('img')){
-
-        // dd($request);
-
             // инкапсулировал логику сжатия изображений в класс App/Services/ImageProcessor
             $imageProcessor = new ImageProcessor();
             // dd($request->img);
 
             //передаем само изображение, название папки куда будут сохранятся изображения, и массив с размерами изображений
-            $paths = $imageProcessor->processImage($request->file('img'), 'games', [[300, 200], [1000, 600]]); 
+            $paths = $imageProcessor->processImage($request->file('img'), 'games', [[800, 600], [300, 200]]); 
 
-            $path_original = $paths[0];
-            $path_medium = $paths[1];
-            $path_thumbnail = $paths[2];
-
-
+            // $path_original = $paths[0];
+            $path_medium = $paths[0];
+            $path_thumbnail = $paths[1];
         //если файл не загружался и поле с путем для удаления файла пустое
-        }else if(isset($game->img) && !isset($validated['delete_img'])){
-
-
-            $path_original = $game->img;
+        }else if(!isset($game->img) && !isset($validated['delete_img'])){
+            // $path_original = $game->img;
             $path_medium = $game->img_medium;
             $path_thumbnail = $game->img_thumbnail;
-
-
         }
+
+
+
+
+
+        // ДОПОЛНИТЕЛЬНЫЕ ИЗОБРАЖЕНИЯ =====================================
+        // формируем массив из ранее загруженных дополнительных изображений
+        $arr_imgs = null; // массив с дополнительными изображениями
+        if(isset($game->additional_imgs)){
+            $old_imgs_arr = json_decode($game->additional_imgs);
+            foreach ($old_imgs_arr as $key => $img) {
+                // dd($img);
+                $arr_imgs[] = [
+                    'image' => ['medium' => $img->image->medium, 'thumbnail' => $img->image->thumbnail],
+                    'text' => $request->additional_imgs_text[$key] ?? null, //$img->text ?? null,
+                    'sort' => $request->additional_imgs_sort[$key] ?? null,
+                ];
+            }
+        }
+
+        // если мы добавляем новые изображения или меняем какие либо из уже существующих
+        if(isset($validated['additional_imgs']) && !empty($validated['additional_imgs'])) {     
+            foreach ($validated['additional_imgs'] as $key => $img) {
+
+                // инкапсулировал логику сжатия изображений в класс App/Services/ImageProcessor
+                $imageProcessor = new ImageProcessor();
+                //передаем само изображение, название папки куда будут сохранятся изображения, и массив с размерами изображений
+                $paths = $imageProcessor->processImage($img, 'games', [[800, 600], [300, 200]]); 
+                $path_add_imgs_medium = $paths[0];
+                $path_add_imgs_thumbnail = $paths[1];       
+
+                // проверяем поменяли ли мы какие либо из уже существующих изображений
+                // array_key_exists - проверяем есть ли такой же ключ в json_decode($film->additional_imgs)
+                if(isset($game->additional_imgs) && array_key_exists((int)$key, json_decode($game->additional_imgs))){
+
+                    // удаляем изображения которые заменились
+                    $deleteImgs = [json_decode($game->additional_imgs)[$key]->image->medium, json_decode($game->additional_imgs)[$key]->image->thumbnail];
+                    Game::deleteFiles($deleteImgs);
+
+                    // формируем ассоциативный массив для записи в базу
+                    $arr_imgs[$key] = [
+                        'image' => ['medium' => $path_add_imgs_medium, 'thumbnail' => $path_add_imgs_thumbnail],
+                        'text' => $validated['additional_imgs_text'][$key] ?? null,
+                        'sort' => $validated['additional_imgs_sort'][$key] ?? null,
+                    ];      
+                }else{
+                    $arr_imgs[] = [
+                        'image' => ['medium' => $path_add_imgs_medium, 'thumbnail' => $path_add_imgs_thumbnail],
+                        'text' => $validated['additional_imgs_text'][$key] ?? null,
+                        'sort' => $validated['additional_imgs_sort'][$key] ?? null,
+                    ];  
+                }
+    
+            }
+        }
+
+
+        // удаление дополнителных изображений если кликнули на удалить
+        if(isset($request->delete_additional_img) && is_array($arr_imgs)){
+            $delete_arr_imgs = explode(",", $request->delete_additional_img);
+            foreach($delete_arr_imgs as $key => $elem){
+                // dump((int)$elem);
+                if(array_key_exists((int)$elem, $arr_imgs)){
+                    // dd($arr_imgs[(int)$elem]['image']['medium']);
+                    Game::deleteFiles([$arr_imgs[(int)$elem]['image']['medium'], $arr_imgs[(int)$elem]['image']['thumbnail']]);
+                    unset($arr_imgs[(int)$elem]);
+                }
+            }
+        }
+
+
+
+        // сортируем по sort
+        // $arr_imgs_sort = collect($arr_imgs)->sortBy('sort');
+        $arr_imgs_sort = collect($arr_imgs)->sortBy(function($item) {
+            // Если ключ 'sort' существует, вернем его значение
+            // Если ключа 'sort' нет, вернем значение, которое будет отсортировано в конец (например, INF или null)
+            return isset($item['sort']) ? $item['sort'] : INF;
+        });
+        $arr_imgs = $arr_imgs_sort->toArray();
+        // сбрасываем ключи массива (индексы) благодаря этому они становятся числовыми
+        $arr_imgs = array_values($arr_imgs);
+
+        // =====================================================================
+
+        
+
+
 
         $validArray = [
             'title' => $validated['title'],
             'slug' =>  $validated['slug'],
-            'img' => $path_original ?? null, //$validated['img'],
+            // 'img' => $path_original ?? null, //$validated['img'],
             'img_medium' => $path_medium ?? null, //$validated['img'],
             'img_thumbnail' => $path_thumbnail ?? null, //$validated['img'],
-
+            'additional_imgs' => json_encode($arr_imgs) ?? null,
+            'iframe_video' => $validated['iframe_video'] ?? null,
             'description' => $validated['description'] ?? null,
             // 'category_id' => Category::query()->value('id'), //$validated['category_id'],
             // 'rating_imdb' => $validated['rating_imdb'] ?? null,

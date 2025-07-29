@@ -219,26 +219,63 @@ class GamesController extends Controller
     
     public function delete(Request $request){
 
-
-        // dd($request);
         $ids = explode(",", $request->field_delete_id);
-        // dd($ids);
+        $games = Game::findMany($ids);
 
-        forEach($ids as $id){
-            // получаем значение нашего поля field_delete_id
-            $game = Game::find($id);
 
+        forEach($games  as $game){
             // Перед удаление записи в базе удаляем связь в таблице collection_film  для этого можно использовать модель, но если модели нет, то можно использовать фасад DB
-            DB::table('collection_game')->where('game_id', $id)->delete();
+            DB::table('collection_game')->where('game_id', $game->id)->delete();
 
-            
             // удаляем файл из хранилища если он там есть
-            $imgs_paths = [$game->img, $game->img_medium, $game->img_thumbnail];
+            $imgs_paths = [$game->img_medium, $game->img_thumbnail];
+
+            $additional_imgs = json_decode($game->additional_imgs);
+            foreach($additional_imgs as $key => $elem){
+                $imgs_paths[] = $additional_imgs[$key]->image->medium;
+                $imgs_paths[] = $additional_imgs[$key]->image->thumbnail;
+            }
+
             Game::deleteFiles($imgs_paths);
 
             // удаляем данные из базы
             $game->delete();
         }
+
+
+
+        // выводим сообщение
+        $textDel = 'Игра удален';
+        if(count($ids) > 1){
+            $textDel = 'Игры удалены';
+        }
+        
+        alert(__($textDel));
+
+        return redirect()->route('admin.games.index');
+    }
+
+
+
+        // // dd($request);
+        // $ids = explode(",", $request->field_delete_id);
+        // // dd($ids);
+
+        // forEach($ids as $id){
+        //     // получаем значение нашего поля field_delete_id
+        //     $game = Game::find($id);
+
+        //     // Перед удаление записи в базе удаляем связь в таблице collection_film  для этого можно использовать модель, но если модели нет, то можно использовать фасад DB
+        //     DB::table('collection_game')->where('game_id', $id)->delete();
+
+            
+        //     // удаляем файл из хранилища если он там есть
+        //     $imgs_paths = [$game->img, $game->img_medium, $game->img_thumbnail];
+        //     Game::deleteFiles($imgs_paths);
+
+        //     // удаляем данные из базы
+        //     $game->delete();
+        // }
 
 
         // dd($ids);
@@ -259,13 +296,13 @@ class GamesController extends Controller
         
         // удаляем данные из базы
         // $film->delete();
-        $textDel = 'Игра удалена';
-        if(count($ids) > 1){
-            $textDel = 'Игры удалены';
-        }
+    //     $textDel = 'Игра удалена';
+    //     if(count($ids) > 1){
+    //         $textDel = 'Игры удалены';
+    //     }
         
-        alert(__($textDel));
+    //     alert(__($textDel));
 
-        return redirect()->route('admin.games.index');
-    }
+    //     return redirect()->route('admin.games.index');
+    // }
 }

@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Mail;
 
 
 // Route::view('/', 'home.index')->name('home'); //home-название каталога, index-название файла
-// Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/collections/{collection}', [CollectionsController::class, 'show'])->name('collections.show');
 Route::get('/categories/{category}', [CategoriesController::class, 'show'])->name('categories.show');
@@ -33,14 +32,12 @@ Route::get('/categories/{category}', [CategoriesController::class, 'show'])->nam
 //что бы применить один middleware на группу роутов надо сделать так:
 Route::middleware('guest')->group(function(){ //guest проверяет пользователь гость или нет
     // разкоментить /register для добавления нового пользователя
-    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
-    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-    Route::get('verify-email/{token}', [RegisterController::class, 'verifyEmail'])->name('register.verify-email');
+    // Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    // Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('verify-email/{token}/{pendingUserId}', [RegisterController::class, 'verifyEmail'])->name('register.verify-email');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
-    // Route::post('/verify-email', [VerificationController::class, 'verify'])
 
 });
 
@@ -48,9 +45,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout.index');
 
 
 
-
-Route::get('/verify-email', function () {
-    return view('register.verify-email');
+// тут мы можем сразу передать pendingUser в шаблон таким способом
+Route::get('/verify-email/{pendingUserId}', function ($pendingUserId) {
+    return view('register.verify-email', ['pendingUserId' => $pendingUserId]);
 })->name('verification.notice');
 
 
@@ -80,7 +77,7 @@ Route::get('/verify-email', function () {
 
 
 // повторная верификация
-Route::post('/email/verification-notification', [RegisterController::class, 'resendVerificationEmail'])->name('verification.send');
+Route::post('/email/verification-notification/{pendingUserId}', [RegisterController::class, 'resendVerificationEmail'])->name('verification.resend');
 
 
 

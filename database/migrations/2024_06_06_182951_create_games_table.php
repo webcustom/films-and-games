@@ -22,9 +22,13 @@ return new class extends Migration
 
             $table->string('title')->default('');
             $table->string('slug')->unique();
-            $table->string('img')->nullable();
+            // $table->string('img')->nullable();
             $table->string('img_medium')->nullable();
             $table->string('img_thumbnail')->nullable();
+
+            $table->json('additional_imgs')->nullable();
+
+            $table->text('iframe_video')->nullable();
 
             $table->text('description')->nullable();
 

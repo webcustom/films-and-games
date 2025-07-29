@@ -118,17 +118,17 @@ img
 ._pb20
    padding-bottom: 20px
 ._pt30
-   padding-top: 3em
+   padding-top: 30px
 ._pb30
-   padding-bottom: 3em
+   padding-bottom: 30px
 ._pt40
-   padding-top: 4em
+   padding-top: 40px
 ._pb40
-   padding-bottom: 4em
+   padding-bottom: 40px
 ._pt50
-   padding-top: 5em
+   padding-top: 50px
 ._pb50
-   padding-bottom: 5em
+   padding-bottom: 50px
 ._pt60
    padding-top: 6em
 ._pb60
@@ -171,17 +171,17 @@ img
 ._mb25
    margin-bottom: 25px
 ._mt30
-   margin-top: 3em
+   margin-top: 30px
 ._mb30
-   margin-bottom: 3em
+   margin-bottom: 30px
 ._mt40
-   margin-top: 4em
+   margin-top: 40px
 ._mb40
-   margin-bottom: 4em
+   margin-bottom: 40px
 ._mt50
-   margin-top: 5em
+   margin-top: 50px
 ._mb50
-   margin-bottom: 5em
+   margin-bottom: 50px
 ._mt60
    margin-top: 6em
 ._mb60
@@ -289,7 +289,7 @@ input:-webkit-autofill:focus
    user-select: none
    position: relative
    text-decoration: none
-   font-family: $black
+   font-family: $mainFonts
    font-weight: 700
    border-radius: 3px
    @media (hover: hover)
@@ -786,11 +786,11 @@ ul
 ._maxW700
    max-width: 700px
 
-.form_1
-   // columns: 2
-   // column-gap: 2em
-   .button_1
-      margin-top: 30px
+// .form_1
+//    // columns: 2
+//    // column-gap: 2em
+//    .button_1
+//       margin-top: 30px
 
 
 
@@ -1152,7 +1152,108 @@ ul
          &:hover
             color: $color_1
 
+// .additionImgs
+//    display: flex
+   // flex-wrap: wrap
+   // .addImg
+   //    width: 33.3%
 
+.addImg
+   border: 2px solid rgba(137, 137, 137, 0.2)
+   padding: 10px
+   display: flex
+   // flex-wrap: wrap
+   align-items: center
+   margin-bottom: 15px
+   // padding-right: 40px
+   position: relative
+   transition: background .3s
+   border-radius: 5px
+   &:last-child
+      margin-bottom: 0
+   input
+      font-size: 13px
+   &._uploaded
+      .button_1
+         // display: none
+      .input_1
+         display: block
+      .closeIcon
+         top: 5px
+   .closeIcon
+      right: 5px
+      top: 14px
+      width: 25px
+      height: 25px
+      transition: transform .3s
+   &._oldLoad
+      background-color: $color_green_light
+      // border-color: $color_1
+   &._remove
+      background-color: rgba(255, 0, 0, 0.1)
+      .closeIcon
+         transform: rotate(45deg)
+
+.addImg__content
+   display: flex
+   flex-wrap: wrap
+   width: 100%
+   align-items: center
+   justify-content: space-between
+   padding-right: 30px
+   // padding-top: 35px
+   .additionalImgInput_js
+      opacity: 0
+      visibility: hidden
+      position: absolute
+      pointer-events: none
+   .input_1
+      display: none
+      margin-bottom: 10px
+   p 
+      word-break: break-all
+      line-height: 1
+      font-size: 14px
+      margin-bottom: 10px
+      padding-right: 40px
+
+.addImg__imgWrap
+   p 
+      font-size: 12px
+      color: #fff
+      position: absolute
+      bottom: 5px
+      left: 10px
+      max-width: calc(100% - 20px)
+
+.addImg__img
+   width: 150px
+   min-width: 150px
+   padding-bottom: 100px
+   position: relative
+   margin-right: 15px
+   background-color: #ccc
+   img
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      object-fit: cover
+      object-position: center
+
+.additionImgs
+   border: 1px solid red
+
+.addImg__bottom
+   display: flex
+   justify-content: space-between
+   width: 100%
+   align-items: center
+   .input_1
+      width: 70px
+      margin-bottom: 0
+      padding: 8px 10px
 
 
 .push

@@ -3,12 +3,13 @@ let input = null
 let uploadImg = null
 let input_delete_img = null 
 
+
 function deleteEditImg(param = null){
     input = document.getElementById('add_img')
 
     if(input){
         input_delete_img = document.querySelector('[name="delete_img"]')
-
+        
         input.addEventListener('change', function(){
 
             if (input.files && input.files[0]) {
@@ -28,6 +29,7 @@ function deleteEditImg(param = null){
                         </div>`
                     uploadImg = document.querySelector('.uploadImg')
 
+
                     if(uploadImg){
                         uploadImg.remove()
                     }
@@ -38,6 +40,7 @@ function deleteEditImg(param = null){
                     closeUploadImg.addEventListener('click', function(){
                         deleteInputImg(param)
                     })
+
                 }
                 
             }

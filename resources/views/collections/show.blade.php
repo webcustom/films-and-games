@@ -12,9 +12,9 @@
         <div class="itemDetail _mw800">
             
 
-            @if(isset($collection->img))
+            @if(isset($collection->img_medium))
                 <div class="itemDetail__img">
-                    <img class="lazyImg" data-src="/{{ $collection->img }}" alt="img">
+                    <img class="lazyImg" data-src="/{{ $collection->img_medium }}" alt="img">
                     <h1 class="titleAbsolute"><span>{{ $collection->title }}</span></h1>
                 </div>
             @endif
@@ -48,223 +48,163 @@
             @endphp
 
 
-            @if(isset($order) && count($order) > 0 )
+        </div>
+    </div>
 
-                <div class=" _mt20">
-                        @php
-                            // Преобразуем массив в коллекцию
-                            $sortOrder = collect($collection->sort_elems);
-                            // Сортируем фильмы по индексу сортировки
-                            $sortedElems = $order->sortBy(function ($elem) use ($sortOrder) {
-                                // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
-                                return (!empty($sortOrder[$elem->id])) ? $sortOrder[$elem->id] : PHP_INT_MAX;
-                            }); 
-                        @endphp
+    @if(isset($order) && count($order) > 0 )
 
-                        {{-- Выводим отсортированные фильмы --}}
-                        @foreach ($sortedElems as $elem)
-                        {{-- {{ dd($elem) }} --}}
-                            <section class="sectionDetail _mt50">
-                                <div class="sectionDetail__inner">
-                                    <div class="doubleTop">
-                                        <h1 class="title_2">{{ $elem['title'] }} <span class="date">({{ $elem->release }})</span></h1>
-                                        {{-- <p class="sectionDetail__date">{{ $elem->release }}</p> --}}
-                                    </div>
-                                    @if(isset($elem->img))
-                                        <div class="itemDetail__img">
-                                            <img class="lazyImg" data-src="/{{ $elem->img }}" alt="img">
-                                        </div>
+        <div class="sectionsDetailWrap _mt20">
+            @php
+                // Преобразуем массив в коллекцию
+                $sortOrder = collect($collection->sort_elems);
+                // Сортируем фильмы по индексу сортировки
+                $sortedElems = $order->sortBy(function ($elem) use ($sortOrder) {
+                    // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
+                    return (!empty($sortOrder[$elem->id])) ? $sortOrder[$elem->id] : PHP_INT_MAX;
+                }); 
+            @endphp
+
+            {{-- Выводим отсортированные фильмы --}}
+            @foreach ($sortedElems as $elem)
+            {{-- {{ dd($elem) }} --}}
+                <section class="sectionDetail">
+                    {{-- <div class="sectionDetail__inner"> --}}
+                    <div class="contain">
+                        <div class="itemDetail _mw800">
+
+                            <div class="doubleTop">
+                                <h1 class="title_2">{{ $elem['title'] }} <span class="date">({{ $elem->release }})</span></h1>
+                                {{-- <p class="sectionDetail__date">{{ $elem->release }}</p> --}}
+                            </div>
+                            @if(isset($elem->img_medium))
+                                <div class="itemDetail__img">
+                                    <img class="lazyImg" data-src="/{{ $elem->img_medium }}" alt="img">
+                                </div>
+                            @endif
+
+                            <div class="paramslistWrap">
+                                <ul class="parmsList">      
+                                    @if(isset($elem->rating_imdb))
+                                        <li class="itemDetail__param">
+                                            <p>рейтинг Imdb:</p>
+                                            <p>{{ $elem->rating_imdb }}</p>
+                                        </li>
+                                    @endif
+                                    @if(isset($elem->rating_kinopoisk))
+                                        <li class="itemDetail__param">
+                                            <p>рейтинг Кинопоиск:</p>
+                                            <p>{{ $elem->rating_kinopoisk }}</p>
+                                        </li>
                                     @endif
 
-                                    <div class="paramslistWrap">
-                                        <ul class="parmsList">      
-                                            @if(isset($elem->rating_imdb))
-                                                <li class="itemDetail__param">
-                                                    <p>рейтинг Imdb:</p>
-                                                    <p>{{ $elem->rating_imdb }}</p>
-                                                </li>
-                                            @endif
-                                            @if(isset($elem->rating_kinopoisk))
-                                                <li class="itemDetail__param">
-                                                    <p>рейтинг Кинопоиск:</p>
-                                                    <p>{{ $elem->rating_kinopoisk }}</p>
-                                                </li>
-                                            @endif
+                                    {{-- @if(isset($elem->release))
+                                        <li class="itemDetail__param">
+                                            <p>релиз:</p>
+                                            <p>{{ $elem->release }}</p>
+                                        </li>
+                                    @endif --}}
 
-                                            {{-- @if(isset($elem->release))
-                                                <li class="itemDetail__param">
-                                                    <p>релиз:</p>
-                                                    <p>{{ $elem->release }}</p>
-                                                </li>
-                                            @endif --}}
-
-                                            @if(isset($elem->duration))
-                                                <li class="itemDetail__param">
-                                                    <p>продолжительность:</p>
-                                                    <p>{{ $elem->duration }}</p>
-                                                </li>
-                                            @endif
-
-                                           
-
-                                            @if(isset($elem->country))
-                                                <li class="itemDetail__param">
-                                                    <p>страна:</p>
-                                                    <p>{{ $elem->country }}</p>
-                                                </li>
-                                            @endif
-
-                                            @if(isset($elem->budget))
-                                                <li class="itemDetail__param">
-                                                    <p>бюджет:</p>
-                                                    <p>{{ $elem->budget }}</p>
-                                                </li>
-                                            @endif
-
-                                            @if(isset($elem->fees_usa))
-                                                <li class="itemDetail__param">
-                                                    <p>сборы в США:</p>
-                                                    <p>{{ $elem->fees_usa }}</p>
-                                                </li>
-                                            @endif
-
-                                            @if(isset($elem->fees_world))
-                                                <li class="itemDetail__param">
-                                                    <p>сборы в мире:</p>
-                                                    <p>{{ $elem->fees_world }}</p>
-                                                </li>
-                                            @endif
-
-                                            @if(isset($elem->maker))
-                                                <li class="itemDetail__param">
-                                                    <p>Разработчик:</p>
-                                                    <p>{{ $elem->maker }}</p>
-                                                </li>
-                                            @endif
-
-                                            
-
-                                        </ul>
-
-                                        @if(isset($elem->director))
-                                            <div class="itemDetail__param _mt5">
-                                                <p>режиссер:</p>
-                                                <p>{{ $elem->director }}</p>
-                                            </div>
-                                        @endif
-                                        @if(isset($elem->genre))
-                                            <div class="itemDetail__param _mt5">
-                                                <p>жанр:</p>
-                                                <p>{{ $elem->genre }}</p>
-                                            </div>
-                                        @endif
-                                        @if(isset($elem->cast) && count($elem->cast) > 0)
-                                            <div class="itemDetail__param _mt5 _flexWrap">
-                                                <p>в&nbsp;ролях:</p>
-                                                <ul>
-                                                    @foreach ($elem->cast as $name)
-                                                        <li>{{ $name }},</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-                                    </div>
+                                    @if(isset($elem->duration))
+                                        <li class="itemDetail__param">
+                                            <p>продолжительность:</p>
+                                            <p>{{ $elem->duration }}</p>
+                                        </li>
+                                    @endif
 
                                     
 
-                                    @if(isset($elem->description))
-                                        <div class="itemDetail__text">
-                                            <p>{!! $elem->description !!}</p>
-                                        </div>
+                                    @if(isset($elem->country))
+                                        <li class="itemDetail__param">
+                                            <p>страна:</p>
+                                            <p>{{ $elem->country }}</p>
+                                        </li>
                                     @endif
 
+                                    @if(isset($elem->budget))
+                                        <li class="itemDetail__param">
+                                            <p>бюджет:</p>
+                                            <p>{{ $elem->budget }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if(isset($elem->fees_usa))
+                                        <li class="itemDetail__param">
+                                            <p>сборы в США:</p>
+                                            <p>{{ $elem->fees_usa }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if(isset($elem->fees_world))
+                                        <li class="itemDetail__param">
+                                            <p>сборы в мире:</p>
+                                            <p>{{ $elem->fees_world }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if(isset($elem->maker))
+                                        <li class="itemDetail__param">
+                                            <p>Разработчик:</p>
+                                            <p>{{ $elem->maker }}</p>
+                                        </li>
+                                    @endif
+
+                                    
+
+                                </ul>
+
+                                @if(isset($elem->director))
+                                    <div class="itemDetail__param _mt5">
+                                        <p>режиссер:</p>
+                                        <p>{{ $elem->director }}</p>
+                                    </div>
+                                @endif
+                                @if(isset($elem->genre))
+                                    <div class="itemDetail__param _mt5">
+                                        <p>жанр:</p>
+                                        <p>{{ $elem->genre }}</p>
+                                    </div>
+                                @endif
+                                @if(isset($elem->cast) && count($elem->cast) > 0)
+                                    <div class="itemDetail__param _mt5 _flexWrap">
+                                        <p>в&nbsp;ролях:</p>
+                                        <ul>
+                                            @foreach ($elem->cast as $name)
+                                                <li>{{ $name }},</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            </div>
+
+
+
+                            @if(isset($elem->description))
+                                <div class="itemDetail__text">
+                                    <p>{!! $elem->description !!}</p>
                                 </div>
-                            </section>
-                        @endforeach
+                            @endif
 
+                        </div>
+                        {{-- itemDetail --}}
 
-                </div>
-                
-            @else
-                <p class="notElems _mt20">Нет элементов привязанных к подборке</p>
-            @endif
-        </div>
-{{-- 
-
-        <div class="_mt25">
-            <button class="button_1 deleteElem_js" data-id="{{ $collection->id }}" data-title="Удалить: <span class='_bold'>{{ $collection->title }}</span>" onclick="show_popup('confirmDelete')">Удалить</button>
-            <button class="button_1" onclick="show_popup('catList')">Выбрать категорию</button>
-            <button class="button_1" type="submit" form="editForm">Сохранить</button>
-        </div>
-
-        <form id="editForm" class="form_1 _maxW700 _mt30" action="{{ route('admin.collections.update', $collection) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
-            @csrf
-            @method('PUT')
-
---}}
-            @php
-                // $category = $categories->find($collection->category_id);
-
-                // if(isset($category)){
-                //     if($category->slug === 'films'){
-                //         $order = $collection->films;
-                //         $title = 'Фильмы';
-                //     }else if($category->slug === 'games') {
-                //         $order = $collection->games;
-                //         $title = 'Игры';
-                //     }
-                // }
-
-                // $order = $collection->games;
-                // $order = $collection['games']->games;
-
-                // dd($collection);
-                // dd($collection->relations);
-
-                // $order = 0;
-                // foreach ($collection->getRelations() as $val) {
-                //     // dd($elem[0]->title);
-                //     // $order = $elem[0];
-                //     // dd($val[0]);
-                //     // $i++;
-                // }
-
-                // for($i = 0; $collection->getRelations() > $i; $i++){
-                //     $val = $collection->getRelations();
-                //     dd($val[$i]);
-                // }
-                // dd($category);
-
-                // $order = [1,2];
-
-            @endphp
-            
-            
-            
-            {{-- <div class="popupBlock" data-flag="catList">
-                <div class="popupConfirm popupItem">
-                    <p>Прежде чем сменить категорию, отвяжите все элементы от подборки</p>
-                    <div>
-                        <span class="button_1 _big" onclick="close_popup(this)">ОК</span>
                     </div>
-                </div>
-            </div> --}}
-            
+                </section>
 
 
-    </div>
+            @endforeach
+
+
+        </div>
+        
+    @else
+        <p class="notElems _mt20">Нет элементов привязанных к подборке</p>
+    @endif
+
+
 </section>
 
 
 
-{{-- подтверждение удаления --}}
-{{-- @include('includes.admin._confirmDelete', ['text' => 'Удалить подборку', 'route' => route('admin.collections.delete')]) --}}
-
-<script>
-    // deleteEditImg() //удаление и редактирование изображения записи
-    // untyingLinkedElems() // открепление записей от категории
-    // sortLinkedElems('sort_elems') // сортировка записей в категории
-</script>
 @endsection
 
 

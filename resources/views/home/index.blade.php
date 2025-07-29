@@ -29,7 +29,7 @@
             @foreach($topCollections as $collection)
                 <div class="mainBlocks__item {{ $loop->first ? 'firstEntry' : ($loop->iteration == 2 ? 'secondEntry' : 'thirdEntry') }}">
                     <a href="{{ route('collections.show', $collection->slug) }}" class="imgTotalWrap _backgroundDarkening">
-                        <img class="imgTotal" src="{{ $collection->img }}" alt="img">
+                        <img class="imgTotal" src="{{ $collection->img_medium }}" alt="img">
                         <p class="titleAbsolute" data-title="{{ $collection->title }}"><span>{{ $collection->title }}</span></p>
                     </a>
                 </div>
@@ -49,7 +49,7 @@
         <div class="blocksList_1 _mt40">
             @foreach($remainingCollections->where('category_id', $category->id)->take(8) as $collection)
                 <a href="{{ route('collections.show', $collection->slug) }}" class="imgTotalWrap _backgroundDarkening">
-                    <img class="imgTotal" src="{{ $collection->img }}" alt="img">
+                    <img class="imgTotal" src="{{ $collection->img_medium }}" alt="img">
                     <p class="titleAbsolute" data-title="{{ $collection->title }}"><span>{{ $collection->title }}</span></p>
                 </a>
             @endforeach

@@ -68,10 +68,9 @@ class FilmsController extends Controller
     }
 
     
-
+    // создание записи
     public function store(Request $request){
     
-        // dd($request);
     
         // ЧЕТВЕРТЫЙ СПОСОБ ВАЛИДАЦИИ (такой же как и первый только прокидываем через созданную нами функцию validate() в helpers.php)
         // $validated = $request->validate(Film::validationRules());
@@ -148,8 +147,11 @@ class FilmsController extends Controller
 
     // редактирование -> страница формы
     public function edit(Request $request, $film_id){
+
+
         $film = Film::query()->findOrFail($film_id); //позволяет получить конкретную запись из базы по ее id, а если ничего не найдет то вернет 404
         // $collections = Collection::all(); //передаем наши коллекции
+        // dd($film);
 
         // $category = Category::query()->findOrFail($category_id);
         // $category = Category::all();
@@ -168,6 +170,16 @@ class FilmsController extends Controller
     // редактирование -> сохранение изменений
     public function update(Request $request, Film $film){
 
+        // если дополнительные изображения были до того как мы добавили еще
+        // if(isset($film->additional_imgs)){
+        //     $arr = json_decode($film->additional_imgs);
+        //     array_push($arr, json_decode($film->additional_imgs)[0]);
+        //     // dd($arr);
+
+        //     $film->additional_imgs = json_encode($arr);
+
+        //     // dump($film->additional_imgs);
+        // }
         // $validated = $request->validate(Film::validationRules());
         // dd($request);
         // $validated = $request->validate(Film::validationRules());
@@ -230,21 +242,22 @@ class FilmsController extends Controller
     
     public function delete(Request $request){
 
-
-        // dd($request);
         $ids = explode(",", $request->field_delete_id);
-        // dd($ids);
+        $films = Film::findMany($ids);
 
-        forEach($ids as $id){
-            // получаем значение нашего поля field_delete_id
-            $film = Film::find($id);
-
+        forEach($films  as $film){
             // Перед удаление записи в базе удаляем связь в таблице collection_film  для этого можно использовать модель, но если модели нет, то можно использовать фасад DB
-            DB::table('collection_film')->where('film_id', $id)->delete();
+            DB::table('collection_film')->where('film_id', $film->id)->delete();
 
-            
             // удаляем файл из хранилища если он там есть
-            $imgs_paths = [$film->img, $film->img_medium, $film->img_thumbnail];
+            $imgs_paths = [$film->img_medium, $film->img_thumbnail];
+
+            $additional_imgs = json_decode($film->additional_imgs);
+            foreach($additional_imgs as $key => $elem){
+                $imgs_paths[] = $additional_imgs[$key]->image->medium;
+                $imgs_paths[] = $additional_imgs[$key]->image->thumbnail;
+            }
+
             Film::deleteFiles($imgs_paths);
 
             // удаляем данные из базы
@@ -252,24 +265,8 @@ class FilmsController extends Controller
         }
 
 
-        // dd($ids);
 
-        // получаем значение нашего поля field_delete_id
-        // $film = Film::find($request->field_delete_id);
-
-
-        // Перед удаление записи в базе удаляем связь в таблице collection_film  для этого можно использовать модель, но если модели нет, то можно использовать фасад DB
-        // $relatedRecords = CollectionFilm::where('film_id', 46)->get();
-        // DB::table('collection_film')->where('film_id', $film->id)->delete();
-
-
-        // удаляем файл из хранилища если он там есть
-        // $imgs_paths = [$film->img, $film->img_medium, $film->img_thumbnail];
-        // Film::deleteFiles($imgs_paths);
-
-        
-        // удаляем данные из базы
-        // $film->delete();
+        // выводим сообщение
         $textDel = 'Фильм удален';
         if(count($ids) > 1){
             $textDel = 'Фильмы удалены';
