@@ -2,7 +2,7 @@
     <div class="contain">
 
         <div class="header__left">
-            <a href="{{route('home')}}">== Подборка ==</a>
+            <a href="{{route('home')}}" class="header__logo _img100"><img src="{{ asset('img/logo.png') }}" alt=""></a>
         </div>
         <nav class="menu_1">
             <ul>

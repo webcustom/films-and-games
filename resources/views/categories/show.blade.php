@@ -33,6 +33,7 @@
         <div class="collectionsLIst">
             @foreach ($collectionsItems as $collection)
 
+
                 <div class="collectionItem">
                     <div class="collectionItem__img">
                         @if(isset($collection->img))
@@ -42,7 +43,7 @@
                     <div class="collectionItem__content">
                         <div>
                             <p class="collectionItem__title">{{ $collection->title }}</p>
-                            <div class="collectionItem__description">{!! Str::words($collection->description, 10, '...') !!}</div>
+                            <div class="collectionItem__description">{{ Str::words($collection->description, 10, '...') }}</div>
                         </div>
                         {{-- <p class="collectionItem__description">{!! $collection->description !!}</p> --}}
                         <a href="/collections/{{ $collection->slug }}" class="button_1">Подробнее</a>

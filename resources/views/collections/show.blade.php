@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
-@section('page.title', 'Создать пост')
+@section('page.title', $collection->title)
+
 
 
 
@@ -180,7 +181,7 @@
 
                             @if(isset($elem->description))
                                 <div class="itemDetail__text">
-                                    <p>{!! $elem->description !!}</p>
+                                    <p>{{ $elem->description }}</p>
                                 </div>
                             @endif
 

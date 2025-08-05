@@ -5,15 +5,32 @@
     <!-- <base href="/"> -->
 
     <title>@yield('page.title', 'значение по умолчанию')</title>
-    <meta name="description" content="Desctiption...">
+    <meta name="description" content="@yield('page.description', 'Интересные подборки фильмов и игр')">
+
+    @stack('meta')
+
+
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
-    <link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/png" href="img/favicon/favicon.png" sizes="128x128" />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon-16x16.png') }}">
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/apple-touch-icon.png') }}">
+
+    <!-- Android / PWA -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('img/android-chrome-192x192.png') }}">
+
+    <!-- Manifest (если ты делаешь PWA) -->
+    {{-- <link rel="manifest" href="{{ asset('site.webmanifest') }}"> --}}
+
+
 
 
 <!--     <meta property="og:image" content="https://roza.friday.ru/img/share/share.jpg">
@@ -41,10 +58,12 @@
 
     @php
         use Illuminate\Support\Str;
+
+        $isAdmin = Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin';
     @endphp 
 
     {{-- если путь начинается с admin и пользователь авторизован и является админом --}}
-    @if(Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin')
+    @if($isAdmin)
         @vite('resources/admin/sass/main.sass' /*, 'resources/js/app.js'*/)
         {{-- <link rel="stylesheet" href="{{ asset('assets/main-OSXSCQmp.css') }}"> --}}
         @stack('css_admin') 
@@ -52,7 +71,6 @@
     @else
         @vite('resources/sass/main.sass' /*, 'resources/js/app.js'*/)
         {{-- <link rel="stylesheet" href="{{ asset('public/build/assets/main-OSXSCQmp.css') }}"> --}}
-
         @stack('css') 
         @stack('js')
     @endif
@@ -88,7 +106,7 @@
     <div class="wrapper">
         <div class="body_content">
             {{-- если путь начинается с admin и пользователь авторизован и является админом --}}
-            @if(Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin')
+            @if($isAdmin)
                 @include('includes.admin._alert')
                 @include('includes.admin._header')
             {{-- если мы находимся не на странице login или register --}}
@@ -103,7 +121,7 @@
 
         {{-- @include('includes.admin._footer') --}}
 
-        @if(Str::startsWith(request()->path(), 'admin/') && Auth::check() && Auth::user()->usertype === 'admin')
+        @if($isAdmin)
             @include('includes.admin._footer')
             {{-- если мы находимся не на странице login или register --}}
         @elseif(!request()->is('login') && !request()->is('register'))
