@@ -1,8 +1,8 @@
 @extends('layouts.base')
 
-@section('page.title')
+{{-- @section('page.title')
     Главная страница
-@endsection
+@endsection --}}
 
 
 @section('content')

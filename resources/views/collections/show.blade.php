@@ -13,12 +13,12 @@
         <div class="itemDetail _mw800">
             
 
-            @if(isset($collection->img_medium))
+            {{-- @if(isset($collection->img_medium)) --}}
                 <div class="itemDetail__img">
                     <img class="lazyImg" data-src="/{{ $collection->img_medium }}" alt="img">
                     <h1 class="titleAbsolute"><span>{{ $collection->title }}</span></h1>
                 </div>
-            @endif
+            {{-- @endif --}}
             <div class="itemDetail__middle">
                 <a class="ref_1" href="{{ url()->previous() }}">Назад</a>
                 <p class="dateItem">дата публикации: {{ $formattedDate }}</p>

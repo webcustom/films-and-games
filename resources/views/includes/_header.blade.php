@@ -6,8 +6,8 @@
         </div>
         <nav class="menu_1">
             <ul>
-                <li><a href="{{route('categories.show', 'films')}}">Фильмы</a></li>
-                <li><a href="{{route('categories.show', 'games')}}">Игры</a></li>
+                <li><a href="{{route('categories.show', 'films')}}" class="{{ request()->is('categories/films') ? '_active' : '' }}">Фильмы</a></li>
+                <li><a href="{{route('categories.show', 'games')}}" class="{{ request()->is('categories/games') ? '_active' : '' }}">Игры</a></li>
             </ul>
         </nav>
 

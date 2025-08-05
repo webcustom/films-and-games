@@ -422,14 +422,16 @@ trix-editor
       display: flex
       align-items: center
    li 
-      margin-right: 30px
+      margin-right: 20px
       &:last-child
          margin-right: 0
    a 
       transition: color .15s
+      text-transform: uppercase
       &._active
          color: lighten($color_1, 40%)
          text-decoration: underline
+         pointer-events: none
       @media(hover: hover)
          &:hover
             color: lighten($color_1, 40%)
@@ -885,8 +887,9 @@ trix-editor
 .paramslistWrap
    margin-top: 20px
    padding: 20px
-   background-color: rgba($color_1, .1)
+   // background-color: rgba($color_1, .1)
    border-radius: 10px
+   background: linear-gradient(to right, rgba($color_1, .1) 0, transparent 100%)
 
 .parmsList
    columns: 2
@@ -934,7 +937,9 @@ trix-editor
 .sectionsDetailWrap
    .sectionDetail
       &:nth-child(odd)
-         background-color: rgba(#ccc, .2)
+         background-color: rgba($color_1, .05)
+         // background: linear-gradient(to left, rgba($color_3, .1) 0, transparent 100%)
+
          
 
 .sectionDetail
@@ -961,12 +966,15 @@ trix-editor
    position: relative
    border-radius: 5px
    display: block
-   background-color: #ccc
+   background-color: $color_2
    // background: linear-gradient(to right, $color_3 30%, $color_1 100%)
    // border: 2px solid $color_2
    // border-radius: 10px
    box-shadow: 2px 2px 5px 0 rgba($color_2, .5)
-         
+   // @media(hover: hover)
+   //    &:hover
+
+          
 
 ._backgroundDarkening
    &::before
@@ -1047,8 +1055,9 @@ trix-editor
          // box-shadow: 0 0 10px 10px rgba($color_1, .5)
          width: 100%
          height: 100%
-         background: linear-gradient(to right, $color_3 30%, $color_1 100%)
+         // background: linear-gradient(to right, $color_3 30%, $color_1 100%)
          // background-color: rgba($color_1, .5)
+         background: linear-gradient(to right, $color_3 30%, transparent 100%)
          top: 0
          left: 0
          z-index: -1
@@ -1121,11 +1130,22 @@ trix-editor
    .title_1
       font-size: 3em
       position: relative
+      background: linear-gradient(to right, $color_1 30%, transparent 100%)
+      padding: 10px 10px 15px
+      border-radius: 5px
+      color: #fff
+      text-shadow: 2px 2px 5px $color_2
+      background: linear-gradient(to right, $color_1 30%, transparent 100%)
+
       // color: $color_3
       // text-shadow: 0 0 5px rgba($color_2, 1)
       // background-color: $color_3
       // padding: 20px 20px
       // border-radius: 50px
+      // &::before
+      //    content: ''
+      //    position: absolute
+      //    background: linear-gradient(to right, $color_3 30%, $color_1 100%)
 
 
 .collectionsLIst
@@ -1321,7 +1341,8 @@ trix-editor
          max-width: 60%
          max-height: 60%
          transform: translate(-52%,-48%)
-
+   &:active
+      top: 3px
 
 
 .push
