@@ -10,7 +10,7 @@
 <section class="sectionPage _section">
     <div class="contain">
         {{-- {{ dd($collectionsItems) }} --}}
-        <h1 class="title_1 _mb20">Подборки {{ $category->title }}:</h1>
+        <h1 class="title_2 _mb20">Подборки {{ $category->title }}:</h1>
         <a href="/" class="ref_1 _fz16">на главную</a>
 
 

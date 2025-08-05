@@ -23,6 +23,17 @@
                 <a class="ref_1" href="{{ url()->previous() }}">Назад</a>
                 <p class="dateItem">дата публикации: {{ $formattedDate }}</p>
             </div>
+
+
+            {{-- <div class="socialList">
+                <a href="https://t.me/share/url?url=https://example.com" class="socialElem _seTel" target="_blank"><svg><use xlink:href="#telegram"/></svg></a>
+                <a href="#" class="socialElem" target="_blank"><svg><use xlink:href="#odnoklassniki"/></svg></a>
+                <a href="https://vk.com/share.php?url={{ urlencode(request()->fullUrl()) }}" target="_blank" class="socialElem _seVk"><svg><use xlink:href="#vk"/></svg></a>
+            </div> --}}
+
+
+            {{-- шеринг в соцсети --}}
+            <x-share/>
             
 
             @if(isset($collection->description))

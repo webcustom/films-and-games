@@ -1259,6 +1259,71 @@ trix-editor
 
 
 
+.socialList
+   position: fixed
+   right: 20px
+   top: 50%
+   transform: translate(0,-50%)
+   .socialElem
+      margin-bottom: 10px
+
+.socialElem
+   // border: 2px solid $color_1
+   width: 5em
+   height: 5em
+   border-radius: 50%
+   position: relative
+   display: block
+   // overflow: hidden
+   &::before
+      content: ''
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      transition: opacity .15s
+      background: linear-gradient(to right, $color_1 0, $color_3 100%)
+      width: 100%
+      height: 100%
+      border-radius: 50%
+   &::after
+      content: ''
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      transition: opacity .15s
+      background: #000
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      z-index: -1
+      opacity: 0
+      transition: opacity .15s
+   &:hover
+      &::before
+         opacity: .7
+      &::after
+         opacity: 1
+   svg
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+      max-width: 60%
+      max-height: 50%
+      fill: #fff//$color_3
+   &._seTel
+      svg
+         transform: translate(-55%,-50%)
+   &._seVk
+      svg
+         max-width: 60%
+         max-height: 60%
+         transform: translate(-52%,-48%)
+
+
+
 .push
    height: 1000px
 @import "media" // Всегда в конце
