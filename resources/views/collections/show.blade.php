@@ -38,7 +38,7 @@
 
 
             {{-- шеринг в соцсети --}}
-            <x-share/>
+            <x-share link="{{ request()->url() }}"/>
             
 
             @if(isset($collection->description))
