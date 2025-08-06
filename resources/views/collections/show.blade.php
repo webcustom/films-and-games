@@ -1,14 +1,21 @@
 @extends('layouts.base')
 
-@section('page.title', $collection->title)
+{{-- @section('page.title', $collection->title) --}}
 
-
+@section('meta')
+    <title>{{ $collection->title }}</title>
+    <meta property="og:description" content="{{ strip_tags(Str::limit($collection->description, 160)) }}">
+    <meta property="og:image" content="{{ $collection->img_medium }}">
+    <meta property="ok:image" content="{{ $collection->img_medium }}">
+    <meta property="vk:image" content="{{ $collection->img_medium }}">
+    <meta property="fb:image" content="{{ $collection->img_medium }}">
+@endsection
 
 
 @section('content')
 
 
-<section class="sectionPage _section">
+<section class="sectionList _section">
     <div class="contain">
         <div class="itemDetail _mw800">
             
@@ -20,16 +27,14 @@
                 </div>
             {{-- @endif --}}
             <div class="itemDetail__middle">
-                <a class="ref_1" href="{{ url()->previous() }}">Назад</a>
+                @php
+                    $fallback = url('/categories/'.$category->slug);
+                    $previous = url()->previous() !== url()->current() ? url()->previous() : $fallback;
+                @endphp
+                <a class="ref_1" href="{{ $previous }}">Назад</a>
                 <p class="dateItem">дата публикации: {{ $formattedDate }}</p>
             </div>
 
-
-            {{-- <div class="socialList">
-                <a href="https://t.me/share/url?url=https://example.com" class="socialElem _seTel" target="_blank"><svg><use xlink:href="#telegram"/></svg></a>
-                <a href="#" class="socialElem" target="_blank"><svg><use xlink:href="#odnoklassniki"/></svg></a>
-                <a href="https://vk.com/share.php?url={{ urlencode(request()->fullUrl()) }}" target="_blank" class="socialElem _seVk"><svg><use xlink:href="#vk"/></svg></a>
-            </div> --}}
 
 
             {{-- шеринг в соцсети --}}
@@ -65,7 +70,7 @@
 
     @if(isset($order) && count($order) > 0 )
 
-        <div class="sectionsDetailWrap _mt20">
+        <div class="sectionsDetailWrap">
             @php
                 // Преобразуем массив в коллекцию
                 $sortOrder = collect($collection->sort_elems);
@@ -229,4 +234,14 @@
         {{-- <script src="/admin/js/untyingAndSortLinkedElems.js"></script> --}}
 
     @endpush
+
+    {{-- @push('meta')
+        <title>{{ $collection->title }}</title>
+        <meta property="og:description" content="{{ strip_tags(Str::limit($collection->description, 160)) }}">
+        <meta property="og:image" content="{{ $collection->img_medium }}">
+        <meta property="ok:image" content="{{ $collection->img_medium }}">
+        <meta property="vk:image" content="{{ $collection->img_medium }}">
+        <meta property="fb:image" content="{{ $collection->img_medium }}">
+    @endpush --}}
+
 @endonce

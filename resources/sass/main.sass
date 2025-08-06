@@ -841,6 +841,11 @@ trix-editor
 .sectionPage
    padding: 8em 0 10em
 
+.sectionList
+   padding: 8em 0 0
+
+
+
 
 .itemDetail
    .title_2
@@ -935,11 +940,13 @@ trix-editor
 
 
 .sectionsDetailWrap
+   margin-top: 30px
    .sectionDetail
       &:nth-child(odd)
          background-color: rgba($color_1, .05)
          // background: linear-gradient(to left, rgba($color_3, .1) 0, transparent 100%)
-
+      &:last-child
+         padding-bottom: 10em
          
 
 .sectionDetail
@@ -1284,6 +1291,7 @@ trix-editor
    right: 20px
    top: 50%
    transform: translate(0,-50%)
+   z-index: 10
    .socialElem
       margin-bottom: 10px
 

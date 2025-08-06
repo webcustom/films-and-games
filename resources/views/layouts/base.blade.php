@@ -2,13 +2,27 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <!-- <base href="/"> -->
 
-    <title>@yield('page.title', 'Bestlist')</title>
-    <meta name="description" content="@yield('page.description', 'Подборки лучших фильмов и игр  найди что-то для себя')">
 
-    @stack('meta')
+    {{-- Если ни одна страница нет своих метатегов, тогда выводим дефолтные --}}
+    @hasSection('meta')
+        @yield('meta')
+    @else
+        <title>@yield('page.title', 'Bestlist')</title>
+        <meta name="description" content="@yield('page.description', 'Подборки лучших фильмов и игр  найди что-то для себя')">
+        <meta property="og:image" content="{{ asset('img/share/share.png') }}">
+        <meta property="ok:image" content="{{ asset('img/share/share.png') }}">
+        <meta property="vk:image" content="{{ asset('img/share/share.png') }}">
+        <meta property="fb:image" content="{{ asset('img/share/share.png') }}">
 
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="{{ asset('img/share/share.png') }}" />
+    @endif
+
+
+
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="600"/>
 
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,16 +47,12 @@
 
 
 
-    <meta property="og:image" content="{{ asset('img/share/share.png') }}">
+    {{-- <meta property="og:image" content="{{ asset('img/share/share.png') }}">
     <meta property="ok:image" content="{{ asset('img/share/share.png') }}">
     <meta property="vk:image" content="{{ asset('img/share/share.png') }}">
-    <meta property="fb:image" content="{{ asset('img/share/share.png') }}">
+    <meta property="fb:image" content="{{ asset('img/share/share.png') }}"> --}}
 
-    <meta property="og:image:width" content="1200"/>
-    <meta property="og:image:height" content="600"/>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="{{ asset('img/share/share.png') }}" />
 
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="#000">
