@@ -123,7 +123,7 @@
 
                                     @if(isset($elem->duration))
                                         <li class="itemDetail__param">
-                                            <p>продолжительность:</p>
+                                            <p>длительность:</p>
                                             <p>{{ $elem->duration }}</p>
                                         </li>
                                     @endif
@@ -153,7 +153,7 @@
 
                                     @if(isset($elem->fees_world))
                                         <li class="itemDetail__param">
-                                            <p>сборы в мире:</p>
+                                            <p>сборы в остальном мире:</p>
                                             <p>{{ $elem->fees_world }}</p>
                                         </li>
                                     @endif
