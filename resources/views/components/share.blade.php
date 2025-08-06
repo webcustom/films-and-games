@@ -1,6 +1,11 @@
 {{-- так же у компоненты есть параметры, все что мы там напишем не поподет в $attributes --}}
 @props(['link' => false])
 
+
+@php
+//    dd(urlencode($link)); 
+@endphp
+
 {{-- urlencode() -  кодирует строку так, чтобы её безопасно можно было использовать в URL --}}
 <div class="socialList">
     <a href="https://t.me/share/url?url={{ urlencode($link) }}" class="socialElem _seTel" target="_blank"><svg><use xlink:href="#telegram"/></svg></a>
