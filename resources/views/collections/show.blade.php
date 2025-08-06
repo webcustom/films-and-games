@@ -21,7 +21,7 @@
             
 
             {{-- @if(isset($collection->img_medium)) --}}
-                <div class="itemDetail__img">
+                <div class="itemDetail__img _start">
                     <img class="lazyImg" data-src="/{{ $collection->img_medium }}" alt="img">
                     <h1 class="titleAbsolute"><span>{{ $collection->title }}</span></h1>
                 </div>
