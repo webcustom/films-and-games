@@ -153,7 +153,7 @@
 
                                     @if(isset($elem->fees_world))
                                         <li class="itemDetail__param">
-                                            <p>сборы в остальном мире:</p>
+                                            <p>сборы в мире:</p>
                                             <p>{{ $elem->fees_world }}</p>
                                         </li>
                                     @endif

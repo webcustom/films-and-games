@@ -5,15 +5,15 @@
   },
   "resources/admin/fonts/RobotoBold/RobotoBold.woff2": {
     "file": "assets/RobotoBold-BYLdE7Ab.woff2",
-    "src": "resources/admin/fonts/RobotoBold/RobotoBold.woff2"
+    "src": "resources/fonts/RobotoBold/RobotoBold.woff2"
   },
   "resources/admin/fonts/RobotoMedium/RobotoMedium.woff": {
     "file": "assets/RobotoMedium-CcxbJM51.woff",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff"
   },
   "resources/admin/fonts/RobotoMedium/RobotoMedium.woff2": {
     "file": "assets/RobotoMedium-C3H6pipf.woff2",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff2"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff2"
   },
   "resources/admin/fonts/RobotoRegular/RobotoRegular.woff": {
     "file": "assets/RobotoRegular-SXoIhfGg.woff",
@@ -21,7 +21,7 @@
   },
   "resources/admin/fonts/RobotoRegular/RobotoRegular.woff2": {
     "file": "assets/RobotoRegular-DcS189mR.woff2",
-    "src": "resources/admin/fonts/RobotoRegular/RobotoRegular.woff2"
+    "src": "resources/fonts/RobotoRegular/RobotoRegular.woff2"
   },
   "resources/admin/sass/main.sass": {
     "file": "assets/main-CdbQEpaF.css",
@@ -34,15 +34,15 @@
   },
   "resources/fonts/RobotoBold/RobotoBold.woff2": {
     "file": "assets/RobotoBold-BYLdE7Ab.woff2",
-    "src": "resources/admin/fonts/RobotoBold/RobotoBold.woff2"
+    "src": "resources/fonts/RobotoBold/RobotoBold.woff2"
   },
   "resources/fonts/RobotoMedium/RobotoMedium.woff": {
     "file": "assets/RobotoMedium-CcxbJM51.woff",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff"
   },
   "resources/fonts/RobotoMedium/RobotoMedium.woff2": {
     "file": "assets/RobotoMedium-C3H6pipf.woff2",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff2"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff2"
   },
   "resources/fonts/RobotoRegular/RobotoRegular.woff": {
     "file": "assets/RobotoRegular-SXoIhfGg.woff",
@@ -50,7 +50,7 @@
   },
   "resources/fonts/RobotoRegular/RobotoRegular.woff2": {
     "file": "assets/RobotoRegular-DcS189mR.woff2",
-    "src": "resources/admin/fonts/RobotoRegular/RobotoRegular.woff2"
+    "src": "resources/fonts/RobotoRegular/RobotoRegular.woff2"
   },
   "resources/js/app.js": {
     "file": "assets/app-C1-XIpUa.js",
@@ -59,7 +59,7 @@
     "isEntry": true
   },
   "resources/sass/main.sass": {
-    "file": "assets/main-CNigtej-.css",
+    "file": "assets/main-CDQqHMhf.css",
     "src": "resources/sass/main.sass",
     "isEntry": true
   }
