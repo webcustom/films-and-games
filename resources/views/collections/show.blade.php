@@ -235,13 +235,4 @@
 
     @endpush
 
-    {{-- @push('meta')
-        <title>{{ $collection->title }}</title>
-        <meta property="og:description" content="{{ strip_tags(Str::limit($collection->description, 160)) }}">
-        <meta property="og:image" content="{{ $collection->img_medium }}">
-        <meta property="ok:image" content="{{ $collection->img_medium }}">
-        <meta property="vk:image" content="{{ $collection->img_medium }}">
-        <meta property="fb:image" content="{{ $collection->img_medium }}">
-    @endpush --}}
-
 @endonce
