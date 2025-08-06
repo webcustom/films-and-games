@@ -43,7 +43,7 @@
 
             @if(isset($collection->description))
                 <div class="itemDetail__text">
-                    <p>{{ $collection->description }}</p>
+                    <p>{!! $collection->description !!}</p>
                 </div>
             @endif
 
@@ -197,7 +197,7 @@
 
                             @if(isset($elem->description))
                                 <div class="itemDetail__text">
-                                    <p>{{ $elem->description }}</p>
+                                    <p>{!! $elem->description !!}</p>
                                 </div>
                             @endif
 
