@@ -43,7 +43,7 @@
 
             @if(isset($collection->description))
                 <div class="itemDetail__text">
-                    <p>{!! $collection->description !!}</p>
+                    <p>{{ $collection->description }}</p>
                 </div>
             @endif
 
