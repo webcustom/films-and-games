@@ -15,7 +15,10 @@
 @section('content')
 
 
-<section class="sectionList _section">
+
+<div class="goUp"><svg><use xlink:href="#arrow"/></svg></div>
+
+<section class="sectionList _section _scrollUp">
     <div class="contain">
         <div class="itemDetail _mw800">
             
@@ -90,7 +93,7 @@
                         <div class="itemDetail _mw800">
 
                             <div class="doubleTop">
-                                <h1 class="title_2">{{ $elem['title'] }} <span class="date">({{ $elem->release }})</span></h1>
+                                <h1 class="title_2"><span class="num">{{ $loop->iteration }}.</span>{{ $elem['title'] }} <span class="date">({{ $elem->release }})</span></h1>
                                 {{-- <p class="sectionDetail__date">{{ $elem->release }}</p> --}}
                             </div>
                             @if(isset($elem->img_medium))

@@ -93,3 +93,28 @@ document.addEventListener('click', function(event) {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const goUpBtn = document.querySelector(".goUp");
+    const mainSection = document.querySelector("._scrollUp");
+
+    // Плавный скролл вверх
+    goUpBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        mainSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Функция показа/скрытия кнопки
+    function scrollHide() {
+        if (window.scrollY === 0) {
+            goUpBtn.classList.add("hide");
+        } else {
+            goUpBtn.classList.remove("hide");
+        }
+    }
+
+    // Проверка при загрузке
+    scrollHide();
+
+    // Проверка при прокрутке
+    window.addEventListener("scroll", scrollHide);
+});
