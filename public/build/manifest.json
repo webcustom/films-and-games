@@ -9,7 +9,7 @@
   },
   "resources/admin/fonts/RobotoMedium/RobotoMedium.woff": {
     "file": "assets/RobotoMedium-CcxbJM51.woff",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff"
   },
   "resources/admin/fonts/RobotoMedium/RobotoMedium.woff2": {
     "file": "assets/RobotoMedium-C3H6pipf.woff2",
@@ -38,7 +38,7 @@
   },
   "resources/fonts/RobotoMedium/RobotoMedium.woff": {
     "file": "assets/RobotoMedium-CcxbJM51.woff",
-    "src": "resources/admin/fonts/RobotoMedium/RobotoMedium.woff"
+    "src": "resources/fonts/RobotoMedium/RobotoMedium.woff"
   },
   "resources/fonts/RobotoMedium/RobotoMedium.woff2": {
     "file": "assets/RobotoMedium-C3H6pipf.woff2",
@@ -59,7 +59,7 @@
     "isEntry": true
   },
   "resources/sass/main.sass": {
-    "file": "assets/main-D5rj004L.css",
+    "file": "assets/main-BCH9hmXs.css",
     "src": "resources/sass/main.sass",
     "isEntry": true
   }
