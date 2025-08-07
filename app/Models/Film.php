@@ -125,8 +125,8 @@ class Film extends Model
             'rating_kinopoisk' => ['nullable', 'string', 'max:30'],
             'release' => ['nullable', 'string', 'max:30'],
             'duration' => ['nullable', 'string', 'max:30'],
-            'genre' => ['nullable', 'string', 'max:60'],
-            'country' => ['nullable', 'string', 'max:50'], ///////////////
+            'genre' => ['nullable', 'string', 'max:200'],
+            'country' => ['nullable', 'string', 'max:200'], ///////////////
             'budget' => ['nullable', 'string'], 
             'fees_usa' => ['nullable', 'string'],
             'fees_world' => ['nullable', 'string'],
