@@ -131,7 +131,7 @@ class Collection extends Model
             $path_medium = $paths[0];
             $path_thumbnail = $paths[1];
         //если файл не загружался и поле с путем для удаления файла пустое
-        }else if(!isset($collection->img) && !isset($validated['delete_img'])){
+        }else if(isset($collection->img) && !isset($validated['delete_img'])){
             // $path_original = $collection->img;
             $path_medium = $collection->img_medium;
             $path_thumbnail = $collection->img_thumbnail;
