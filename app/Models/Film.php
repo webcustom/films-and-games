@@ -173,7 +173,7 @@ class Film extends Model
             $path_medium = $paths[0];
             $path_thumbnail = $paths[1];
         //если файл не загружался и поле с путем для удаления файла пустое
-        }else if(!isset($film->img) && !isset($validated['delete_img'])){
+        }else if(!isset($film->img) && !isset($validated['delete_img']) && isset($film->img_medium) && isset($film->img_thumbnail)){
             // $path_original = $film->img;
             $path_medium = $film->img_medium;
             $path_thumbnail = $film->img_thumbnail;
