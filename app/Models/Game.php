@@ -128,7 +128,7 @@ class Game extends Model
             $path_medium = $paths[0];
             $path_thumbnail = $paths[1];
         //если файл не загружался и поле с путем для удаления файла пустое
-        }else if(isset($game->img) && !isset($validated['delete_img'])){
+        }else if(!isset($game->img) && !isset($validated['delete_img'])){
             // $path_original = $game->img;
             $path_medium = $game->img_medium;
             $path_thumbnail = $game->img_thumbnail;
