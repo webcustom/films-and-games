@@ -18,7 +18,7 @@
             <button class="button_1" type="submit" form="editForm">Сохранить</button>
         </div>
 
-        <form id="editForm" class="form_1 _maxW700 _mt30" action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="on">
+        <form id="editForm" class="form_1 _maxW800 _mt30" action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="on">
             @csrf
             <x-admin.input type="text" name="title" title="Название" required autofocus/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг" required/>
@@ -31,7 +31,7 @@
             <x-admin.input type="text" name="published_at" title="Дата публикации" class="_mt20"/>
             {{-- <x-admin.checkbox name="published" value="1" class="_mt20" checked>Опубликовано</x-admin.checkbox> --}}
 
-            <button class="button_1 _big" type="submit">Сохранить</button>
+            <button class="button_1 _big _mt20" type="submit">Сохранить</button>
         </form>
 
 

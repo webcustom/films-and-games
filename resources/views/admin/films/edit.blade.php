@@ -23,7 +23,7 @@
 
 
 
-        <form id="editForm" class="form_1 _maxW700 _mt20" action="{{ route('admin.films.update', $film) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
+        <form id="editForm" class="form_1 _maxW800 _mt20" action="{{ route('admin.films.update', $film) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
             @csrf
             @method('PUT')
 

@@ -18,7 +18,7 @@
             <button class="button_1" type="submit" form="editForm">Сохранить</button>
         </div>
 
-        <form id="editForm" class="form_1 _maxW700 _mt30" action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
+        <form id="editForm" class="form_1 _maxW800 _mt30" action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
             @csrf
             @method('PUT')
 
@@ -86,7 +86,7 @@
             @endif
 
 
-            <button class="button_1 _big" type="submit">Сохранить</button>
+            <button class="button_1 _big _mt20" type="submit">Сохранить</button>
         </form>
 
 

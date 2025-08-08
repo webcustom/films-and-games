@@ -21,7 +21,7 @@
 
         {{-- {{ dd($collections) }} --}}
         
-        <form class="form_1 _maxW700 _mt30" id="editForm" action="{{ route('admin.films.store') }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="on">
+        <form class="form_1 _maxW800 _mt30" id="editForm" action="{{ route('admin.films.store') }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="on">
             @csrf
             
             <x-admin.categoryPopup :elems="$collections"></x-admin.categoryPopup>

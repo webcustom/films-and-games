@@ -22,7 +22,7 @@
             <button class="button_1" type="submit" form="editForm">Сохранить</button>
         </div>
 
-        <form id="editForm" class="form_1 _maxW700 _mt30" action="{{ route('admin.collections.update', $collection) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
+        <form id="editForm" class="form_1 _maxW800 _mt30" action="{{ route('admin.collections.update', $collection) }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="off">
             @csrf
             @method('PUT')
 
