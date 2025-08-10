@@ -77,6 +77,7 @@
             </div> --}}
 
             <x-admin.input type="text" name="title" title="Заголовок" required value="{{ $collection->title }}"/>
+            <x-admin.input class="_mt20" type="text" name="title_seo" title="title для seo" value="{{ $collection->title_seo }}"/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг" value="{{ $collection->slug }}"/>
 
             @if(isset($collection->img_medium))

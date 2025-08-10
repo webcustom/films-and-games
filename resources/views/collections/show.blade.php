@@ -3,7 +3,7 @@
 {{-- @section('page.title', $collection->title) --}}
 
 @section('meta')
-    <title>{{ $collection->title }}</title>
+    <title>{{ $collection->title_seo ?: $collection->title }}</title>
     <meta property="og:description" content="{{ strip_tags(Str::limit($collection->description, 160)) }}">
     <meta property="og:image" content="{{ asset($collection->img_medium) }}">
     <meta property="ok:image" content="{{ asset($collection->img_medium) }}">

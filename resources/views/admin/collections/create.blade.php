@@ -51,6 +51,7 @@
             </div> --}}
 
             <x-admin.input type="text" name="title" title="Заголовок" required autofocus/>
+            <x-admin.input class="_mt20" type="text" name="title_seo" title="title для seo"/>
             <x-admin.input class="_mt20" type="text" name="slug" title="Слаг"/>
 
             <x-admin.input id="add_img" type="file" name="img" title="Загрузить изображение" class="_mt20"/>

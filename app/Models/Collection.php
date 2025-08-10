@@ -25,6 +25,7 @@ class Collection extends Model
     protected $fillable = [
         'slug',
         'title',
+        'title_seo',
         // 'img',
         'img_medium',
         'img_thumbnail',
@@ -88,7 +89,8 @@ class Collection extends Model
         return [
             // пишем арпвила валидации для каждого элемента в запросе $request
             // если эти правила валидации часто повторяются их можно вынести в модель , как это сделать см. урок 16 конец ролика
-            'title' => ['required', 'string', 'max:150'], // обязательный, строка, максимум 100 символов
+            'title' => ['required', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
+            'title_seo' => ['nullable', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
             'slug' => ['nullable', 'string', Rule::unique('collections', 'slug')->ignore($id)],
             'img' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],
             'delete_img' => ['nullable', 'string', 'in:1'],
@@ -153,6 +155,8 @@ class Collection extends Model
 
         $validArray = [
             'title' => $validated['title'],
+            'title_seo' => $validated['title_seo'],
+
             'slug' => $validated['slug'],
             // 'img' => $path_original ?? null, //$validated['img'],
             'img_medium' => $path_medium ?? null, //$validated['img'],

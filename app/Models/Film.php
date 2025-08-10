@@ -63,6 +63,7 @@ class Film extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+            // ->doNotGenerateSlugsOnUpdate(); //Не генерировать повторно
     }
     // для обратной связи один к одному или один ко многим т.е. при выводе фильмов мы сможем получить коллекции привязанные к ним
     // public function collection(): BelongsTo {
