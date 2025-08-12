@@ -23,10 +23,17 @@
         <div class="itemDetail _mw800">
             
 
+            @php
+                // dd(json_encode($collection->title));
+            @endphp
+
             {{-- @if(isset($collection->img_medium)) --}}
                 <div class="itemDetail__img _start">
                     <img class="lazyImg" data-src="/{{ $collection->img_medium }}" alt="img">
                     <h1 class="titleAbsolute"><span>{{ $collection->title }}</span></h1>
+                    {{-- так не безопасно т.к. можно выполнить script прописав его в поле --}}
+                    {{-- <h1 class="titleAbsolute"><span>{!! html_entity_decode($collection->title, ENT_QUOTES | ENT_HTML5, 'UTF-8') !!}</span></h1> --}}
+
                 </div>
             {{-- @endif --}}
             <div class="itemDetail__middle">
