@@ -9,7 +9,7 @@
         @yield('meta')
     @else
         <title>@yield('page.title', 'Bestlist')</title>
-        <meta name="description" content="@yield('page.description', 'Подборки лучших фильмов и игр  найди что-то для себя')">
+        <meta name="description" content="@yield('page.description', 'Подборки лучших фильмов и игр - найди что-то для себя')">
         <meta property="og:image" content="{{ asset('img/share/share.jpg') }}">
         <meta property="ok:image" content="{{ asset('img/share/share.jpg') }}">
         <meta property="vk:image" content="{{ asset('img/share/share.jpg') }}">
