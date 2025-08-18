@@ -23,6 +23,37 @@
             </form>
         </div> --}}
 
+
+        @php
+            // if(isset($collection->category_id)){
+            //     $category = $categories->find($collection->category_id);
+            //     // dd($category);
+
+            //     if($collection->category_id === $category->id){
+            //         // $order = $collection->films;
+            //         $order = $collection[$category['slug']]; //так получаем $collection->films или $collection->games
+            //         $title = $category->title;
+
+            //         // dd($category['slug']);
+            //         $category_id = (int)$collection->category_id;
+            //         // dd($category_id);
+
+            //     }
+
+
+            //     dd($categories);
+
+            // }
+
+            // dd($collections);
+        @endphp
+
+        {{-- {{ dd($categories); }} --}}
+
+
+
+
+
         <x-admin.search class="_mt30" route="{{ route('admin.collections.index') }}"></x-admin>
  
         @if(count($categories) > 0)
@@ -61,6 +92,7 @@
         @else
             <div class="adminListTwo _mt30">
                 @foreach ($collections as $collection)
+                    {{-- {{ dd(count($collection->films)) }} --}}
                     {{-- @php
                         $category = $categories->find($collection->category_id);
                         // $category = $categories->where('id', $collection->category_id)->first();
@@ -90,12 +122,21 @@
                                 <p class="adminItemTwo__title"><strong>{{ $collection->title }}</strong></p>
                                 <div class="adminItemTwo__bottom">
                                     {{-- <p class="adminItemTwo__id">{{ $collection->id }}</p> --}}
-                                    <span class="adminItemTwo__date">
-                                        {{ $collection->published_at?->format('d.m.y') }}
-                                        {{-- diffForHumans - позволяет выводить дату в формате: '9 месяцев назад'  --}}
-                                        {{-- {{ $collections->published_at->diffForHumans() }} --}}
-                                    </span>
+                                    <div class="adminItemTwo__bottom_left">
+                                        <span class="adminItemTwo__date">
+                                            {{ $collection->published_at?->format('d.m.y') }}
+                                            {{-- diffForHumans - позволяет выводить дату в формате: '9 месяцев назад'  --}}
+                                            {{-- {{ $collections->published_at->diffForHumans() }} --}}
+                                        </span>
+                                        @if(count($collection->films) > 0)
+                                            <p class="linkedItems">Привязано: {{ count($collection->films) }}</p>
+                                        @endif
+                                        @if(count($collection->games) > 0)
+                                            <p class="linkedItems">Привязано: {{ count($collection->games) }}</p>
+                                        @endif
+                                    </div>
 
+                                    
 
                                     {{-- @if(isset($category) && count($collection[$category['slug']]) > 0)
                                         <p class="_fz12">{{ count($collection[$category['slug']]) }}</p>

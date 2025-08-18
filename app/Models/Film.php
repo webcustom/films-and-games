@@ -146,7 +146,8 @@ class Film extends Model
         // dd($request);
 
         $validated = $request->validate(Film::validationRules($film ? $film->id : null));
-        $cast = explode(",", $validated['cast']);
+        $cast = array_map('trim', explode(",", $validated['cast']));
+        // $cast = explode(",", $validated['cast']);
 
         
         // dd($validated);
@@ -265,7 +266,6 @@ class Film extends Model
 
         // =====================================================================
 
-          
 
 
         $validArray = [
