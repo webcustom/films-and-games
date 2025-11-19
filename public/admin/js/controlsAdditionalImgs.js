@@ -53,18 +53,49 @@ function showThumbnail(ths){
 }
 
 
+
+
 let arrIds = []
+let input_delete_imgs = null
+
+// function deleteAditionalImgStart(){
+window.addEventListener('DOMContentLoaded', () => {    
+
+    input_delete_imgs = document.querySelector('[name="delete_additional_img"]')
+
+    const inputs = document.querySelectorAll('.additionalImgInput_js')
+    console.log(inputs)
+    if(inputs.length > 0){
+        inputs.forEach(input => {
+            input.addEventListener('change', function(){
+                const dataIndex = input.closest('.addImg').querySelector('[data-index]').dataset.index
+                // console.log(dataIndex)
+                if (!arrIds.includes(dataIndex)) {
+                    arrIds.push(dataIndex)
+                }
+                let joinedString  = arrIds.join(', ')
+                input_delete_imgs.value = joinedString                
+            })
+        })
+    }
+
+})
+
+
+
 function deleteAditionalImg(ths){
 
     if(ths.classList.contains('_create')){
         ths.parentNode.remove()
     }else{
-        input_delete_imgs = document.querySelector('[name="delete_additional_img"]')
         const dataIndex = ths.dataset.index
         
         if(!ths.parentNode.classList.contains('_remove')){
             ths.parentNode.classList.add('_remove')
-            arrIds.push(dataIndex)
+            // arrIds.push(dataIndex)
+            if (!arrIds.includes(dataIndex)) {
+                arrIds.push(dataIndex)
+            }
         }else{
             ths.parentNode.classList.remove('_remove')
             arrIds = arrIds.filter(item => item !== dataIndex)

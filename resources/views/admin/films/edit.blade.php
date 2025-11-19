@@ -170,6 +170,7 @@
 <script>
     deleteEditImg() // скрипты для удаления и редактирования основного изображения
     addImgsCreateInput() // скрипты для управления дополниьельными изображениями
+    // deleteAditionalImgStart()
 </script>
 
 @endsection
