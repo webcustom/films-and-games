@@ -115,6 +115,7 @@
             <x-admin.input type="text" name="release" title="Дата релиза" class="_mt20" value="{{ $game->release }}"/>
             <x-admin.input type="text" name="genre" title="Жанр" class="_mt20" value="{{ $game->genre }}"/>
             <x-admin.input type="text" name="budget" title="Бюджет" class="_mt20" value="{{ $game->budget }}"/>
+            <x-admin.input type="text" name="platforms" title="Платформы" class="_mt20" value="{{ $game->platforms }}"/>
             <x-admin.input type="text" name="maker" title="Разработчик" class="_mt20" value="{{ $game->maker }}"/>
             @php
                 if(!is_null($game->cast)){

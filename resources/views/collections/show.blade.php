@@ -175,6 +175,13 @@
                                         </li>
                                     @endif
 
+                                    @if(isset($elem->platforms))
+                                        <li class="itemDetail__param">
+                                            <p>Платформы:</p>
+                                            <p>{{ $elem->platforms }}</p>
+                                        </li>
+                                    @endif
+
                                     
 
                                 </ul>

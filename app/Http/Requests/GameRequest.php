@@ -38,6 +38,7 @@ class GameRequest extends FormRequest
             'published_at' => ['nullable', 'string', 'date'],
             'collections' => ['array'],
             'collections.*' => ['exists:collections,slug'], //проверяем что каждый элемент в массиве collections существует в таблице коллекций в столбце slug
+            'platforms' => ['required', 'string', 'max:150'],
         ];
     }
 }

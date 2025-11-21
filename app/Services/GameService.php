@@ -78,6 +78,7 @@ class GameService
             'budget' => $validated['budget'] ?? null, 
             'maker' => $validated['maker'] ?? null,
             'published_at' => new Carbon($validated['published_at'] ?? null), // null значение по умолчанию, Carbon приводит дату к единому типу
+            'platforms' => $validated['platforms'] ?? null,
         ];
     }
 

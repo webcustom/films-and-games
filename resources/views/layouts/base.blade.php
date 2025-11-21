@@ -115,6 +115,9 @@
     
     <div class="wrapper">
         <div class="body_content">
+
+            <span class="floatDecore _fd1"></span>
+
             {{-- если путь начинается с admin и пользователь авторизован и является админом --}}
             @if($isAdmin)
                 @include('includes.admin._alert')

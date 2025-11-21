@@ -33,6 +33,7 @@ class Game extends Model
         'budget',
         'maker',
         'published_at',
+        'platforms',
     ];
 
     protected $casts = [
