@@ -168,13 +168,6 @@
                                         </li>
                                     @endif
 
-                                    @if(isset($elem->maker))
-                                        <li class="itemDetail__param">
-                                            <p>Разработчик:</p>
-                                            <p>{{ $elem->maker }}</p>
-                                        </li>
-                                    @endif
-
                                     @if(isset($elem->platforms))
                                         <li class="itemDetail__param">
                                             <p>Платформы:</p>
@@ -182,8 +175,12 @@
                                         </li>
                                     @endif
 
-                                    
-
+                                    @if(isset($elem->maker))
+                                        <li class="itemDetail__param">
+                                            <p>Разработчик:</p>
+                                            <p>{{ $elem->maker }}</p>
+                                        </li>
+                                    @endif
                                 </ul>
 
                                 @if(isset($elem->director))
