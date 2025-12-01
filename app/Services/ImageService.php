@@ -205,7 +205,7 @@ class ImageService
         if ($request->hasFile($field)) {
             foreach ($request->file($field) as $key => $file) {
                 $processor = new ImageProcessor();
-                $paths = $processor->processImage($file, $this->storageFolder, [[800, 600], [300, 200]]);
+                $paths = $processor->processImage($file, $this->storageFolder, [[800, 440], [300, 200]]);
 
                 $arr_imgs[$key] = [
                     'image' => ['medium' => $paths[0], 'thumbnail' => $paths[1]],
