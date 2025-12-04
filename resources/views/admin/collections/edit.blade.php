@@ -30,51 +30,22 @@
             @php
             if(isset($collection->category_id)){
                 $category = $categories->find($collection->category_id);
-                // dd($category);
-
                 if($collection->category_id === $category->id){
-                    // $order = $collection->films;
-                    $order = $collection[$category['slug']]; //так получаем $collection->films или $collection->games
-                    $title = $category->title;
-
-                    // dd($category['slug']);
+                    $map = [
+                        1 => 'films',  // ID категории фильмов
+                        2 => 'games',  // ID категории игр
+                    ];
                     $category_id = (int)$collection->category_id;
-                    // dd($category_id);
-
+                    $order = $collection[$map[$category_id]]; //так получаем $collection->films или $collection->games
+                    $title = $category->title;
                 }
             }
-
             @endphp
             
 
 
 
             <x-admin.categoryPopup :order="isset($order) ? $order : null" radio :elems="$categories" category_id="{{ isset($category_id) ? $category_id : null }}"></x-admin.categoryPopup>
-
-            
-            {{-- <div class="popupBlock" data-flag="catList">
-                <div class="popupConfirm popupItem">
-                    @if(isset($order) && count($order) > 0 )
-                        <p class="_fz14 _red">Прежде чем сменить категорию, <br> отвяжите все элементы от подборки</p>
-                    @endif
-                    <div class="listElems_1 _mt20 _mb20 {{ (isset($order) && count($order) > 0 ) ? '_disable' : '' }}">
-                        <ul>
-                            <li>
-                                <x-admin.checkbox type="radio" name="category_id" value="" checked="{{ (!isset($collection->category_id)) ? true : false }}">Нет категории</x-admin.checkbox>
-                            </li>
-                            @foreach ($categories as $category)
-
-                                <li>
-                                    <x-admin.checkbox type="radio" name="category_id" value="{{ $category->id }}" checked="{{ ($category->id === $collection->category_id) ? true : false }}">{{ $category->title }}</x-admin.checkbox>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <span class="button_1 _big" onclick="close_popup(this)">ОК</span>
-                    </div>
-                </div>
-            </div> --}}
 
             <x-admin.input type="text" name="title" title="Заголовок" required value="{{ $collection->title }}"/>
             <x-admin.input class="_mt20" type="text" name="title_seo" title="title для seo" value="{{ $collection->title_seo }}"/>
@@ -116,7 +87,6 @@
                             $sortOrder = collect($collection->sort_elems);
                             // Сортируем фильмы по индексу сортировки
                             $sortedElems = $order->sortBy(function ($elem) use ($sortOrder) {
-                                // dd($elem);
                                 // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
                                 return (!empty($sortOrder[$elem->id])) ? $sortOrder[$elem->id] : PHP_INT_MAX;
                             }); 
@@ -126,7 +96,7 @@
                         @foreach ($sortedElems as $elem)
                             <li class="catElemsList__li">
                                 <input type="text" class="catElemsList__elem_input elemsSort_js" value="{{ $collection->sort_elems[$elem->id] ?? '' }}" data-id="{{ $elem->id }}">
-                                <a href="{{ route('admin.'.$category['slug'].'.edit', $elem->id) }}" class="catElemsList__elem">
+                                <a href="{{ route('admin.'.$map[$category_id].'.edit', $elem->id) }}" class="catElemsList__elem">
                                     <p>{{ $elem['title'] }}</p>
                                     <span class="closeIcon untieElement_js" data-id="{{ $elem->id }}" title="отвязать от подборки"><svg><use xlink:href="#close"/></svg></span>
                                 </a>
@@ -141,53 +111,12 @@
 
                 {{-- поле для добавления id и индекса сортировки --}}
                 <input type="hidden" name="sort_elems" readonly value="">
-                {{-- <input type="hidden" name="sort_games" readonly value=""> --}}
 
 
                 
             @else
                 <p class="catElemsListWrap__title _mt20">Нет элементов привязанных к подборке</p>
             @endif
-
-            {{-- {{ dd($collection->games) }} --}}
-            {{-- @if(count($collection->games) > 0)
-            <div class="catElemsListWrap _mt20">
-                <p class="catElemsListWrap__title">Игры привязанные к подборке:</p>
-                        <ul class="catElemsList__marks">
-                            <li>сорт-ка</li>
-                            <li>название</li>
-                        </ul>
-                        <ul class="catElemsList">
-                            @php
-                            // dd($collection->films);
-                            // dd($collection->sort_films);
-                            // Преобразуем массив в коллекцию
-                            $sortOrder2 = collect($collection->sort_games);
-                            // dd($collection->films);
-                            // Сортируем фильмы по индексу сортировки
-                            $sortedGames = $collection->games->sortBy(function ($game) use ($sortOrder2) {
-                                // Если id нет в массиве или индекс сортировки пустой, ставим самый большой индекс
-                                return (!empty($sortOrder2[$game->id])) ? $sortOrder2[$game->id] : PHP_INT_MAX;
-                            }); 
-                            // dd($sortedFilms);
-
-                        @endphp
-                        @foreach ($sortedGames as $game)
-
-                            <li class="catElemsList__li">
-                                <input type="text" class="catElemsList__elem_input elemsSort_js" value="{{ $collection->sort_games[$game->id] ?? '' }}" data-id="{{ $game->id }}">
-                                <div class="catElemsList__elem">
-                                    <p>{{ $game['title'] }}</p>
-                                    <span class="closeIcon untieElement_js" data-id="{{ $game->id }}" title="отвязать от подборки"><svg><use xlink:href="#close"/></svg></span>
-                                </div>
-                            </li>
-                        @endforeach
-                        </ul>
-            </div>
-            @else
-                <p class="catElemsListWrap__title _mt20">Нет игр привязанных к подборке</p>
-            @endif --}}
-
 
             <button class="button_1 _big _mt20" type="submit">Сохранить</button>
         </form>

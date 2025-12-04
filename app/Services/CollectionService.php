@@ -35,12 +35,14 @@ class CollectionService
         $deleteElemsId = explode(',', $deleteElemsId); //превращаем строку в массив
         
         $category = Category::find($collection->category_id);
+        // dd($category->slug);
+
         if(isset($category->slug)){
             foreach($deleteElemsId as $elem){
-                if($category->slug === 'films'){
+                if($category->slug === 'filmy'){
                     DB::table('collection_film')->where('film_id', (int)$elem)->delete();
                 }
-                if($category->slug === 'games'){
+                if($category->slug === 'igry'){
                     DB::table('collection_game')->where('game_id', (int)$elem)->delete();
                 }
             }
