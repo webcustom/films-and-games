@@ -55,13 +55,13 @@ class GameService
     {
         $validated = $request->validated();
 
-        $cast = isset($validated['cast'])
-            ? array_map('trim', explode(',', $validated['cast']))
-            : null;
+        // $cast = isset($validated['cast'])
+        //     ? array_map('trim', explode(',', $validated['cast']))
+        //     : null;
 
         // подключаем сервис картинок
         // подключаем сервис картинок
-        $imageService = new ImageService('games');
+        $imageService = new ImageService('games'); //games - директория куда загружаются файлы
         $mainImage = $imageService->handleMainImage($request, $game);
         $additional = $imageService->handleAdditionalImages($request, $game);
 

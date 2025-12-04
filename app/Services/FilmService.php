@@ -58,7 +58,7 @@ class FilmService
             : null;
 
         // подключаем сервис картинок
-        $imageService = new ImageService('films');
+        $imageService = new ImageService('films'); //films - директория куда загружаются файлы
         $mainImage = $imageService->handleMainImage($request, $film);
         $additional = $imageService->handleAdditionalImages($request, $film);
 
