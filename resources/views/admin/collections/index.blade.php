@@ -16,44 +16,6 @@
         </div>
 
 
-        {{-- <div class="searchBlock _mt30">
-            <form class="inputWrap" method="GET" {{ route('admin.collections.index') }}>
-                <input type="text" class="input_1" name="search" placeholder="Поиск" value="{{ request()->input('search') }}">
-                <button class="button_1" type="submit">Искать</button>
-            </form>
-        </div> --}}
-
-
-        @php
-            // if(isset($collection->category_id)){
-            //     $category = $categories->find($collection->category_id);
-            //     // dd($category);
-
-            //     if($collection->category_id === $category->id){
-            //         // $order = $collection->films;
-            //         $order = $collection[$category['slug']]; //так получаем $collection->films или $collection->games
-            //         $title = $category->title;
-
-            //         // dd($category['slug']);
-            //         $category_id = (int)$collection->category_id;
-            //         // dd($category_id);
-
-            //     }
-
-
-            //     dd($categories);
-
-            // }
-
-            // dd($collections);
-        @endphp
-
-        {{-- {{ dd($categories); }} --}}
-
-
-
-
-
         <x-admin.search class="_mt30" route="{{ route('admin.collections.index') }}"></x-admin>
  
         @if(count($categories) > 0)

@@ -59,19 +59,15 @@
 
 
             @php
-
-
-                // $category = $categories->find($collection->category_id);
-                // dd($collection->category_id);
-                
                 if($collection->category_id === $category->id){
                     // $order = $collection->films;
-                    $order = $collection[$category['slug']]; //так получаем $collection->films или $collection->games
-                    // $title = 'Фильмы';
+                    $map = [
+                        1 => 'films',  // ID категории фильмов
+                        2 => 'games',  // ID категории игр
+                    ];
+                    $order = $collection[$map[$category['id']]]; //так получаем $collection->films или $collection->games
                 }
 
-                // dd($category['slug']);
-                // dd($order);
             @endphp
 
 

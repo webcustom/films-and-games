@@ -14,41 +14,14 @@
         <a class="ref_1 _mt10" href="{{ route('admin.collections.index') }}">Назад</a>
 
         <div class="_mt25">
-            {{-- <button class="button_1 deleteElem_js" value="{{ $film->id }}" data-title="{{ $film->title }}" onclick="show_popup('confirmDelete')">Удалить</button> --}}
             <button class="button_1" onclick="show_popup('catList')">Выбрать категорию</button>
             <button class="button_1" type="submit" form="editForm">Сохранить</button>
         </div>
 
         <form id="editForm" class="form_1 _maxW800 _mt30" action="{{ route('admin.collections.store') }}" method="POST" enctype="multipart/form-data" novalidate autocomplete="on">
             @csrf
-
-            {{-- @php
-                $category = $categories->find($collection->category_id);
-            @endphp --}}
             
             <x-admin.categoryPopup radio :elems="$categories"></x-admin.categoryPopup>
-
-
-            {{-- <div class="popupBlock" data-flag="catList">
-                <div class="popupConfirm popupItem">
-                    <div class="listElems_1 _mt20 _mb20">
-                        <ul>
-                            <li>
-                                <x-admin.checkbox type="radio" name="category_id" value="" checked="{{ (!isset($collection->category_id)) ? true : false }}">Нет категории</x-admin.checkbox>
-                            </li>
-                            @foreach ($categories as $category)
-
-                                <li>
-                                    <x-admin.checkbox type="radio" name="category_id" value="{{ $category->id }}">{{ $category->title }}</x-admin.checkbox>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <span class="button_1 _big" onclick="close_popup(this)">ОК</span>
-                    </div>
-                </div>
-            </div> --}}
 
             <x-admin.input type="text" name="title" title="Заголовок" required autofocus/>
             <x-admin.input class="_mt20" type="text" name="title_seo" title="title для seo"/>
