@@ -23,6 +23,15 @@ class GamesController extends Controller
     {
         $games = Game::with('collections')
             ->when($request->search, fn($q) => $q->where('title', 'like', "%{$request->search}%"))
+            ->orderByRaw("
+                CASE 
+                    WHEN EXISTS (
+                        SELECT 1 FROM collection_game 
+                        WHERE collection_game.game_id = games.id
+                    ) THEN 0 
+                    ELSE 1 
+                END
+            ") //элементы у которых отсутствует подборка выводим в конце
             ->latest('published_at')
             ->paginate(48);
 

@@ -25,7 +25,7 @@ class FilmsController extends Controller
                     ) THEN 0 
                     ELSE 1 
                 END
-            ")
+            ") //элементы у которых отсутствует подборка выводим в конце
             ->latest('published_at')
             ->paginate(48);
 
