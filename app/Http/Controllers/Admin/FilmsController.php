@@ -5,17 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FilmRequest;
 use App\Models\Category;
-use App\Models\Collection;
-// use App\Models\Category;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-
-
 use App\Models\Film;
 use App\Services\FilmService;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+
 
 class FilmsController extends Controller
 {

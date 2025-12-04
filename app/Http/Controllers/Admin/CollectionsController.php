@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Collection;
-use App\Models\Film;
-use App\Models\Game;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 use App\Services\CollectionService;
 use App\Http\Requests\CollectionRequest;
