@@ -16,6 +16,16 @@ class FilmsController extends Controller
     {
         $films = Film::with('collections')
             ->when($request->search, fn($q) => $q->where('title', 'like', "%{$request->search}%"))
+            // ->latest('published_at')
+            ->orderByRaw("
+                CASE 
+                    WHEN EXISTS (
+                        SELECT 1 FROM collection_film 
+                        WHERE collection_film.film_id = films.id
+                    ) THEN 0 
+                    ELSE 1 
+                END
+            ")
             ->latest('published_at')
             ->paginate(48);
 
@@ -26,7 +36,7 @@ class FilmsController extends Controller
 
     public function create()
     {
-        $category = Category::where('slug', 'films')->first();
+        $category = Category::where('slug', 'filmy')->first();
         $collections = $category->collections;
 
         return view('admin.films.create', compact('collections'));
@@ -47,7 +57,7 @@ class FilmsController extends Controller
     // редактирование -> страница формы
     public function edit(Film $film)
     {
-        $category = Category::where('slug', 'films')->first();
+        $category = Category::where('slug', 'filmy')->first();
         $collections = $category->collections;
 
         return view('admin.films.edit', compact('film', 'collections'));
