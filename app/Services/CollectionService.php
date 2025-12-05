@@ -60,11 +60,11 @@ class CollectionService
 
         // удаляем связи в таблицах collection_film и collection_game
         if(isset($category->slug)){
-            if($category->slug === 'films'){
+            if($category->slug === 'filmy'){
                 DB::table('collection_film')->where('collection_id', $collection->id)->delete();
                 // $collection->films()->detach(); //альтернативный способ
             }
-            if($category->slug === 'games'){
+            if($category->slug === 'igry'){
                 DB::table('collection_game')->where('collection_id', $collection->id)->delete();
                 // $collection->games()->detach();
             }
