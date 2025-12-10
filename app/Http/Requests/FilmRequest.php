@@ -17,7 +17,7 @@ class FilmRequest extends FormRequest
         $id = $this->route('film')?->id;
 
         return [
-            'title' => ['required', 'string', 'max:150'],
+            'title' => ['required', 'string', Rule::unique('films', 'title')->ignore($id)],
             'slug' => ['nullable', 'string', Rule::unique('films', 'slug')->ignore($id)],
             'img' => ['nullable', 'image:jpg,jpeg,png,webp,svg', 'max:2048'],
             'additional_imgs' => ['nullable','array'],

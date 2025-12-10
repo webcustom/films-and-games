@@ -18,7 +18,7 @@ class CollectionRequest extends FormRequest
 
         return [
             // пишем правила валидации для каждого элемента в запросе $request
-            'title' => ['required', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
+            'title' => ['required', 'string', Rule::unique('collections', 'title')->ignore($id)], // обязательный, строка, максимум 100 символов
             'title_seo' => ['nullable', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
             'slug' => ['nullable', 'string', Rule::unique('collections', 'slug')->ignore($id)],
             'img' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],

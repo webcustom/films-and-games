@@ -17,7 +17,7 @@ class CategoryRequest extends FormRequest
         $id = $this->route('category')?->id;
 
         return [
-            'title' => ['required', 'string', 'max:150'], 
+            'title' => ['required', 'string', Rule::unique('categories', 'title')], 
             'slug' => ['nullable', 'string', Rule::unique('categories', 'slug')->ignore($id)],
             'published_at' => ['nullable', 'string', 'date'],
             // 'published' => ['nullable', 'boolean'],
