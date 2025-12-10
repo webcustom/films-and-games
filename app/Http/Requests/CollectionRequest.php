@@ -17,8 +17,7 @@ class CollectionRequest extends FormRequest
         $id = $this->route('collection')?->id;
 
         return [
-            // пишем арпвила валидации для каждого элемента в запросе $request
-            // если эти правила валидации часто повторяются их можно вынести в модель , как это сделать см. урок 16 конец ролика
+            // пишем правила валидации для каждого элемента в запросе $request
             'title' => ['required', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
             'title_seo' => ['nullable', 'string', 'max:250'], // обязательный, строка, максимум 100 символов
             'slug' => ['nullable', 'string', Rule::unique('collections', 'slug')->ignore($id)],

@@ -19,8 +19,8 @@ class GameRequest extends FormRequest
         return [
             // пишем арпвила валидации для каждого элемента в запросе $request
             // если эти правила валидации часто повторяются их можно вынести в модель, как это сделать см. урок 16 конец ролика
-            'title' => ['required', 'string', 'max:150'], // обязательный, строка, максимум 100 символов
-            'slug' => ['nullable', 'string', Rule::unique('games', 'slug')->ignore($id)],
+            'title' => ['required', 'string', Rule::unique('games', 'slug')->ignore($id)], // обязательный, строка, максимум 100 символов
+            'slug' => ['nullable', 'string', Rule::unique('games', 'title')->ignore($id)],
             'img' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],
             'additional_imgs' => ['nullable','array'],
             'additional_imgs.*' => ['nullable', 'image:jpg, jpeg, png, webp, svg', 'max:2048'],
