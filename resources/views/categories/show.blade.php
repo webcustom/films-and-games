@@ -5,9 +5,10 @@
 
 
 @section('content')
+<div class="goUp"><svg><use xlink:href="#arrow"/></svg></div>
 
 
-<section class="sectionPage _section">
+<section class="sectionPage _section _scrollUp">
     <div class="contain">
         {{-- {{ dd($collectionsItems) }} --}}
         <h1 class="title_2 _mb20">Подборки {{ $category->title }}:</h1>
