@@ -37,22 +37,6 @@
             
             
             <x-admin.categoryPopup :elems="$collections" :collections_ids="$collections_ids"></x-admin.categoryPopup>
-            {{-- <div class="popupBlock" data-flag="catList">
-                <div class="popupConfirm popupItem">
-                    <div class="listElems_1 _mt20 _mb20">
-                        <ul>
-                            @foreach ($collections as $collection)
-                                <li>
-                                    <x-admin.checkbox name="collections[]" value="{{ $collection->slug }}" checked="{{ (in_array($collection->id, $ids->toArray())) ? true : false }}">{{ $collection->title }}</x-admin.checkbox>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <span class="button_1 _big" onclick="close_popup(this)">ОК</span>
-                    </div>
-                </div>
-            </div> --}}
 
 
             <x-admin.input type="text" name="title" title="Заголовок" required value="{{ $game->title }}"/>

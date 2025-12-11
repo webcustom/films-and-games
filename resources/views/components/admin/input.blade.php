@@ -3,10 +3,7 @@
 
 @php
     $id = Str::uuid();
-    // echo $attributes->get('name');
-
-    // dd($attributes->get('placeholder'));
-    // dump($errors->has($attributes->get('name')));
+    $value = str_replace(['&amp;#039;', '&#039;'], "'", $value); //для того что бы апострофы не заменялись на &amp;#039;' или '&#039;
 
 @endphp
 
@@ -16,7 +13,7 @@
     @endif
 
     {{-- {{ 
-    dd($attributes->get('textarea'));
+    dump($value);
     }} --}}
     
 
