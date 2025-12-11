@@ -35,8 +35,7 @@ class CollectionService
         $deleteElemsId = explode(',', $deleteElemsId); //превращаем строку в массив
         
         $category = Category::find($collection->category_id);
-        // $slug = $category?->slug;
-        dd($collection);
+        // dd($category);
 
         if(isset($category->slug)){
             foreach($deleteElemsId as $elem){
