@@ -90,6 +90,8 @@ class CollectionsController extends Controller
         $collection = Collection::where('slug', $collection_slug)->first();
         $category = Category::find($collection->category_id);
 
+        // dd($collection);
+
         // Преобразуем строку в объект Carbon
         $date = Carbon::parse($collection->published_at);
         $formattedDate = $date->format('d m Y'); // Например, "26 09 2023"

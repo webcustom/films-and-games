@@ -6,14 +6,14 @@
         </div>
         <nav class="menu_1">
             <ul>
-                @foreach($categories as $category)
+                {{-- @foreach($categories as $category)
                     <li>
                         <a href="{{ route('categories.show', $category->slug) }}"
                         class="{{ request()->is('categories/' . $category->slug) ? '_active' : '' }}">
                             {{ $category->title }}
                         </a>
                     </li>
-                @endforeach
+                @endforeach --}}
             </ul>
         </nav>
 
