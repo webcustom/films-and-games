@@ -59,6 +59,10 @@
 
 
             @php
+
+            dump($collection->films);
+            dd($collection->games);
+
                 if($collection->category_id === $category->id){
                     // $order = $collection->films;
                     $map = [

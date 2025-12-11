@@ -6,14 +6,8 @@
         </div>
         <nav class="menu_1">
             <ul>
-                {{-- @foreach($categories as $category)
-                    <li>
-                        <a href="{{ route('categories.show', $category->slug) }}"
-                        class="{{ request()->is('categories/' . $category->slug) ? '_active' : '' }}">
-                            {{ $category->title }}
-                        </a>
-                    </li>
-                @endforeach --}}
+                <li><a href="{{route('categories.show', 'filmy')}}" class="{{ request()->is('categories/filmy') ? '_active' : '' }}">Фильмы</a></li>
+                <li><a href="{{route('categories.show', 'igry')}}" class="{{ request()->is('categories/igry') ? '_active' : '' }}">Игры</a></li>
             </ul>
         </nav>
 

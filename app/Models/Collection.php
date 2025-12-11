@@ -58,6 +58,7 @@ class Collection extends Model
     // }
 
     // для обратной связи многие ко многим т.е. при выводе коллекций мы сможем получить фильмы привязанные к ним
+    // возможно тут стоило использовать полиморфную связь morphMany что бы не создавать 2 таблицы в базе данных
     public function films(): BelongsToMany  {
         return $this->BelongsToMany (Film::class);
     }
