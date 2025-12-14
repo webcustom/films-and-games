@@ -893,6 +893,19 @@ trix-editor
 .itemDetail__text
    font-size: 18px 
    margin-top: 20px
+   li
+      position: relative
+      list-style-type: none
+      padding-left: 15px
+      &::before
+         content: ''
+         position: absolute
+         width: 6px
+         height: 6px
+         border-radius: 50%
+         background-color: $color_3
+         left: 0
+         top: .5em
 
 .paramslistWrap
    margin-top: 20px
