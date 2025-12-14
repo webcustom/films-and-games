@@ -93,7 +93,8 @@
 
             <x-admin.input type="text" title="iframe с видeо" name="iframe_video" class="_mt20" textarea value="{{ $game->iframe_video }}"/>
 
-            <x-admin.input type="text" title="Содержание поста" name="description" class="_mt20" value="{{ strip_tags($game->description) ?? '' }}">
+
+            <x-admin.input type="text" title="Содержание поста" name="description" class="_mt20" value="{{ $game->description ?? '' }}">
                 <x-slot name="trix"></x-slot> {{-- можно дополнять компоненту слотом --}}
             </x-admin.input>
             <x-admin.input type="text" name="release" title="Дата релиза" class="_mt20" value="{{ $game->release }}"/>

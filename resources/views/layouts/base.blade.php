@@ -46,7 +46,6 @@
 
 
 
-
     {{-- <meta property="og:image" content="{{ asset('img/share/share.png') }}">
     <meta property="ok:image" content="{{ asset('img/share/share.png') }}">
     <meta property="vk:image" content="{{ asset('img/share/share.png') }}">

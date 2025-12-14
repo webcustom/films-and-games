@@ -19,7 +19,7 @@
 
     @if(isset($trix))
         {{-- {{ $trix }} --}}
-        <input id="{{ $id }}" type="hidden" name="{{ $attributes->get('name') }}" value="{{ $value }}" placeholder="{{ $attributes->get('placeholder') }}">
+        <input id="{{ $id }}" type="hidden" name="{{ $attributes->get('name') }}" value="{!! $value !!}" placeholder="{{ $attributes->get('placeholder') }}">
         <trix-editor input="{{ $id }}" class="input_1 {{ ($errors->has($attributes->get('name')) && !$notError) ? '_error' : '' }}"></trix-editor>
     @else
         @if($textarea)

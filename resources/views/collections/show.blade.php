@@ -203,10 +203,10 @@
                             </div>
 
 
-
                             @if(isset($elem->description))
                                 <div class="itemDetail__text">
-                                    <p>{!! $elem->description !!}</p>
+                                    {{-- <p>{!! $elem->description !!}</p> --}}
+                                    {!! html_entity_decode($elem->description, ENT_QUOTES | ENT_HTML5, 'UTF-8') !!}
                                 </div>
                             @endif
 
