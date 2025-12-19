@@ -13,16 +13,19 @@ use App\Http\Requests\CollectionRequest;
 class CollectionsController extends Controller
 {
 
+    // sadfasdfalasd alsdkfj alsdkjf asldkfjals dkfja sldkfja sldkfjalsdkfjalsdf
 
     public function index(Request $request)
     {
         $query = Collection::with(['films', 'games']);
+        // dd($query);
         $query->when($request->search, function($q) use ($request) {
             $q->where('title', 'like', "%{$request->search}%");
         });
         $query->when($request->filled('selectionByCat'), function($q) use ($request) {
             $q->where('category_id', $request->selectionByCat);
         });
+        // dd($query);
         
         $collections = $query->latest('published_at')->paginate(20);
         $collections->appends(request()->query());
@@ -76,7 +79,6 @@ class CollectionsController extends Controller
     {
 
         $collection = Collection::find($request->field_delete_id); //получаем нашу коллекцию
-        // dd($collection);
 
         $collectionService->deleteCollection($collection);
         alert(__('Подборка удалена'));
@@ -90,7 +92,10 @@ class CollectionsController extends Controller
         $collection = Collection::where('slug', $collection_slug)->first();
         $category = Category::find($collection->category_id);
 
-        // dd($collection);
+        if(!$category){
+            return response()->json(['message'=> 'collection not found.'], 404);
+        }
+
 
         // Преобразуем строку в объект Carbon
         $date = Carbon::parse($collection->published_at);
