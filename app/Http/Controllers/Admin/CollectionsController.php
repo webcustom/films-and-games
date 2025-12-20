@@ -13,7 +13,6 @@ use App\Http\Requests\CollectionRequest;
 class CollectionsController extends Controller
 {
 
-    // sadfasdfalasd alsdkfj alsdkjf asldkfjals dkfja sldkfja sldkfjalsdkfjalsdf
 
     public function index(Request $request)
     {
