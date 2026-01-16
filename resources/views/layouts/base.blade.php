@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-
+    <meta name="yandex-verification" content="a6620698a153f66f" />
 
     {{-- Если ни одна страница нет своих метатегов, тогда выводим дефолтные --}}
     @hasSection('meta')
