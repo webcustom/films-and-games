@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Facades\Cache;
 
 
 class Collection extends Model
@@ -75,6 +76,89 @@ class Collection extends Model
         'published_at' => 'datetime',
         // 'collection_id' => 
     ];
+
+    /**
+     * Получить опубликованные коллекции с кешированием
+     * 
+     * @param int $limit
+     * @param int $ttl Время жизни кеша в секундах (по умолчанию 1800 = 30 минут)
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getCachedPublished(int $limit = 19, int $ttl = 1800)
+    {
+        return Cache::remember("collections:published:limit:{$limit}", $ttl, function () use ($limit) {
+            return static::query()
+                ->where('published', true)
+                ->whereNotNull('category_id')
+                ->with('category')
+                ->latest('published_at')
+                ->limit($limit)
+                ->get();
+        });
+    }
+
+    /**
+     * Получить коллекции категории с кешированием
+     * 
+     * @param int $categoryId
+     * @param int $ttl Время жизни кеша в секундах (по умолчанию 1800 = 30 минут)
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getCachedByCategory(int $categoryId, int $ttl = 1800)
+    {
+        return Cache::remember("collections:category:{$categoryId}", $ttl, function () use ($categoryId) {
+            return static::where('category_id', $categoryId)
+                ->where('published', true)
+                ->latest('published_at')
+                ->get();
+        });
+    }
+
+    /**
+     * Очистить кеш коллекций
+     */
+    public static function clearCache(): void
+    {
+        // Очищаем основные ключи кеша коллекций
+        // В реальном приложении можно использовать Cache::tags(['collections'])->flush()
+        // если драйвер кеша поддерживает теги (Redis, Memcached)
+        Cache::forget('collections:published:limit:19');
+    }
+
+    /**
+     * Очистить кеш конкретной коллекции
+     * 
+     * @param Collection|null $collection
+     */
+    public static function clearCollectionCache(?Collection $collection): void
+    {
+        if (!$collection) {
+            return;
+        }
+
+        // Очищаем кеш коллекций категории
+        if ($collection->category_id) {
+            Cache::forget("collections:category:{$collection->category_id}");
+        }
+
+        // Очищаем общий кеш опубликованных коллекций
+        static::clearCache();
+    }
+
+    /**
+     * Boot метод для автоматической очистки кеша при изменении модели
+     */
+    protected static function booted()
+    {
+        // Очищаем кеш при создании, обновлении или удалении коллекции
+        static::saved(function ($collection) {
+            static::clearCollectionCache($collection);
+        });
+
+        static::deleted(function ($collection) {
+            static::clearCollectionCache($collection);
+        });
+    }
 
 
 }

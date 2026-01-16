@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CollectionService
 {
@@ -30,26 +30,22 @@ class CollectionService
     public function updateCollection(Request $request, Collection $collection): Collection
     {
         $data = $this->prepareData($request, $collection);
-        // получаем id фильмов связь с которыми нужно удалить и удаляем связь
-        $deleteElemsId = $request->delete_elems;
-        $deleteElemsId = explode(',', $deleteElemsId); //превращаем строку в массив
         
-        $category = Category::find($collection->category_id);
-        // $slug = $category?->slug;
-        // dd($collection);
-
-        if(isset($category->slug)){
-            foreach($deleteElemsId as $elem){
-                if($category->slug === 'filmy'){
-                    DB::table('collection_film')->where('film_id', (int)$elem)->delete();
-                }
-                if($category->slug === 'igry'){
-                    DB::table('collection_game')->where('game_id', (int)$elem)->delete();
-                }
-            }
+        // Получаем id элементов, связь с которыми нужно удалить
+        $deleteElemsId = $request->delete_elems;
+        
+        if ($deleteElemsId) {
+            $deleteElemsId = explode(',', $deleteElemsId); // Превращаем строку в массив
+            
+            // Удаляем связи элементов с коллекцией в зависимости от типа категории
+            $this->detachElementsFromCollection($collection, $deleteElemsId);
         }
 
         $collection->update($data);
+        
+        // Очищаем кеш коллекций после обновления
+        Collection::clearCollectionCache($collection);
+        
         return $collection;
     }
 
@@ -57,23 +53,94 @@ class CollectionService
     public function deleteCollection(Collection $collection): void
     {
         FileService::deleteFiles([$collection->img_medium, $collection->img_thumbnail]);
-        $category = Category::find($collection->category_id);
-
-        // удаляем связи в таблицах collection_film и collection_game
-        if(isset($category->slug)){
-            if($category->slug === 'filmy'){
-                DB::table('collection_film')->where('collection_id', $collection->id)->delete();
-                // $collection->films()->detach(); //альтернативный способ
-            }
-            if($category->slug === 'igry'){
-                DB::table('collection_game')->where('collection_id', $collection->id)->delete();
-                // $collection->games()->detach();
-            }
-        }
+        
+        // Удаляем все связи коллекции с элементами (фильмами или играми) в зависимости от категории
+        $this->detachAllElementsFromCollection($collection);
+        
         $collection->delete();
+        
+        // Очищаем кеш коллекций после удаления
+        Collection::clearCollectionCache($collection);
     }
 
 
+
+    /**
+     * Определяет тип связи коллекции на основе категории
+     * 
+     * @param Collection $collection
+     * @return string|null Возвращает 'films', 'games' или null
+     */
+    private function getCollectionRelationType(Collection $collection): ?string
+    {
+        if (!$collection->category_id) {
+            return null;
+        }
+
+        // Используем кешированную категорию для лучшей производительности
+        $category = Category::getCachedById($collection->category_id, 3600);
+        
+        if (!$category) {
+            return null;
+        }
+
+        return match ($category->slug) {
+            'filmy' => 'films',
+            'igry' => 'games',
+            default => null,
+        };
+    }
+
+    /**
+     * Удаляет конкретные элементы из связи с коллекцией
+     * 
+     * @param Collection $collection
+     * @param array $elementIds Массив ID элементов для удаления
+     */
+    private function detachElementsFromCollection(Collection $collection, array $elementIds): void
+    {
+        $relationType = $this->getCollectionRelationType($collection);
+        
+        if (!$relationType) {
+            Log::warning('CollectionService: Не удалось определить тип связи коллекции', [
+                'collection_id' => $collection->id,
+                'category_id' => $collection->category_id
+            ]);
+            return;
+        }
+
+        // Используем Eloquent отношения вместо прямых SQL-запросов
+        if ($relationType === 'films') {
+            $collection->films()->detach($elementIds);
+        } elseif ($relationType === 'games') {
+            $collection->games()->detach($elementIds);
+        }
+    }
+
+    /**
+     * Удаляет все элементы из связи с коллекцией
+     * 
+     * @param Collection $collection
+     */
+    private function detachAllElementsFromCollection(Collection $collection): void
+    {
+        $relationType = $this->getCollectionRelationType($collection);
+        
+        if (!$relationType) {
+            Log::warning('CollectionService: Не удалось определить тип связи коллекции при удалении', [
+                'collection_id' => $collection->id,
+                'category_id' => $collection->category_id
+            ]);
+            return;
+        }
+
+        // Используем Eloquent отношения вместо прямых SQL-запросов
+        if ($relationType === 'films') {
+            $collection->films()->detach(); // Удаляет все связи
+        } elseif ($relationType === 'games') {
+            $collection->games()->detach(); // Удаляет все связи
+        }
+    }
 
     private function prepareData(Request $request, ?Collection $collection = null): array
     {
@@ -101,8 +168,4 @@ class CollectionService
             'category_id' => $validated['category_id'] ?? null,
         ];
     }
-
-
-
-
 }

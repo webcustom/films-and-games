@@ -8,20 +8,33 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //
-    public function index(Request $request){
-        $query = Collection::with(['films', 'games']);
+    /**
+     * Отображение главной страницы с коллекциями
+     * 
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        // Используем кешированные опубликованные коллекции (TTL: 30 минут)
+        $collections = Collection::getCachedPublished(19, 1800);
 
+        // Проверяем наличие коллекций
+        if ($collections->isEmpty()) {
+            $collections = collect(); // Пустая коллекция для view
+        }
 
-        $collections = $query->where('published', 1)->whereNotNull('category_id')->latest('published_at')->limit(19)->get();
-
-        // $collections = $query->latest('published_at')->where('published', 1)->where('category_id', !null)->paginate(19);
-
-        $categories = Category::all();
-
+        // Оптимизированная загрузка категорий с кешированием: только с опубликованными коллекциями
+        $categoryIds = $collections->pluck('category_id')->unique()->filter();
+        
+        if ($categoryIds->isNotEmpty()) {
+            // Получаем категории с кеша, но фильтруем только нужные
+            $allCategories = Category::getCachedAll(3600); // TTL: 1 час
+            $categories = $allCategories->whereIn('id', $categoryIds)->values();
+        } else {
+            $categories = collect();
+        }
 
         return view('home.index', compact('collections', 'categories'));
-
     }
-
 }

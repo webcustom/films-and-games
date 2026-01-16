@@ -71,10 +71,21 @@ class CategoriesController extends Controller
     }
 
 
-    public function show($category_slug){
-        $category = Category::where('slug', $category_slug)->first();
-        $collectionsItems = $category->collections()->where('published', 1)->paginate(12);
-        return view('categories.show', compact('collectionsItems', 'category'));
+    public function show($category_slug)
+    {
+        // Используем кешированную категорию (TTL: 1 час)
+        $category = Category::getCachedBySlug($category_slug, 3600);
+        
+        if (!$category) {
+            abort(404, 'Категория не найдена');
+        }
 
+        // Используем кешированные коллекции категории если они есть, иначе делаем запрос
+        $collectionsItems = $category->collections()
+            ->where('published', true)
+            ->latest('published_at')
+            ->paginate(12);
+            
+        return view('categories.show', compact('collectionsItems', 'category'));
     }
 }

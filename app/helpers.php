@@ -51,17 +51,21 @@ if(!function_exists('alert')){
 
 
 if(!function_exists('isAdmin')){
-    function isAdmin(string $usertype = 'user'){
-        if (Auth::check()) {
-            // Пользователь аутентифицирован
-            if($usertype === 'admin'){
-                // пользователь админ
-                return true;
-            }
-        } else {
-            // Пользователь не аутентифицирован
-            return false;
-        }
+    // function isAdmin(string $usertype = 'user'){
+    //     if (Auth::check()) {
+    //         // Пользователь аутентифицирован
+    //         if($usertype === 'admin'){
+    //             // пользователь админ
+    //             return true;
+    //         }
+    //     } else {
+    //         // Пользователь не аутентифицирован
+    //         return false;
+    //     }
+    // }
+
+    function isAdmin(): bool {
+        return Auth::check() && Auth::user()->usertype === 'admin';
     }
 }
 

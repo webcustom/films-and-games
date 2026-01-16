@@ -21,18 +21,13 @@ class GamesController extends Controller
 
     public function index(Request $request)
     {
+        // Оптимизированный запрос: используем withCount вместо сложного orderByRaw с EXISTS
+        // Это намного быстрее, так как выполняется один JOIN вместо подзапроса для каждой записи
         $games = Game::with('collections')
+            ->withCount('collections') // Подсчитываем количество связанных коллекций
             ->when($request->search, fn($q) => $q->where('title', 'like', "%{$request->search}%"))
-            ->orderByRaw("
-                CASE 
-                    WHEN EXISTS (
-                        SELECT 1 FROM collection_game 
-                        WHERE collection_game.game_id = games.id
-                    ) THEN 0 
-                    ELSE 1 
-                END
-            ") //элементы у которых отсутствует подборка выводим в конце
-            ->latest('published_at')
+            ->orderBy('collections_count', 'asc') // Игры без коллекций (0) будут в конце
+            ->latest('published_at') // Затем сортируем по дате публикации
             ->paginate(48);
 
         return view('admin.games.index', compact('games'));
@@ -42,7 +37,13 @@ class GamesController extends Controller
 
     public function create()
     {
-        $category = Category::where('slug', 'igry')->first();
+        // Используем кешированную категорию (TTL: 1 час)
+        $category = Category::getCachedBySlug('igry', 3600);
+        
+        if (!$category) {
+            abort(404, 'Категория "igry" не найдена');
+        }
+
         $collections = $category->collections;
 
         return view('admin.games.create', compact('collections'));
@@ -64,7 +65,13 @@ class GamesController extends Controller
     // редактирование -> страница формы
     public function edit(Game $game)
     {
-        $category = Category::where('slug', 'igry')->first();
+        // Используем кешированную категорию (TTL: 1 час)
+        $category = Category::getCachedBySlug('igry', 3600);
+        
+        if (!$category) {
+            abort(404, 'Категория "igry" не найдена');
+        }
+
         $collections = $category->collections;
 
         return view('admin.games.edit', compact('game', 'collections'));

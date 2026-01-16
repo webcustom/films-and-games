@@ -14,19 +14,13 @@ class FilmsController extends Controller
 {
     public function index(Request $request)
     {
+        // Оптимизированный запрос: используем withCount вместо сложного orderByRaw с EXISTS
+        // Это намного быстрее, так как выполняется один JOIN вместо подзапроса для каждой записи
         $films = Film::with('collections')
+            ->withCount('collections') // Подсчитываем количество связанных коллекций
             ->when($request->search, fn($q) => $q->where('title', 'like', "%{$request->search}%"))
-            // ->latest('published_at')
-            ->orderByRaw("
-                CASE 
-                    WHEN EXISTS (
-                        SELECT 1 FROM collection_film 
-                        WHERE collection_film.film_id = films.id
-                    ) THEN 0 
-                    ELSE 1 
-                END
-            ") //элементы у которых отсутствует подборка выводим в конце
-            ->latest('published_at')
+            ->orderBy('collections_count', 'asc') // Фильмы без коллекций (0) будут в конце
+            ->latest('published_at') // Затем сортируем по дате публикации
             ->paginate(48);
 
         return view('admin.films.index', compact('films'));
@@ -36,7 +30,13 @@ class FilmsController extends Controller
 
     public function create()
     {
-        $category = Category::where('slug', 'filmy')->first();
+        // Используем кешированную категорию (TTL: 1 час)
+        $category = Category::getCachedBySlug('filmy', 3600);
+        
+        if (!$category) {
+            abort(404, 'Категория "filmy" не найдена');
+        }
+
         $collections = $category->collections;
 
         return view('admin.films.create', compact('collections'));
@@ -57,7 +57,13 @@ class FilmsController extends Controller
     // редактирование -> страница формы
     public function edit(Film $film)
     {
-        $category = Category::where('slug', 'filmy')->first();
+        // Используем кешированную категорию (TTL: 1 час)
+        $category = Category::getCachedBySlug('filmy', 3600);
+        
+        if (!$category) {
+            abort(404, 'Категория "filmy" не найдена');
+        }
+
         $collections = $category->collections;
 
         return view('admin.films.edit', compact('film', 'collections'));

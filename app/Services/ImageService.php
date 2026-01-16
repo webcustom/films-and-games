@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Services\ImageProcessor;
 use App\Services\FileService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -23,24 +24,50 @@ class ImageService
         $deleteRequested = (bool) $request->input("delete_img");
 
         if ($request->hasFile($field)) {
-            $processor = new ImageProcessor();
-            $paths = $processor->processImage(
-                $request->file($field),
-                $this->storageFolder,
-                [[800, 600], [300, 200]]
-            );
+            try {
+                $processor = new ImageProcessor();
+                $paths = $processor->processImage(
+                    $request->file($field),
+                    $this->storageFolder,
+                    [[800, 600], [300, 200]]
+                );
 
-            if ($model && $deleteRequested) {
-                FileService::deleteFiles([
-                    $model->getAttribute("img_medium"),
-                    $model->getAttribute("img_thumbnail"),
+                // Проверяем, что processImage вернул корректные данные
+                if ($paths === null || !isset($paths[0]) || !isset($paths[1])) {
+                    throw new \RuntimeException('ImageProcessor вернул некорректные данные');
+                }
+
+                if ($model && $deleteRequested) {
+                    FileService::deleteFiles([
+                        $model->getAttribute("img_medium"),
+                        $model->getAttribute("img_thumbnail"),
+                    ]);
+                }
+
+                return [
+                    "img_medium" => $paths[0],
+                    "img_thumbnail" => $paths[1],
+                ];
+            } catch (\InvalidArgumentException $e) {
+                // Ошибки валидации - пробрасываем дальше для отображения пользователю
+                Log::warning('ImageService: Ошибка валидации изображения', [
+                    'field' => $field,
+                    'error' => $e->getMessage(),
+                    'model' => $model ? get_class($model) : null,
+                    'model_id' => $model?->id
                 ]);
+                throw $e;
+            } catch (\Exception $e) {
+                // Другие ошибки - логируем и пробрасываем
+                Log::error('ImageService: Ошибка при обработке основного изображения', [
+                    'field' => $field,
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                    'model' => $model ? get_class($model) : null,
+                    'model_id' => $model?->id
+                ]);
+                throw new \RuntimeException('Не удалось обработать изображение. Пожалуйста, попробуйте другое изображение.', 0, $e);
             }
-
-            return [
-                "img_medium" => $paths[0],
-                "img_thumbnail" => $paths[1],
-            ];
         }
 
         if ($model && !$deleteRequested) {
@@ -99,14 +126,42 @@ class ImageService
 
         if ($request->hasFile($field)) {
             foreach ($request->file($field) as $key => $file) {
-                $processor = new ImageProcessor();
-                $paths = $processor->processImage($file, $this->storageFolder, [[800, 440], [300, 200]]);
+                try {
+                    $processor = new ImageProcessor();
+                    $paths = $processor->processImage($file, $this->storageFolder, [[800, 440], [300, 200]]);
 
-                $arr_imgs[$key] = [
-                    'image' => ['medium' => $paths[0], 'thumbnail' => $paths[1]],
-                    'text' => $request->input("{$field}_text.{$key}") ?? null,
-                    'sort' => $request->input("{$field}_sort.{$key}") ?? null,
-                ];
+                    // Проверяем, что processImage вернул корректные данные
+                    if ($paths === null || !isset($paths[0]) || !isset($paths[1])) {
+                        Log::warning('ImageService: ImageProcessor вернул некорректные данные для дополнительного изображения', [
+                            'key' => $key,
+                            'file' => $file->getClientOriginalName()
+                        ]);
+                        continue; // Пропускаем это изображение, продолжаем обработку остальных
+                    }
+
+                    $arr_imgs[$key] = [
+                        'image' => ['medium' => $paths[0], 'thumbnail' => $paths[1]],
+                        'text' => $request->input("{$field}_text.{$key}") ?? null,
+                        'sort' => $request->input("{$field}_sort.{$key}") ?? null,
+                    ];
+                } catch (\InvalidArgumentException $e) {
+                    // Ошибки валидации - логируем и пропускаем это изображение
+                    Log::warning('ImageService: Ошибка валидации дополнительного изображения', [
+                        'key' => $key,
+                        'file' => $file->getClientOriginalName(),
+                        'error' => $e->getMessage()
+                    ]);
+                    continue; // Пропускаем это изображение, продолжаем обработку остальных
+                } catch (\Exception $e) {
+                    // Другие ошибки - логируем и пропускаем это изображение
+                    Log::error('ImageService: Ошибка при обработке дополнительного изображения', [
+                        'key' => $key,
+                        'file' => $file->getClientOriginalName(),
+                        'error' => $e->getMessage(),
+                        'trace' => $e->getTraceAsString()
+                    ]);
+                    continue; // Пропускаем это изображение, продолжаем обработку остальных
+                }
             }
         }
 

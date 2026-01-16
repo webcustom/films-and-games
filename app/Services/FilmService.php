@@ -88,21 +88,31 @@ class FilmService
 
     private function syncCollections(Film $film, Request $request): void
     {
+        // Получаем старые связи до синхронизации для очистки кеша
+        $oldCollectionIds = $film->collections()->pluck('collections.id')->toArray();
+
         // если в $request есть поле collections
         if ($request->filled('collections')) {
             // получаем id коллекции, у которой значение поля 'slug' совпадает с одним из значений в массиве $request->collections
             $collectionIds = Collection::whereIn('slug', $request->collections)->pluck('id')->all();
 
-        // dd($collectionIds);
-
             // Здесь мы используем отношение collections() модели фильма для синхронизации коллекций. 
             // Метод sync() синхронизирует коллекцию с заданными идентификаторами. В результате, коллекции фильма будут соответствовать значениям в $collectionIds
             $film->collections()->sync($collectionIds);
-        }else{
+            
+            // Очищаем кеш для всех затронутых коллекций (старые и новые)
+            $allCollectionIds = array_unique(array_merge($oldCollectionIds, $collectionIds));
+        } else {
             // отвязываем все коллекции
             $film->collections()->detach();
+            $allCollectionIds = $oldCollectionIds;
         }
 
+        // Очищаем кеш коллекций при изменении связей
+        // Изменения в промежуточной таблице не вызывают события модели Collection
+        if (!empty($allCollectionIds)) {
+            Collection::clearCache(); // Очищаем общий кеш коллекций
+        }
     }
 
 }
