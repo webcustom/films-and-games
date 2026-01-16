@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="yandex-verification" content="a6620698a153f66f" />
+    <meta name="google-site-verification" content="ZlAu8u_pdsGUUIF44VKWSDK3H2Nq0iTEITzhgT7AgK4" />
 
     {{-- Если ни одна страница нет своих метатегов, тогда выводим дефолтные --}}
     @hasSection('meta')
